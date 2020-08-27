@@ -230,67 +230,67 @@
                             <p class="no_select_tip simsun" id="tip_leasetype" style="display:none">请选择出租类型</p>
                         </div>
                     </li>
-                    <li class="clearfix pb15">
-                        <label class="type1 w_103" style="color:#000;">房屋户型：</label>
-                        <span id="roomTypeDesc" style="line-height: 40px;font-size:12px;color:#757575">
-	                                        </span>
-                        <div class="h_house_r clearfix" style="margin-left: 103px;">
-                            <div class="h_input_box " id="room_shi_err" style="width: 120px;">
-                                <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                                <input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name ="roomtype_shi" id="roomtype_shi" value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="roomtype_shi_num" style="display: none;z-index: 99;">
-                                    <li key ="1" class="tantnum_box">1</li>
+                    <!--<li class="clearfix pb15">-->
+                        <!--<label class="type1 w_103" style="color:#000;">房屋户型：</label>-->
+                        <!--<span id="roomTypeDesc" style="line-height: 40px;font-size:12px;color:#757575">-->
+	                                        <!--</span>-->
+                        <!--<div class="h_house_r clearfix" style="margin-left: 103px;">-->
+                            <!--<div class="h_input_box " id="room_shi_err" style="width: 120px;">-->
+                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
+                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name ="roomtype_shi" id="roomtype_shi" value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="roomtype_shi_num" style="display: none;z-index: 99;">-->
+                                    <!--<li key ="1" class="tantnum_box">1</li>-->
 
-                                </ul>
-                            </div>
-                            <span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">室</span>
+                                <!--</ul>-->
+                            <!--</div>-->
+                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">室</span>-->
 
-                            <div class="h_input_box  " id="room_ting_err" style="width: 120px;">
-                                <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                                <input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_ting" id="roomtype_ting" value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="roomtype_ting_num" style="display: none;">
-                                    <li key ="0" class="tantnum_box">0</li>
-                                    <li key ="1" class="tantnum_box">1</li>
+                            <!--<div class="h_input_box  " id="room_ting_err" style="width: 120px;">-->
+                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
+                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_ting" id="roomtype_ting" value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="roomtype_ting_num" style="display: none;">-->
+                                    <!--<li key ="0" class="tantnum_box">0</li>-->
+                                    <!--<li key ="1" class="tantnum_box">1</li>-->
 
-                                </ul>
-                            </div>
+                                <!--</ul>-->
+                            <!--</div>-->
 
-                            <span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">厅</span>
-                            <div class="h_input_box  " id="room_wei_err" style="width: 120px;">
-                                <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                                <input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_wei" id="roomtype_wei" value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="roomtype_wei_num" style="display: none;">
-                                    <li key ="0" class="tantnum_box">0</li>
-                                    <li key ="1" class="tantnum_box">1</li>
+                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">厅</span>-->
+                            <!--<div class="h_input_box  " id="room_wei_err" style="width: 120px;">-->
+                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
+                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_wei" id="roomtype_wei" value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="roomtype_wei_num" style="display: none;">-->
+                                    <!--<li key ="0" class="tantnum_box">0</li>-->
+                                    <!--<li key ="1" class="tantnum_box">1</li>-->
 
-                                </ul>
-                            </div>
+                                <!--</ul>-->
+                            <!--</div>-->
 
-                            <span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">卫</span>
-                            <div class="h_input_box  " id="room_chu_err" style="width: 120px;">
-                                <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                                <input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_chu" id="roomtype_chu" value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="roomtype_chu_num" style="display: none;">
-                                    <li key ="0" class="tantnum_box">0</li>
-                                    <li key ="1" class="tantnum_box">1</li>
-                                </ul>
-                            </div>
+                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">卫</span>-->
+                            <!--<div class="h_input_box  " id="room_chu_err" style="width: 120px;">-->
+                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
+                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_chu" id="roomtype_chu" value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="roomtype_chu_num" style="display: none;">-->
+                                    <!--<li key ="0" class="tantnum_box">0</li>-->
+                                    <!--<li key ="1" class="tantnum_box">1</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
 
-                            <span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">厨</span>
-                            <div class="h_input_box  " id="room_yt_err" style="width: 120px;">
-                                <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                                <input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_yt" id="roomtype_yt" value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="roomtype_yt_num" style="display: none;">
-                                    <li key ="0" class="tantnum_box">0</li>
-                                    <li key ="1" class="tantnum_box">1</li>
-                                </ul>
-                            </div>
+                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">厨</span>-->
+                            <!--<div class="h_input_box  " id="room_yt_err" style="width: 120px;">-->
+                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
+                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_yt" id="roomtype_yt" value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="roomtype_yt_num" style="display: none;">-->
+                                    <!--<li key ="0" class="tantnum_box">0</li>-->
+                                    <!--<li key ="1" class="tantnum_box">1</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
 
-                            <span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">阳台</span>
-                            <p class="h_check_tip ml10 simsun" id="tip_roomtype" style="display:none">请完善房屋户型</p>
-                            <p class="h_check_tip ml10 simsun" id="tip_roomtype_zero" style="display:none"></p>
-                        </div>
-                    </li>
+                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">阳台</span>-->
+                            <!--<p class="h_check_tip ml10 simsun" id="tip_roomtype" style="display:none">请完善房屋户型</p>-->
+                            <!--<p class="h_check_tip ml10 simsun" id="tip_roomtype_zero" style="display:none"></p>-->
+                        <!--</div>-->
+                    <!--</li>-->
                     <!--
                     <li class="pb15" style="display:none" id="pleaseNum">
                         <p class="h_num_tip">请填写整套房屋的户型（如果没有请填写0）</p>
