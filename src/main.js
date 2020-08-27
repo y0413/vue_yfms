@@ -6,6 +6,11 @@ import router from './router'
 import axios from 'axios'
 import elementui from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import BaiduMap from 'vue-baidu-map'
+Vue.use(BaiduMap, {
+    /* Visit http://lbsyun.baidu.com/apiconsole/key for details about app key. */
+    ak: 'lKbXTOTdQ9v50RdoCZcAzyiNHc0CfwPi'
+})
 
 
 Vue.config.productionTip = false

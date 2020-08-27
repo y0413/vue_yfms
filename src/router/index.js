@@ -13,9 +13,6 @@ export default new Router({
       path: '/',
       name: 'Housing_info',
       component: () => import('../components/Housing_info')
-    },{
-          path:"*",
-          name:"../../static/xzms/小猪民宿-住得更好，花得更少.html"
-      }
+    }
   ]
 })
