@@ -112,10 +112,9 @@
                         </li>
                     </ul>
                 </div>
+
                 <div class="h_wrap">
-
                     <div style="display: block;" id="pictureTypeModules">
-
                         <div class="h_pic_list clearfix filesInputNew" id="group_bedroom" type="bedroom">
                             <span style="font-weight: bold">卧室：</span>
                             <p id="bedroomDesc" style="color: #757575;">
@@ -124,7 +123,7 @@
                                 <span style="color: #ff4081">床单、枕头展示齐全</span>。
                                 <span class="showDemo cursorPointer" data-desc="请确保床单、枕头展示齐全"></span>
                             </p>
-                            <div id="   " class='dp_con '>
+                            <div class='dp_con '>
                                 <el-upload
                                     action="#"
                                     list-type="picture-card"
@@ -144,7 +143,7 @@
                             <p style="color: #757575;">建议上传。站在厅角拍摄，视野会更广。
                                 <span class="showDemo cursorPointer" data-value="livingroom"
                                       data-desc="站在厅角拍摄，视野会更广"></span></p>
-                            <div id="" class='dp_con '>
+                            <div class='dp_con '>
                                 <el-upload
                                     action="#"
                                     list-type="picture-card"
@@ -167,7 +166,7 @@
                                 <span class="showDemo cursorPointer" data-value="bathroom"
                                       data-desc="请确保马桶卫浴、地面细节完整"></span>
                             </p>
-                            <div id="  " class='dp_con '>
+                            <div class='dp_con '>
                                 <el-upload
                                     action="#"
                                     list-type="picture-card"
@@ -191,7 +190,7 @@
                                            data-desc="请确保灶具、台面完整"></span>
                                 <input type="hidden" id="isNeedKitchenPicture" value="no">
                             </p>
-                            <div id=" " class='dp_con '>
+                            <div class='dp_con '>
                                 <el-upload
                                     action="#"
                                     list-type="picture-card"
@@ -214,7 +213,7 @@
                             <span class="showDemo cursorPointer" data-value="others"
                                   data-desc="可以是其他室内空间、物件、小区周边环境等"></span>
                         </p>
-                        <div id="imageBoxOthers" class='dp_con '>
+                        <div class='dp_con '>
                             <el-upload
                                 action="#"
                                 list-type="picture-card"
@@ -236,17 +235,6 @@
                     <a href="###" class="keep_btn" id="facilitySave">保存并继续</a>
                 </div>
 
-
-
-                <div class="o_mask" id='mask'  style="display:none;"></div>
-                <div class="o_warp" id="dialog"  style="display:none;border:none;"></div>
-                <input type="hidden" value="" id="houseId"/>
-                <input type="hidden" value="144561368296" id="roomId"/>
-                <input type="hidden" value="" id="userRole">
-                <input type="hidden" value="2" id="step">
-                <input type="hidden" value="Pub_IndexV2Step2" id="action">
-                <input type="hidden" value="" id="commercialLandlord">
-                <input type="hidden" value="" id="luId">
 
                 <div class='h_body'>
                     <div class="foot_v2">
