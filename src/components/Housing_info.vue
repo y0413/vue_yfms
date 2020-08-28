@@ -88,9 +88,12 @@
                     </div>
                 </div>
             </div>
+            <el-form :model="bnb">
             <div class="h_wrap mt20">
+
                 <h4 class="h_tit">房源地址</h4>
                 <div class="address_box" >
+
                     <div class="clearfix">
                         <div class="address_text">房源位于：</div>
                         <div class="address_list">
@@ -119,7 +122,7 @@
                                 @change="handleChange">
                             </el-cascader>
                             </div>
-                            <div><el-input style="width: 200px" placeholder="详细地址" v-model="jt" @blur="cx()"></el-input>
+                            <div><el-input style="width: 200px" placeholder="详细地址" v-model="bnb.address" @blur="cx()"></el-input>
                             </div>
                             <div id="allmap"></div>
                             <!--<el-dialog width="40%" title="房源添加" :visible.sync="dialogVisible">-->
@@ -157,6 +160,10 @@
             <div  class="h_house_info">
                 <ul>
                     <li class="clearfix pb15" >
+                        <label class="type w_103" style="width: 100px;color:#000;">房屋名称：</label>
+                        <el-input style="width: 200px" placeholder="民宿名称" v-model="bnb.bnbname" ></el-input>
+                    </li>
+                    <li class="clearfix pb15" >
                         <label class="type w_103" style="width: 100px;color:#000;">房屋类型：</label>
                         <!--<div class="h_input_box house_type" id="houseType" style="width: 120px;">-->
 
@@ -166,18 +173,19 @@
                         <!--&lt;!&ndash;<ul class="select_list_box"  style="z-index: 99;">&ndash;&gt;-->
                         <!--&lt;!&ndash;</ul>&ndash;&gt;-->
                     <!--</div>-->
-                        <el-select v-model="fwvalue" placeholder="请选择">
+                        <el-select v-model="bnb.rid" placeholder="请选择">
                             <el-option
-                                v-for="item in fwlx"
-                                :key="item.value"
-                                :value="item.value">
+                                v-for="item in rommtype"
+                                :key="item.rid"
+                                :label="item.rname"
+                                :value="item.rid">
                             </el-option>
                         </el-select>
                     </li>
                     <li class="clearfix pb15" >
                         <label class="type w_103" style="width: 100px;color:#000;">出租类型：</label>
                         <div class="h_house_r pr">
-                            <el-radio-group  v-model="czradio">
+                            <el-radio-group  v-model="bnb.hid">
 
                                 <!--<el-radio :label="6">备选项</el-radio>-->
                                 <!--<el-radio :label="9">备选项</el-radio>-->
@@ -300,11 +308,11 @@
                     <li class="clearfix pb15" id="luToilet" >
                         <label class="type1 w_103" style="color:#000;">卫生间类型：</label>
                         <div class="h_house_r clearfix " id="toilet">
-                            <el-radio-group fill="#409EFF"  v-model="wcradio">
+                            <el-radio-group fill="#409EFF"  v-model="bnb.guard">
                             <ul class="h_toliet_type">
                                 <li style="margin: 10px 0;" class="leasetype_red_err  " value="2">
                                     <span class="select_leasetype ">
-                                        <el-radio :label="1">&nbsp;</el-radio>
+                                        <el-radio :label="0">&nbsp;</el-radio>
                                     </span>
                                     <p style="display: inline-block;margin-left: 15px;font-size: 12px;color: #757575;">
                                         <span style="display: block;font-size: 14px;font-weight: bold;color: #212121;">独立卫生间</span><br/>
@@ -313,7 +321,7 @@
                                 </li>
                                 <li style="margin: 10px 0;" class="leasetype_red_err  " value="1">
                                     <span class="select_leasetype ">
-                                        <el-radio :label="2">&nbsp;</el-radio>
+                                        <el-radio :label="1">&nbsp;</el-radio>
                                     </span>
                                     <p style="display: inline-block;margin-left: 15px;font-size: 12px;color: #757575;">
                                         <span style="display: block;font-size: 14px;font-weight: bold;color: #212121;">共用卫生间</span>
@@ -339,12 +347,12 @@
                                 <!--<ul class="select_list_box tantnum_box" id="tantnum_select" style="display:none">-->
                                     <!--<li value="1" class="tantnum_box">1</li>-->
                                 <!--</ul>-->
-                                <el-select v-model="fwvalue" placeholder="请选择">
+                                <el-select v-model="bnb.liva_id" placeholder="请选择">
                                     <el-option
-                                        v-for="item in options"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value">
+                                        v-for="item in livable"
+                                        :key="item.liva_num"
+                                        :label="item.liva_num"
+                                        :value="item.liva_id">
                                     </el-option>
                                 </el-select>
                             </div>
@@ -355,12 +363,14 @@
                     </li>
                     <!--<li class="clearfix pb15" id="luRoomNum" >-->
                 </ul>
-            </div>
-        </div>
 
+            </div>
+
+        </div>
+            </el-form>
             <div class="w_960 pb15 clearfix">
                 <!--<a class="keep_btn" href="#ongo" id="saveSub">保存并继续</a>-->
-                <el-button @click="bc()">保存并继续</el-button>
+                <el-button @click="addbnb()">保存并继续</el-button>
             </div>
 
             <!-- <div id="requestDeleteReasonsDiv" class="requestDeleteReasons" style="display: none;" lodgeunitOnline="">
@@ -502,117 +512,159 @@
 </template>
 
 <script>
-    import { regionData,CodeToText } from 'element-china-area-data'
-    var j="";
-    var w="";
+import { regionData, CodeToText } from 'element-china-area-data'// 省市级连
+var j = ''// 精度
+var w = ''// 维度
 export default {
   name: 'Housing_info',
-    data(){
-      return {
-          options: regionData,
-          selectedOptions: [],
-          fwlx:[
-              {value:"民宿"},
-              {value:"别墅"}
-          ],
-          jt:"",
-          jt1:"",
-          fwvalue:"",
-          czradio:1,
-          wcradio:1,
-      }
-    },
-    methods:{
-      bc(){
-          var ssq="";
-          for(var i=0;i<this.selectedOptions.length;i++){
-              ssq+=CodeToText[this.selectedOptions[i]];
-          }
-          ssq+=this.jt;
-          alert("详细地址:"+ssq+"房屋类型:"+this.fwvalue+"出租类型:"+this.czradio+"卫生间类型:"+this.wcradio+"精度:"+j+w)
-      },
-      cx(){
-          this.jt1=this.jt;
-          var map = new BMap.Map("allmap");
+  data () {
+    return {
+      options: regionData,
+      selectedOptions: [], // 省市级连信息
+        bnb:{"guard":0,"hid":1},
+      jt: '', // 地图文本框信息
+      jt1: '', // 地图文本框信息2
+      czradio: 1, // 出租类型单选框
+      wcradio: 1, // 厕所单选框
+      rommtype: [],
+      rommtypevalue: '', // 房屋类型下拉框数据
+      livable: [],
+      livablevalue: '',// 宜居人数数据
+      bnbname:""//民宿名称
+    }
+  },
+  created () {
+    this.getrommtype()
+    this.getlivable()
+  },
+  methods: {
+      //添加房源信息
+      addbnb(){
+          this.$axios.post('http://localhost:8081/bnbinfo/add',this.bnb)
+              .then(response => {
+                if(response.data!=""){
+                    this.$router.push({name:"Housing_des"});
+                }
+              }).catch(error => {
 
-          var local = new BMap.LocalSearch(map, {
-              renderOptions: { map: map },
-          });
-           if(this.jt1==""){
-               this.jt1="北京市"
-           }
-          let c=local.search(this.jt1);
-          if(c==null){
-              var pc = new BMap.Map("allmap");
-              // 初始化地图,设置中心点坐标，
-              var point = new BMap.Point(116.331398,39.897445); // 创建点坐标，汉得公司的经纬度坐标
-              map.centerAndZoom(point, 10);
-          }
-          map.disableDragging();
-          local.setMarkersSetCallback(function(pois){
-              var mar=pois[0].marker;
-              var p = mar.getPosition();
-              mar.enableDragging();
-              // alert("marker的位置是" + p.lng + "," + p.lat)
-              var map = new BMap.Map("allmap");
-              var point = new BMap.Point(p.lng,p.lat); // 创建点坐标，汉得公司的经纬度坐标
-              map.centerAndZoom(point, 17);
-              var marker = new BMap.Marker(point);  // 创建标注
-              map.addOverlay(marker);
-              marker.addEventListener("click",getAttr);
-              marker.enableDragging();
-              var c = marker.getPosition();
-              console.log(c.lng+"12345"+c.lat);
-              j=c.lng;
-              w=c.lat;
-              function getAttr(){
-                  var p = marker.getPosition();       //获取marker的位置
-                  alert("marker是" + p.lng + "," + p.lat);
-                  let a=p.lng;
-                  console.log(a+"你")
-
-                  console.log(p.lng+","+p.lat)
-              }
-              map.enableScrollWheelZoom(false);
-              var geolocationControl = new BMap.GeolocationControl();
-              geolocationControl.addEventListener("locationSuccess", function(e){
-                  // 定位成功事件
-                  map.centerAndZoom(marker.getPosition(), 17);
-              });
-              map.addControl(geolocationControl);
           })
       },
-        handleChange (value) {
-            var map = new BMap.Map("allmap");
-                var local = new BMap.LocalSearch(map, {
-                    renderOptions: { map: map },
-                });
-                local.search(CodeToText[this.selectedOptions[2]]);
-                map.disableDragging();
-                // local.setMarkersSetCallback(function(pois){
-                //     var p = pois[0].marker.getPosition();
-                //     // alert("marker的位置是" + p.lng + "," + p.lat)
-                // })
-            }
+      //获取房屋类型
+    getrommtype () {
+      this.$axios.post('http://localhost:8081/rommtype/queryAll')
+        .then(response => {
+          this.rommtype = response.data
+        }).catch(error => {
 
-    },mounted(){
-        var map = new BMap.Map("allmap");
-        // map.addEventListener("tilesloaded",function(){marker.enableDragging()});
+        })
+    },
+      //获取宜居人数
+    getlivable () {
+      this.$axios.post('http://localhost:8081/livable/queryAll')
+        .then(response => {
+          this.livable = response.data
+
+        }).catch(error => {
+
+        })
+    },
+    bc () {
+      var ssq = ''
+      for (var i = 0; i < this.selectedOptions.length; i++) {
+        ssq += CodeToText[this.selectedOptions[i]]
+      }
+      ssq += this.jt
+      alert('详细地址:' + ssq + '房屋类型:' + this.rommtypevalue + '出租类型:' + this.czradio + '卫生间类型:' + this.wcradio + '精度:' + j + w + '宜居人数:' + this.livablevalue)
+    },
+    cx () {
+      this.jt1 = this.bnb.address;
+      var map = new BMap.Map('allmap')
+
+      var local = new BMap.LocalSearch(map, {
+        renderOptions: { map: map }
+      })
+      if (this.jt1 == '') {
+        this.jt1 = '北京市'
+      }
+      let c = local.search(this.jt1)
+      if (c == null) {
+        var pc = new BMap.Map('allmap')
         // 初始化地图,设置中心点坐标，
-        var point = new BMap.Point(116.404,39.915); // 创建点坐标，汉得公司的经纬度坐标
-        map.centerAndZoom(point, 4);
-        // var marker = new BMap.Marker(point);  // 创建标注
-        // map.addOverlay(marker);              // 将标注添加到地图中
-        // marker.addEventListener("click",getAttr);
+        var point = new BMap.Point(116.331398, 39.897445) // 创建点坐标，汉得公司的经纬度坐标
+        map.centerAndZoom(point, 10)
+      }
+      map.disableDragging()
+      local.setMarkersSetCallback(function (pois) {
+        var mar = pois[0].marker
+        var p = mar.getPosition()
+        mar.enableDragging()
+        // alert("marker的位置是" + p.lng + "," + p.lat)
+        var map = new BMap.Map('allmap')
+        var point = new BMap.Point(p.lng, p.lat) // 创建点坐标，汉得公司的经纬度坐标
+        map.centerAndZoom(point, 17)
+        var marker = new BMap.Marker(point) // 创建标注
+        map.addOverlay(marker)
+        marker.addEventListener('click', getAttr)
+        marker.enableDragging()
+        var c = marker.getPosition()
+        console.log(c.lng + '12345' + c.lat)
+        j = c.lng
+        w = c.lat
+        function getAttr () {
+          var p = marker.getPosition() // 获取marker的位置
+          alert('marker是' + p.lng + ',' + p.lat)
+          let a = p.lng
+          console.log(a + '你')
 
-        map.disableDragging();
-        // function getAttr(){
-        //     var p = marker.getPosition();       //获取marker的位置
-        //     alert("marker是" + p.lng + "," + p.lat);
-        //     console.log(p.lng+","+p.lat)
+          console.log(p.lng + ',' + p.lat)
+        }
+        map.enableScrollWheelZoom(false)
+        var geolocationControl = new BMap.GeolocationControl()
+        geolocationControl.addEventListener('locationSuccess', function (e) {
+          // 定位成功事件
+          map.centerAndZoom(marker.getPosition(), 17)
+        })
+        map.addControl(geolocationControl)
+      })
+    },
+      //省市级联事件
+    handleChange (value) {
+        // for (var i = 0; i < this.selectedOptions.length; i++) {
+        //     ssq += CodeToText[this.selectedOptions[i]]
         // }
+        this.bnb.province=CodeToText[this.selectedOptions[0]];
+        this.bnb.city=CodeToText[this.selectedOptions[1]];
+        this.bnb.town=CodeToText[this.selectedOptions[2]];
+      var map = new BMap.Map('allmap')
+      var local = new BMap.LocalSearch(map, {
+        renderOptions: { map: map }
+      })
+      local.search(CodeToText[this.selectedOptions[2]])
+      map.disableDragging()
+      // local.setMarkersSetCallback(function(pois){
+      //     var p = pois[0].marker.getPosition();
+      //     // alert("marker的位置是" + p.lng + "," + p.lat)
+      // })
     }
 
+  },
+  mounted () {
+    var map = new BMap.Map('allmap')
+    // map.addEventListener("tilesloaded",function(){marker.enableDragging()});
+    // 初始化地图,设置中心点坐标，
+    var point = new BMap.Point(116.404, 39.915) // 创建点坐标，汉得公司的经纬度坐标
+    map.centerAndZoom(point, 4)
+    // var marker = new BMap.Marker(point);  // 创建标注
+    // map.addOverlay(marker);              // 将标注添加到地图中
+    // marker.addEventListener("click",getAttr);
+
+    map.disableDragging()
+    // function getAttr(){
+    //     var p = marker.getPosition();       //获取marker的位置
+    //     alert("marker是" + p.lng + "," + p.lat);
+    //     console.log(p.lng+","+p.lat)
+    // }
+  }
 
 }
 
@@ -631,4 +683,3 @@ export default {
         width: 100px;
     }
 </style>
-

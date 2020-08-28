@@ -271,7 +271,7 @@
             }
         },methods:{
             addDes(){  //添加房源描述
-                this.$axios.post('http://localhost:8081/des/addDes',this.des)
+                this.$axios.post('http://localhost:8081/bnbinfo/addDes',this.des)
                     .then(res => {
                         if (res.data === 1){
                             this.$message.success({message:'添加成功'})
