@@ -194,7 +194,6 @@
 
                 <input type="hidden" name="actionName" id="actionName" value="Pub_Index"/>
                 <input type="hidden" name="xz_srf_token" id="xz_srf_token" value="c7d30e242ec2b969231c09400c9a65c4"/>
-
             </div>
         </div>
 </template>
