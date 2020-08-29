@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <div class="top"></div>
         <div class="o_mask" id='maskName'  style="display:none;"></div>
         <div class="detail_wrapper">
