@@ -19,15 +19,20 @@ export default new Router({
     //       name: 'Housing_des',
     //       component: () => import('../components/Housing_des')
     //   },
-      {
-          path:'/',
-          name:'Housing_main',
-          component : ()=> import('../components/Housing_main')
-      }
+    //   {
+    //       path:'/',
+    //       name:'Housing_main',
+    //       component : ()=> import('../components/Housing_main')
+    //   }
     //   {
     //       path: '/',
     //       name: 'Housing_search',
     //       component: () => import('../components/Housing_search')
     //   }
+      {
+          path: '/',
+          name: 'Housing_details',
+          component: () => import('../components/Housing_details')
+      }
   ]
 })
