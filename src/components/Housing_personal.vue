@@ -54,22 +54,33 @@
         </el-header>
         <el-main >
             <el-tabs :tab-position="tabPosition='left'" style="height: 500px" type="border-card">
-                <el-tab-pane class="el-icon-s-order" label="我的订单">我的订单·
+                <el-tab-pane class="el-icon-s-order">
+                    <span slot="label"><i class="el-icon-s-order"></i>我的订单</span>
+
                     <el-tabs v-model="activeName" @tab-click="handleClick"  style="height: 700px;width: 1000px">
                         <el-tab-pane label="进行中" name="first">进行中</el-tab-pane>
                         <el-tab-pane label="已结束" name="second">已结束</el-tab-pane>
                     </el-tabs>
+
                 </el-tab-pane>
-                <el-tab-pane class="el-icon-user" label="个人资料">
+                <el-tab-pane class="el-icon-user">
+                    <span slot="label"><i class="el-icon-user"></i>个人资料</span>
                     个人资料
                 </el-tab-pane>
-                <el-tab-pane class="el-icon-star-off" label="我的收藏">
+                <el-tab-pane class="el-icon-edit-outline">
+                    <span slot="label"><i class="el-icon-edit-outline"></i>我的点评</span>
+                    我的点评
+                </el-tab-pane>
+                <el-tab-pane class="el-icon-star-off">
+                    <span slot="label"><i class="el-icon-star-off"></i>我的收藏</span>
                     我的收藏
                 </el-tab-pane>
-                <el-tab-pane class="el-icon-lock"  label="密码设置">
+                <el-tab-pane class="el-icon-lock">
+                    <span slot="label"><i class="el-icon-lock"></i>密码设置</span>
                     密码设置
                 </el-tab-pane>
-                <el-tab-pane class="el-icon-setting" label="注销账号">
+                <el-tab-pane class="el-icon-setting">
+                    <span slot="label"><i class="el-icon-setting"></i>注销账号</span>
                     注销账号
                 </el-tab-pane>
 
