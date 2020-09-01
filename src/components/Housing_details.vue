@@ -67,17 +67,17 @@
             <div class="con_l">
                 <div class="pho_info">
                     <h4>
-                        <em>地铁四号线清源路站 （艺术气息温馨大主卧）</em>
+                        <em>{{listinfo.bnbname}}</em>
                     </h4>
 
-                    <p title="北京市大兴区清源西路">
+                    <p :title="listinfo.city+listinfo.address">
                         <em class="col_pink">
                             <a href="https://www.xiaozhu.com" >小猪</a>
                             &gt;
-                            <a href="https://bj.xiaozhu.com/">北京</a>
+                            <a href="https://bj.xiaozhu.com/">{{listinfo.city}}</a>
                             &gt;
                         </em>
-                        <span class="pr5">北京市大兴区清源西路
+                        <span class="pr5">{{listinfo.address}}
                                   </span>
                     </p>
                     <div class="labels">
@@ -92,38 +92,50 @@
                         &nbsp;
                     </div>
                 </div>
-
+                <el-carousel height="533px" :autoplay="false" arrow="hover"   >
+                    <el-carousel-item v-for="item in pic" :key="item">
+                        <img :src="'http://localhost:8081/'+item" alt="" style="height: 533px;width: 1000px" />
+                    </el-carousel-item>
+                </el-carousel>
                 <!--轮播图-->
-                <div class="pho_show clearfix user_unselectable" id="detailImageBox" onselectstart="return false">
-                    <div class="pho_show_l">
-                        <div class="pho_show_big">
-                            <div class="pho_tip_box" id="curImgIntro" style="display:none;">
-                                <div>
-                                    <span></span>
-                                </div>
-                            </div>
-                            <div valign="middle" align="center">
-                                <div id="imgMouseCusor" style="background:url('/images/detail/null_bg.png')"></div>
-                                <img id="curBigImage" src="https://image.xiaozhustatic3.com/00,800,533/2,3,0,6,983,1800,1200,0088b195.jpg" alt="" />
+                <!--<div class="pho_show clearfix user_unselectable" id="detailImageBox" onselectstart="return false">-->
+                    <!--<div class="pho_show_l">-->
+                        <!--<div class="pho_show_big">-->
+                            <!--<div class="pho_tip_box" id="curImgIntro" style="display:none;">-->
+                                <!--<div>-->
+                                    <!--<span></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div valign="middle" align="center">-->
+                                <!--<div id="imgMouseCusor" style="background:url('/images/detail/null_bg.png')"></div>-->
+                                <!--<img id="curBigImage" :src="'http://localhost:8081/'+listinfo.bedroom" alt="" />-->
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pho_show_r">
-                        <div class="pho_show_small">
-                            <div class="pho_small_prev detail-image-prev"></div>
-                            <div class="pho_small_next detail-image-next"></div>
-                            <ul class="detail-thumb-nav">
-                                <li>
-                                    <div class="pho_layer"></div>
-                                    <img data-src="https://image.xiaozhustatic2.com/00,118,159/s,1,nubs,950,1280,2,3b15e3c5.jpg"
-                                         data-intro="" data-imgrate="0.7421875"
-                                         data-bigimg="https://image.xiaozhustatic3.com/00,396,533/s,1,nubs,950,1280,2,3b15e3c5.jpg" data-width="396"  data-height="533" title="" />
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                                <!--&lt;!&ndash;<img id="curBigImage" src="https://image.xiaozhustatic3.com/00,800,533/2,3,0,6,983,1800,1200,0088b195.jpg" alt="" />&ndash;&gt;-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="pho_show_r">-->
+                        <!--<div class="pho_show_small">-->
+                            <!--<div class="pho_small_prev detail-image-prev"></div>-->
+                            <!--<div class="pho_small_next detail-image-next"></div>-->
+                            <!--<ul class="detail-thumb-nav">-->
+                                <!--<li>-->
+                                    <!--<div class="pho_layer"></div>-->
+                                    <!--<img :src="'http://localhost:8081/'+listinfo.bedroom"-->
+                                         <!--data-intro="" data-imgrate="0.7421875"-->
+                                         <!--data-bigimg="https://image.xiaozhustatic3.com/00,396,533/s,1,nubs,950,1280,2,3b15e3c5.jpg" data-width="396"  data-height="533" title="" />-->
+
+                                <!--</li>-->
+                                <!--<li>-->
+                                    <!--<img :src="'http://localhost:8081/'+listinfo.bedroom"-->
+                                         <!--data-intro="" data-imgrate="0.7421875"-->
+                                         <!--data-bigimg="https://image.xiaozhustatic3.com/00,396,533/s,1,nubs,950,1280,2,3b15e3c5.jpg" data-width="396"  data-height="533" title="" />-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <!--/轮播图-->
 
                 <!--photo light box-->
@@ -133,22 +145,22 @@
                 <div id="introducePart">
                     <ul class="house_info clearfix" id="introduce">
                         <li class="border_none">
-                            <h6 class="h_ico6">独立单间</h6>
+                            <h6 class="h_ico6">{{listinfo.hname}}</h6>
                             <p>房间面积：25平米<br/>                         房屋户型：3室1厅1卫1厨2阳台</p>                 </li>
                         <li>
-                            <h6 class="h_ico2">宜住2人</h6>
+                            <h6 class="h_ico2">宜住{{listinfo.liva_num}}人</h6>
                             <p>
                                 与房东分别住不同房间<br />
                                 可能与其他房客分住不同房间
                             </p>
                         </li>
-                        <li>
-                            <h6 class="h_ico3">共1张</h6>
-                            <p>
+                        <!--<li>-->
+                            <!--<h6 class="h_ico3">共1张</h6>-->
+                            <!--<p>-->
 
-                                双人床：1.5m宽 × 2m长 ×1张<br />
-                            </p>
-                        </li>
+                                <!--双人床：1.5m宽 × 2m长 ×1张<br />-->
+                            <!--</p>-->
+                        <!--</li>-->
                     </ul>
                     <div class="box_white clearfix detail_intro_item" hideheight="135" showheight="120" >
                         <div class="info_l">
@@ -157,7 +169,7 @@
                         </div>
                         <div class="info_r">
                             <div class=" intro_item_content">
-                                <p>一进屋就充满了浓浓的艺术气息哦，墙壁挂着几幅手绘油画，时尚杂志随处都是，随处可以感受到浓浓的时尚艺术气息。（室外百分之五十的绿化营造了天然氧吧，室内松下全能静风系统让您随时与大自然相伴）</p>
+                                <p>{{listinfo.desbes}}</p>
                             </div>
                             <div class="open" style="display:none;">查看全部<span></span></div>
                             <div class="stop" style="display:none;">收起<span></span></div>
@@ -171,7 +183,7 @@
                         </div>
                         <div class="info_r">
                             <div class=" intro_item_content">
-                                <p>房间内三幅手绘油画，一个加湿器，一个威尼斯带回来的小玩偶，一台电视机，一台空调机，一个书架，一张书桌和一把北欧风情椅子，一张双人床和宜家家居的床垫，一张宜家家居的小方桌。在房间内随时可以叫各种外卖送到您的嘴边。（百度外卖，饿了么外卖）小区对面就有菜市，超市，民宿等。</p>
+                                <p>{{listinfo.Internal}}</p>
                             </div>
                             <div class="open" style="display:none;">查看全部<span></span></div>
                             <div class="stop" style="display:none;">收起<span></span></div>
@@ -184,7 +196,7 @@
                         </div>
                         <div class="info_r">
                             <div class=" intro_item_content">
-                                <p>地铁四号线直达时尚购物圣地西单只需半小时，地铁四号线是贯穿北京南北全长50公里的*长地铁线路，来北京去哪里都是非常非常的方便咯。早5点到10点，晚5点到10点半从枣园地铁D口有小巴士直达小区门口。交通便利，自驾游可选入京游玩，亦可直驾天津，四通八达。另公交车37路，35路，28路可达</p>
+                                <p>{{listinfo.Traffic}}</p>
                             </div>
                             <div class="open" style="display:none;">查看全部<span></span></div>
                             <div class="stop" style="display:none;">收起<span></span></div>
@@ -198,10 +210,7 @@
                         </div>
                         <div class="info_r">
                             <div class=" intro_item_content">
-                                <p>楼宇及小区情况：<br />
-                                    小区为高档居民区，24小时安保，欧式花园配合欧洲阿波罗水池，小区绿化面积达到百分之五十哦，在北京这样寸土寸金的大都市还是非常的少见啦。统一保洁人员，停车场整齐干净，布局合理。小区安静，有序，小区全方位监控录像，所以非常的安全，对于犯罪分子来说是一张法网，绝无下手之地咯。<br />
-                                    外部周围情况：<br />
-                                    小区北门超市发连锁超市，水果超市，餐饮小店，不远有大型购物广场并有各种口味的民宿。出行可随时打车，订车，租车，滴滴一下马上出发啦，滴答拼车到市区非常的便宜，来京旅游办事非常方便。</p>
+                                <p>{{listinfo.spots}}</p>
                             </div>
                             <div class="open" style="display:none;">查看全部<span></span></div>
                             <div class="stop" style="display:none;">收起<span></span></div>
@@ -216,21 +225,67 @@
                         <div class="info_r">
                             <div class="intro_item_content">
                                 <ul class="pt_list clearfix">
-                                    <li class="s_ico_shower">热水淋浴</li>
-                                    <li class="s_ico_wirelessnetwork">无线网络</li>
-                                    <li class="s_ico_aircondition">空调</li>
-                                    <li class="s_ico_tv">电视</li>
-                                    <li class="s_ico_heater">暖气</li>
-                                    <li class="s_ico_no">有线网络</li>
-                                    <li class="s_ico_no">牙具</li>
-                                    <li class="s_ico_no">适宜老人
-                                    <li title="为老人提供方便进出和日常使用的设施" style="display: inline-block;width:12px;height:12px;
-                                    background:url(../images/icon_wenhaogrey.png) no-repeat; background-size: 100% 100%;margin-left: 5px;">
+                                    <li>
+                                    <!--<li class="s_ico_shower">热水淋浴-->
+                                    <span v-if="listinfo.shower==='0'">
+                                        <span class="s_ico_shower">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;热水淋浴
+                                        </span>
+                                    </span>
+                                        <span v-if="listinfo.shower==='1'">
+                                        <span class="s_ico_no">
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;热水淋浴
+                                        </span>
+                                    </span>
                                     </li>
-                                    <li class="s_ico_no">适宜残疾人
-                                        <i title="为残疾人提供无障碍通行和活动的设施" style="display: inline-block;width:12px;height:12px;
-                                    background:url(../images/icon_wenhaogrey.png) no-repeat; background-size: 100% 100%;margin-left: 5px;">
-                                        </i>
+                                    <li >
+                                        <span v-if="listinfo.network==='0'">
+                                        <span class="s_ico_wirelessnetwork">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;热水淋浴
+                                        </span>
+                                    </span>
+                                        <span v-if="listinfo.network==='1'">
+                                        <span class="s_ico_no">
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;热水淋浴
+                                        </span>
+                                    </span>
+                                    </li>
+                                    <li >
+                                        <span v-if="listinfo.air==='0'">
+                                        <span class="s_ico_aircondition">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空调
+                                        </span>
+                                    </span>
+                                        <span v-if="listinfo.air==='1'">
+                                        <span class="s_ico_no">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;空调
+                                        </span>
+                                    </span>
+                                    </li>
+                                    <li >
+                                        <span v-if="listinfo.Television==='0'">
+                                        <span class="s_ico_tv">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电视
+                                        </span>
+                                    </span>
+                                        <span v-if="listinfo.Television==='1'">
+                                        <span class="s_ico_no">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电视
+                                        </span>
+                                    </span></li>
+                                    <li >
+                                        <span v-if="listinfo.Heating==='0'">
+                                        <span class="s_ico_heater">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暖气
+                                        </span>
+                                    </span>
+                                        <span v-if="listinfo.Heating==='1'">
+                                        <span class="s_ico_no">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暖气
+                                        </span>
+                                    </span>
+                                    </li>
+                                    <li class="s_ico_no">牙具
                                     </li>
                                 </ul>
                             </div>
@@ -248,7 +303,8 @@
                             <div class="info_text_mid">
 
                                 <ul class="check_con clearfix">
-                                    <li>卫生间：共用卫生间</li>
+                                    <li>卫生间：&nbsp;&nbsp;<span v-if="listinfo.guard==='1'">共用卫生间</span>
+                                        <span v-if="listinfo.guard==='0'">独立卫生间</span></li>
                                     <li>最少入住天数：1天</li>
                                     <li>最多入住天数：365天</li>
                                 </ul>
@@ -257,13 +313,12 @@
                     </div>
                 </div>
 
-                <div class="xq_map" style="position:relative">
+                <div id="allmap" style="position:relative">
                     <div class="map_btm"></div><div class="xq_map" id="detailMap" style="height:500px"></div>
                     <div class="map_text">
                         <table>
                             <tr>
                                 <td>
-
                                     房源位置：北京市大兴区清源西路
                                 </td>
                             </tr>
@@ -276,9 +331,7 @@
                     <div class="clause_box">
                         <h5>房东对房客的要求</h5>
                         <div>
-                            可接待性别：不限<br />
-                            可接待年龄：不限<br />
-                            其他要求：入住的朋友一定要爱干净，人品要好，觉不接待矫情无理的客人，想通过这样的客房做非法活动或者有不法行为的概不接待，而且我们小区全程监控觉不允许不正当的人员来民宿。想有非法行为想法的还是请你选择其他地方民宿，否则后果自负。注意：做饭我们提供厨具和餐具，其他一切调料，米，油自备）小区对面有超市发可以自行购买调料盒散装大米以及便携装的食用油）
+                            {{listinfo.requirement}}
                         </div>
                     </div>
 
@@ -348,7 +401,7 @@
 
                 <div class="bg_box" id="floatRightBox">
                     <div class="day_top clearfix" id="pricePart">
-                        <div class="day_l">&#165;<span>138</span><em></em></div>
+                        <div class="day_l">&#165;<span>{{listinfo.price}}</span><em></em></div>
                         <div class="day_r">每晚</div>
                     </div>
 
@@ -380,34 +433,32 @@
                                         <input type="hidden" name="enddate" id="enddate" value="2020-09-01"/>
                                         <div id="calendar-box" style="display:none" class="calendar_box clearfix"> </div>
                                     </div>
-                                    <div class="select_box">
-                                        <div class="select_arrow"></div>
-                                        <input id="sameRoomNum" readOnly="readOnly" data-bookroomnum="" type="text" value="1间" />
-                                        <ul class="select_con room_num_select limit10" id="detailRoomNumSelect">
-                                            <li data-num="1">1间</li>
-                                        </ul>
-                                    </div>
+                                    <!--<div class="select_box">-->
+                                        <!--<div class="select_arrow"></div>-->
+                                        <!--<input id="sameRoomNum" readOnly="readOnly" data-bookroomnum="" type="text" value="1间" />-->
+                                        <!---->
+                                    <!--</div>-->
                                 </div>
                                 <div class="price_top">
 
-                                    <div class="reserve_text">在线收取押金￥<span>300</span></div>
+                                    <!--<div class="reserve_text">在线收取押金￥<span>300</span></div>-->
                                 </div>
                                 <div class="order_btn_container">
                                     <a class="order_btn" href="#ongo" id="day_yuding">立即预订<span class="f14">（总计￥438）</span></a>
                                 </div>
                             </div>
-                            <div class="white_bg">
-                                <input type="hidden" id="avgprice" value="138" />
-                                <input type="hidden" id="priceTip" value="" />
-                                <ul class="cal_box clearfix">
-                                    <li>今天<br/>¥138</li>
-                                    <li>01<br/>¥138</li>
-                                    <li>02<br/>¥138</li>
-                                    <li>03<br/>¥138</li>
-                                    <li>04<br/>¥138</li>
-                                    <li class="line_none_r"><a id="showMoreCalendar" href="#">全部<br>日历</a> </li>
-                                </ul>
-                            </div>
+                            <!--<div class="white_bg">-->
+                                <!--<input type="hidden" id="avgprice" value="138" />-->
+                                <!--<input type="hidden" id="priceTip" value="" />-->
+                                <!--<ul class="cal_box clearfix">-->
+                                    <!--<li>今天<br/>¥138</li>-->
+                                    <!--<li>01<br/>¥138</li>-->
+                                    <!--<li>02<br/>¥138</li>-->
+                                    <!--<li>03<br/>¥138</li>-->
+                                    <!--<li>04<br/>¥138</li>-->
+                                    <!--<li class="line_none_r"><a id="showMoreCalendar" href="#">全部<br>日历</a> </li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
                         </div>
                     </div>
                     <!--预定end-->
@@ -634,10 +685,61 @@
 
 <script>
     export default {
-        name: "Housing_details"
+        name: "Housing_details",
+        data(){
+            return{
+                bnbid:1,
+                listinfo:[],
+                pic:[]
+            }
+        },
+        created:function(){
+            this.bnbid=this.$route.params.bnbid;
+            this.queryBnbid(this.bnbid)
+        },
+        methods:{
+            queryBnbid(bnbid){
+                this.$axios.post("http://localhost:8081/bnbinfo/queryId?bnbid="+bnbid)
+                    .then(response=>{
+                        this.listinfo=response.data;
+                        var map = new BMap.Map('allmap');
+                        var point = new BMap.Point(this.listinfo.longitude, this.listinfo.latitude) // 创建点坐标，汉得公司的经纬度坐标
+                        map.centerAndZoom(point, 15);
+                        var marker = new BMap.Marker(point);  // 创建标注
+                        map.addOverlay(marker);
+                        map.disableDragging();
+                        this.pic.push(this.listinfo.bedroom);
+                        this.pic.push(this.listinfo.room);
+                        this.pic.push(this.listinfo.toilet);
+                        this.pic.push(this.listinfo.kitchen);
+                        this.pic.push(this.listinfo.other);
+
+                    })
+            }
+        },
+
     }
 </script>
 
 <style scoped>
+    #allmap{
+        width: 918px;
+        height: 500px;
+        border:1px solid green;
+    }
+    .el-carousel__item h3 {
+        color: #475669;
+        font-size: 14px;
+        opacity: 0.75;
+        line-height: 200px;
+        margin: 0;
+    }
 
+    .el-carousel__item:nth-child(2n) {
+        background-color: #99a9bf;
+    }
+
+    .el-carousel__item:nth-child(2n+1) {
+        background-color: #d3dce6;
+    }
 </style>

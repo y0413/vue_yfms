@@ -88,28 +88,50 @@
                     </div>
                 </div>
             </div>
+            <el-form :model="bnb">
             <div class="h_wrap mt20">
+
                 <h4 class="h_tit">房源地址</h4>
                 <div class="address_box" >
+
                     <div class="clearfix">
                         <div class="address_text">房源位于：</div>
                         <div class="address_list">
-                            <ul id="address_ul">
-                                <li class="clearfix "   data-lock="0" data-nationid="0">
-                                    <span class=" "></span>
-                                    <div class="select_text" title="">
-                                        <div>
-                                            <i></i>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                            <!--<ul id="address_ul">-->
+                                <!--<li class="clearfix "   data-lock="0" data-nationid="0">-->
+                                    <!--<span class=" "></span>-->
+                                    <!--<div class="select_text" title="">-->
+                                        <!--<div>-->
+                                            <!--<i></i>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</li>-->
+                            <!--</ul>-->
                             <p class="open_all"  style="display:none">显示全部地址<span></span></p>
-                            <div class="address_btm clearfix">
-                                <a href="" class="add_btn fl" id="add_site"><span></span>位于新地址</a>
-                                <input type="hidden"  id="address"  value="0"></input>
-                                <p class="h_check_tip simsun mt2" id="tip_address" style="display:none">请您填写房源地址</p>
+                            <!--<div class="address_btm clearfix">-->
+                                <!--&lt;!&ndash;<a href="" class="add_btn fl" id="add_site"><span></span>位于新地址</a>&ndash;&gt;-->
+                                <!--<button class="add_btn fl" id="add_site" @click="showDialog()"><span></span>位于新地址</button>-->
+                                <!--<input type="hidden"  id="address"  value="0"></input>-->
+                                <!--<p class="h_check_tip simsun mt2" id="tip_address" style="display:none">请您填写房源地址</p>-->
+                            <!--</div>-->
+                            <div>
+                            <el-cascader
+                                size="large"
+                                :options="options"
+                                v-model="selectedOptions"
+                                @change="handleChange">
+                            </el-cascader>
                             </div>
+                            <div><el-input style="width: 200px" placeholder="详细地址" v-model="bnb.address" @blur="cx()"></el-input>
+                            </div>
+                            <div id="allmap"></div>
+                            <!--<el-dialog width="40%" title="房源添加" :visible.sync="dialogVisible">-->
+                                <!--<div id="l-map">-->
+                                <!--</div>-->
+                                <!--<div slot="footer" class="dialog-footer">-->
+                                    <!--<el-button type="success" @click="dialogVisible = false">取 消</el-button>-->
+                                <!--</div>-->
+                            <!--</el-dialog>-->
                         </div>
                     </div>
                 </div>
@@ -138,112 +160,145 @@
             <div  class="h_house_info">
                 <ul>
                     <li class="clearfix pb15" >
+                        <label class="type w_103" style="width: 100px;color:#000;">房屋名称：</label>
+                        <el-input style="width: 200px" placeholder="民宿名称" v-model="bnb.bnbname" ></el-input>
+                    </li>
+                    <li class="clearfix pb15" >
                         <label class="type w_103" style="width: 100px;color:#000;">房屋类型：</label>
-                        <div class="h_input_box house_type" id="houseType" style="width: 120px;">
-                            <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                            <input type="text" class="roomtype tantnum_box cursorPointer" id="houseTypeText" style="width: 106px;" data="" value="" readonly/>
-                            <p class="no_select_tip tip_house_type" id="tipHouseType" style="display: none"></p>
-                            <ul class="select_list_box"  style="z-index: 99;">
-                            </ul>
-                        </div>
+                        <!--<div class="h_input_box house_type" id="houseType" style="width: 120px;">-->
+
+                        <!--&lt;!&ndash;<div class="s_arrow_top s_arrow_down cursorPointer"></div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="text" class="roomtype tantnum_box cursorPointer" id="houseTypeText" style="width: 106px;" data="" value="" readonly/>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<p class="no_select_tip tip_house_type" id="tipHouseType" style="display: none"></p>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<ul class="select_list_box"  style="z-index: 99;">&ndash;&gt;-->
+                        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+                    <!--</div>-->
+                        <el-select v-model="bnb.rid" placeholder="请选择">
+                            <el-option
+                                v-for="item in rommtype"
+                                :key="item.rid"
+                                :label="item.rname"
+                                :value="item.rid">
+                            </el-option>
+                        </el-select>
                     </li>
                     <li class="clearfix pb15" >
                         <label class="type w_103" style="width: 100px;color:#000;">出租类型：</label>
                         <div class="h_house_r pr">
+                            <el-radio-group  v-model="bnb.hid">
+
+                                <!--<el-radio :label="6">备选项</el-radio>-->
+                                <!--<el-radio :label="9">备选项</el-radio>-->
+
                             <ul class="h_house_type">
                                 <li style="margin: 10px 0;" class="leasetype_red_err " id="whole_red_err"  >
-                                    <span class="select_leasetype "></span>
+
+                                    <span class="select_leasetype">
+                                        <el-radio :label="1">&nbsp;
+                                        </el-radio>
+                                    </span>
+
                                     <!--<span class="set " style="background: url(./images/pubsysV2/pot_gray_06.png) no-repeat center"></span><p style="font-weight: bold;">整套出租</p>-->
                                     <span style="background:  no-repeat center;height: 21px;width: 24px;margin-left: 15px;margin-bottom: 5px;"></span>
                                     <p style="display: inline-block;margin-left: 15px;font-size: 12px;color: #757575;">
+
                                         <span style="display: block;font-size: 14px;font-weight: bold;color: #212121;">整套出租</span>
-                                        房客独享整套房屋
+                                        <br/>房客独享整套房屋
+
                                     </p>
+
                                 </li>
                                 <li style="margin: 10px 0;" class="leasetype_red_err " id="part_red_err"  >
-                                    <span class="select_leasetype "></span>
+                                    <span class="select_leasetype ">
+                                        <el-radio :label="2">&nbsp;
+                                        </el-radio>
+                                    </span>
                                     <!--<span class="alone_room "  ></span><p style="font-weight: bold;">独立单间</p>-->
                                     <span style="background:  no-repeat center;height: 21px;width: 24px;margin-left: 15px;margin-bottom: 5px;"></span>
                                     <p style="display: inline-block;margin-left: 15px;font-size: 12px;color: #757575;">
                                         <span style="display: block;font-size: 14px;font-weight: bold;color: #212121;">独立单间</span>
-                                        房客拥有一个独立的房间，但部分空间与他人分享
+                                        <br/>房客拥有一个独立的房间，但部分空间与他人分享
                                     </p>
                                 </li>
                                 <li style="margin: 10px 0;" class="leasetype_red_err " id="sharedRoom_red_err"   >
-                                    <span class="select_leasetype "></span>
+                                    <span class="select_leasetype ">
+                                        <el-radio :label="3">&nbsp;
+                                        </el-radio>
+                                    </span>
                                     <!--<span class="sharedRoom "></span><p style="font-weight: bold;">合住房间</p>-->
                                     <span style="background:  no-repeat center;height: 21px;width: 24px;margin-left: 15px;margin-bottom: 5px;"></span>
                                     <p style="display: inline-block;margin-left: 15px;font-size: 12px;color: #757575;">
                                         <span style="display: block;font-size: 14px;font-weight: bold;color: #212121;">合住房间</span>
-                                        房客与他人共住一个房间，没有独立的卧室（如：床位、沙发等）
+                                        <br/>房客与他人共住一个房间，没有独立的卧室（如：床位、沙发等）
                                     </p>
                                 </li>
                             </ul>
+                            </el-radio-group>
                             <input type="hidden"  id="leasetype"  value=""></input>
                             <p class="no_select_tip simsun" id="tip_leasetype" style="display:none">请选择出租类型</p>
                         </div>
                     </li>
-                    <li class="clearfix pb15">
-                        <label class="type1 w_103" style="color:#000;">房屋户型：</label>
-                        <span id="roomTypeDesc" style="line-height: 40px;font-size:12px;color:#757575">
-	                                        </span>
-                        <div class="h_house_r clearfix" style="margin-left: 103px;">
-                            <div class="h_input_box " id="room_shi_err" style="width: 120px;">
-                                <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                                <input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name ="roomtype_shi" id="roomtype_shi" value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="roomtype_shi_num" style="display: none;z-index: 99;">
-                                    <li key ="1" class="tantnum_box">1</li>
+                    <!--<li class="clearfix pb15">-->
+                        <!--<label class="type1 w_103" style="color:#000;">房屋户型：</label>-->
+                        <!--<span id="roomTypeDesc" style="line-height: 40px;font-size:12px;color:#757575">-->
+	                                        <!--</span>-->
+                        <!--<div class="h_house_r clearfix" style="margin-left: 103px;">-->
+                            <!--<div class="h_input_box " id="room_shi_err" style="width: 120px;">-->
+                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
+                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name ="roomtype_shi" id="roomtype_shi" value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="roomtype_shi_num" style="display: none;z-index: 99;">-->
+                                    <!--<li key ="1" class="tantnum_box">1</li>-->
 
-                                </ul>
-                            </div>
-                            <span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">室</span>
+                                <!--</ul>-->
+                            <!--</div>-->
+                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">室</span>-->
 
-                            <div class="h_input_box  " id="room_ting_err" style="width: 120px;">
-                                <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                                <input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_ting" id="roomtype_ting" value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="roomtype_ting_num" style="display: none;">
-                                    <li key ="0" class="tantnum_box">0</li>
-                                    <li key ="1" class="tantnum_box">1</li>
+                            <!--<div class="h_input_box  " id="room_ting_err" style="width: 120px;">-->
+                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
+                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_ting" id="roomtype_ting" value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="roomtype_ting_num" style="display: none;">-->
+                                    <!--<li key ="0" class="tantnum_box">0</li>-->
+                                    <!--<li key ="1" class="tantnum_box">1</li>-->
 
-                                </ul>
-                            </div>
+                                <!--</ul>-->
+                            <!--</div>-->
 
-                            <span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">厅</span>
-                            <div class="h_input_box  " id="room_wei_err" style="width: 120px;">
-                                <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                                <input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_wei" id="roomtype_wei" value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="roomtype_wei_num" style="display: none;">
-                                    <li key ="0" class="tantnum_box">0</li>
-                                    <li key ="1" class="tantnum_box">1</li>
+                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">厅</span>-->
+                            <!--<div class="h_input_box  " id="room_wei_err" style="width: 120px;">-->
+                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
+                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_wei" id="roomtype_wei" value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="roomtype_wei_num" style="display: none;">-->
+                                    <!--<li key ="0" class="tantnum_box">0</li>-->
+                                    <!--<li key ="1" class="tantnum_box">1</li>-->
 
-                                </ul>
-                            </div>
+                                <!--</ul>-->
+                            <!--</div>-->
 
-                            <span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">卫</span>
-                            <div class="h_input_box  " id="room_chu_err" style="width: 120px;">
-                                <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                                <input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_chu" id="roomtype_chu" value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="roomtype_chu_num" style="display: none;">
-                                    <li key ="0" class="tantnum_box">0</li>
-                                    <li key ="1" class="tantnum_box">1</li>
-                                </ul>
-                            </div>
+                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">卫</span>-->
+                            <!--<div class="h_input_box  " id="room_chu_err" style="width: 120px;">-->
+                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
+                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_chu" id="roomtype_chu" value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="roomtype_chu_num" style="display: none;">-->
+                                    <!--<li key ="0" class="tantnum_box">0</li>-->
+                                    <!--<li key ="1" class="tantnum_box">1</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
 
-                            <span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">厨</span>
-                            <div class="h_input_box  " id="room_yt_err" style="width: 120px;">
-                                <div class="s_arrow_top s_arrow_down cursorPointer"></div>
-                                <input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_yt" id="roomtype_yt" value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="roomtype_yt_num" style="display: none;">
-                                    <li key ="0" class="tantnum_box">0</li>
-                                    <li key ="1" class="tantnum_box">1</li>
-                                </ul>
-                            </div>
+                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">厨</span>-->
+                            <!--<div class="h_input_box  " id="room_yt_err" style="width: 120px;">-->
+                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
+                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_yt" id="roomtype_yt" value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="roomtype_yt_num" style="display: none;">-->
+                                    <!--<li key ="0" class="tantnum_box">0</li>-->
+                                    <!--<li key ="1" class="tantnum_box">1</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
 
-                            <span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">阳台</span>
-                            <p class="h_check_tip ml10 simsun" id="tip_roomtype" style="display:none">请完善房屋户型</p>
-                            <p class="h_check_tip ml10 simsun" id="tip_roomtype_zero" style="display:none"></p>
-                        </div>
-                    </li>
+                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">阳台</span>-->
+                            <!--<p class="h_check_tip ml10 simsun" id="tip_roomtype" style="display:none">请完善房屋户型</p>-->
+                            <!--<p class="h_check_tip ml10 simsun" id="tip_roomtype_zero" style="display:none"></p>-->
+                        <!--</div>-->
+                    <!--</li>-->
                     <!--
                     <li class="pb15" style="display:none" id="pleaseNum">
                         <p class="h_num_tip">请填写整套房屋的户型（如果没有请填写0）</p>
@@ -253,22 +308,28 @@
                     <li class="clearfix pb15" id="luToilet" >
                         <label class="type1 w_103" style="color:#000;">卫生间类型：</label>
                         <div class="h_house_r clearfix " id="toilet">
+                            <el-radio-group fill="#409EFF"  v-model="bnb.guard">
                             <ul class="h_toliet_type">
                                 <li style="margin: 10px 0;" class="leasetype_red_err  " value="2">
-                                    <span class="select_leasetype "></span>
+                                    <span class="select_leasetype ">
+                                        <el-radio :label="0">&nbsp;</el-radio>
+                                    </span>
                                     <p style="display: inline-block;margin-left: 15px;font-size: 12px;color: #757575;">
-                                        <span style="display: block;font-size: 14px;font-weight: bold;color: #212121;">独立卫生间</span>
+                                        <span style="display: block;font-size: 14px;font-weight: bold;color: #212121;">独立卫生间</span><br/>
                                         房客独享的卫生间
                                     </p>
                                 </li>
                                 <li style="margin: 10px 0;" class="leasetype_red_err  " value="1">
-                                    <span class="select_leasetype "></span>
+                                    <span class="select_leasetype ">
+                                        <el-radio :label="1">&nbsp;</el-radio>
+                                    </span>
                                     <p style="display: inline-block;margin-left: 15px;font-size: 12px;color: #757575;">
                                         <span style="display: block;font-size: 14px;font-weight: bold;color: #212121;">共用卫生间</span>
-                                        可能与他人分享的卫生间
+                                        <br/>可能与他人分享的卫生间
                                     </p>
                                 </li>
                             </ul>
+                            </el-radio-group>
                             <input type="hidden"  id="toilettype" key="y" value=""></input>
                             <p class="h_check_tip simsun" id="tip_toilettype"  style="display:none">请选择卫生间类型</p>
                         </div>
@@ -280,24 +341,41 @@
                     <p id="tantnumDesc" style="margin-left: 103px;font-size:12px;color:#757575"></p>
                 </span>
                         <div class="h_house_r" style="margin-left: 103px;margin-top: 10px;">
-                            <div class=" select_box fl mr10 tantnum_box" id="select_red_err">
-                                <div class="s_arrow_top s_arrow_down tantnum_box"></div>
-                                <input type="text" class="tantnum_box h_col_gray" id="tantnum" name="tantnum" key='' value="请选择" readonly/>
-                                <ul class="select_list_box tantnum_box" id="tantnum_select" style="display:none">
-                                    <li value="1" class="tantnum_box">1</li>
-                                </ul>
+                            <div style="width: 100px" class=" select_box fl mr10 tantnum_box" id="select_red_err">
+                                <!--<div class="s_arrow_top s_arrow_down tantnum_box"></div>-->
+                                <!--<input type="text" class="tantnum_box h_col_gray" id="tantnum" name="tantnum" key='' value="请选择" readonly/>-->
+                                <!--<ul class="select_list_box tantnum_box" id="tantnum_select" style="display:none">-->
+                                    <!--<li value="1" class="tantnum_box">1</li>-->
+                                <!--</ul>-->
+                                <el-select style="width: 200px;" v-model="bnb.liva_id" placeholder="请选择">
+                                    <el-option
+                                        v-for="item in livable"
+                                        :key="item.liva_num"
+                                        :label="item.liva_num"
+                                        :value="item.liva_id">
+                                    </el-option>
+                                </el-select>
                             </div>
+
                             <span class="bedDetailInfo">人</span>
                             <p class="h_check_tip ml10 simsun" id="tip_tantnum" value="" style="display:none">请选择宜居人数</p>
                         </div>
                     </li>
+                    <br/>
+                    <li class="clearfix pb15" >
+                        <label class="type w_103" style="width: 100px;color:#000;">房屋价格：</label>
+                        <el-input style="width: 200px" placeholder="民宿价格" v-model="bnb.price" ></el-input>
+                    </li>
                     <!--<li class="clearfix pb15" id="luRoomNum" >-->
                 </ul>
-            </div>
-        </div>
 
+            </div>
+
+        </div>
+            </el-form>
             <div class="w_960 pb15 clearfix">
-                <a class="keep_btn" href="#ongo" id="saveSub">保存并继续</a>
+                <!--<a class="keep_btn" href="#ongo" id="saveSub">保存并继续</a>-->
+                <el-button @click="addbnb()">保存并继续</el-button>
             </div>
 
             <!-- <div id="requestDeleteReasonsDiv" class="requestDeleteReasons" style="display: none;" lodgeunitOnline="">
@@ -439,12 +517,176 @@
 </template>
 
 <script>
-
+import { regionData, CodeToText } from 'element-china-area-data'// 省市级连
+var j = ''// 精度
+var w = ''// 维度
 export default {
-  name: 'Housing_info'
+  name: 'Housing_info',
+  data () {
+    return {
+      options: regionData,
+      selectedOptions: [], // 省市级连信息
+        bnb:{"guard":0,"hid":1},
+      jt: '', // 地图文本框信息
+      jt1: '', // 地图文本框信息2
+      czradio: 1, // 出租类型单选框
+      wcradio: 1, // 厕所单选框
+      rommtype: [],
+      rommtypevalue: '', // 房屋类型下拉框数据
+      livable: [],
+      livablevalue: '',// 宜居人数数据
+      bnbname:""//民宿名称
+    }
+  },
+  created () {
+    this.getrommtype()
+    this.getlivable()
+  },
+  methods: {
+      //添加房源信息
+      addbnb(){
+          this.bnb.longitude=j;
+          this.bnb.latitude=w;
+          this.$axios.post('http://localhost:8081/bnbinfo/add',this.bnb)
+              .then(response => {
+                if(response.data!=""){
+                    this.$router.push({name:"Housing_des"});
+                }
+              }).catch(error => {
+
+          })
+      },
+      //获取房屋类型
+    getrommtype () {
+      this.$axios.post('http://localhost:8081/rommtype/queryAll')
+        .then(response => {
+          this.rommtype = response.data
+        }).catch(error => {
+
+        })
+    },
+      //获取宜居人数
+    getlivable () {
+      this.$axios.post('http://localhost:8081/livable/queryAll')
+        .then(response => {
+          this.livable = response.data
+
+        }).catch(error => {
+
+        })
+    },
+    bc () {
+      var ssq = ''
+      for (var i = 0; i < this.selectedOptions.length; i++) {
+        ssq += CodeToText[this.selectedOptions[i]]
+      }
+      ssq += this.jt
+      alert('详细地址:' + ssq + '房屋类型:' + this.rommtypevalue + '出租类型:' + this.czradio + '卫生间类型:' + this.wcradio + '精度:' + j + w + '宜居人数:' + this.livablevalue)
+    },
+    cx () {
+      this.jt1 = this.bnb.address;
+      var map = new BMap.Map('allmap')
+
+      var local = new BMap.LocalSearch(map, {
+        renderOptions: { map: map }
+      })
+      if (this.jt1 == '') {
+        this.jt1 = '北京市'
+      }
+      let c = local.search(this.jt1)
+      if (c == null) {
+        var pc = new BMap.Map('allmap')
+        // 初始化地图,设置中心点坐标，
+        var point = new BMap.Point(116.331398, 39.897445) // 创建点坐标，汉得公司的经纬度坐标
+        map.centerAndZoom(point, 10)
+      }
+      map.disableDragging()
+      local.setMarkersSetCallback(function (pois) {
+        var mar = pois[0].marker
+        var p = mar.getPosition()
+        mar.enableDragging()
+        // alert("marker的位置是" + p.lng + "," + p.lat)
+        var map = new BMap.Map('allmap')
+        var point = new BMap.Point(p.lng, p.lat) // 创建点坐标，汉得公司的经纬度坐标
+        map.centerAndZoom(point, 17)
+        var marker = new BMap.Marker(point) // 创建标注
+        map.addOverlay(marker)
+        marker.addEventListener('click', getAttr)
+        marker.enableDragging()
+        var c = marker.getPosition()
+        console.log(c.lng + '12345' + c.lat)
+        j = c.lng
+        w = c.lat
+        function getAttr () {
+          var p = marker.getPosition() // 获取marker的位置
+          alert('marker是' + p.lng + ',' + p.lat)
+          let a = p.lng
+          console.log(a + '你')
+
+          console.log(p.lng + ',' + p.lat)
+        }
+        map.enableScrollWheelZoom(false)
+        var geolocationControl = new BMap.GeolocationControl()
+        geolocationControl.addEventListener('locationSuccess', function (e) {
+          // 定位成功事件
+          map.centerAndZoom(marker.getPosition(), 17)
+        })
+        map.addControl(geolocationControl)
+      })
+    },
+      //省市级联事件
+    handleChange (value) {
+        // for (var i = 0; i < this.selectedOptions.length; i++) {
+        //     ssq += CodeToText[this.selectedOptions[i]]
+        // }
+        this.bnb.province=CodeToText[this.selectedOptions[0]];
+        this.bnb.city=CodeToText[this.selectedOptions[1]];
+        this.bnb.town=CodeToText[this.selectedOptions[2]];
+      var map = new BMap.Map('allmap')
+      var local = new BMap.LocalSearch(map, {
+        renderOptions: { map: map }
+      })
+      local.search(CodeToText[this.selectedOptions[2]])
+      map.disableDragging()
+      // local.setMarkersSetCallback(function(pois){
+      //     var p = pois[0].marker.getPosition();
+      //     // alert("marker的位置是" + p.lng + "," + p.lat)
+      // })
+    }
+
+  },
+  mounted () {
+    var map = new BMap.Map('allmap')
+    // map.addEventListener("tilesloaded",function(){marker.enableDragging()});
+    // 初始化地图,设置中心点坐标，
+    var point = new BMap.Point(116.404, 39.915) // 创建点坐标，汉得公司的经纬度坐标
+    map.centerAndZoom(point, 4)
+    // var marker = new BMap.Marker(point);  // 创建标注
+    // map.addOverlay(marker);              // 将标注添加到地图中
+    // marker.addEventListener("click",getAttr);
+
+    map.disableDragging()
+    // function getAttr(){
+    //     var p = marker.getPosition();       //获取marker的位置
+    //     alert("marker是" + p.lng + "," + p.lat);
+    //     console.log(p.lng+","+p.lat)
+    // }
+  }
+
 }
+
 </script>
 
 <style scoped>
-
+    #allmap{
+        width: 700px;
+        height: 400px;
+        border:1px solid green;
+    }
+    .el-radio{
+        margin-top: -1px;
+    }
+    #xxdz{
+        width: 100px;
+    }
 </style>

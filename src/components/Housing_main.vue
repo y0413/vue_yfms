@@ -87,9 +87,9 @@
                             <div class="rooms_intro">
                                 <img class="img_user_fd" lazy_src="https://image.xiaozhustatic1.com/22/s,5,rQ6K,414,414,2,44ece91c.jpg" />
                                 <span class="room_name">{{info.bnbname}} - {{info.city}}</span>
-                                <span class="index_price"><em class="bigFont">&#165;</em>198</span>
+                                <span class="index_price"><em class="bigFont">&#165;</em>{{info.price}}</span>
                             </div>
-                            <a href="//sz.xiaozhu.com/fangzi/6257935516.html" target="_blank" class="room_hover" luid="6257935516"></a>
+                            <a @click="details(info.bnbid)" target="_blank" class="room_hover" ></a>
                         </li>
                         </span>
                     </ul>
@@ -226,6 +226,9 @@
                     }).catch(error => {
 
                 })
+            },
+            details(bnbid){
+                this.$router.push({name: 'Housing_details',params: {bnbid}})
             }
         }
     }

@@ -28,7 +28,7 @@ export default new Router({
           path: '/Housing_main',
           name: 'Housing_main',
           component: () => import('../components/Housing_main')
-      }
+      },
     // {
     //       path: '/',
     //       name: 'Housing_info',
