@@ -275,6 +275,7 @@
                     .then(res => {
                         if (res.data === 1){
                             this.$message.success({message:'添加成功'})
+                            this.$router.push({name:"Housing_fac"});
                         } else {
                             this.$message.error('添加失败');
                         }

@@ -35,7 +35,7 @@
                         </el-carousel-item>
                     </el-carousel>
 
-                <div class="search_index search_index_home">
+                <div class="search_index search_index_home" style="margin-left: -250px">
                     <div class="search_column_l">
                         <span class="icon_place_box" id="suggest_icon"><i class="iconfont search-icon">&#xe7bf;</i></span>
                         <input class="ipt_search_l r_border" type="text" id="searchcity" name="searchcity" autocomplete="off" value="城市或目的地" />
@@ -48,15 +48,15 @@
 
                         </div>
                     </div>
-                    <div class="search_column_r">
-            <span class="icon_place_box" id="calendar_btn_s">
-                <i class="iconfont search-icon">&#xe748;</i>
-            </span>
-                        <input class="ipt_search_r" type="text" readonly="" id="startenddate" name="startenddate"   value="入住离开日期" />
-                        <input type="hidden" name="startdate" id="startdate" value=""/>
-                        <input type="hidden" name="enddate" id="enddate" value=""/>
-                        <div id="calendar-box" class="calendar-box-index" style="display:none"> </div>
-                    </div>
+                    <!--<div class="search_column_r">-->
+            <!--<span class="icon_place_box" id="calendar_btn_s">-->
+                <!--<i class="iconfont search-icon">&#xe748;</i>-->
+            <!--</span>-->
+                        <!--<input class="ipt_search_r" type="text" readonly="" id="startenddate" name="startenddate"   value="入住离开日期" />-->
+                        <!--<input type="hidden" name="startdate" id="startdate" value=""/>-->
+                        <!--<input type="hidden" name="enddate" id="enddate" value=""/>-->
+                        <!--<div id="calendar-box" class="calendar-box-index" style="display:none"> </div>-->
+                    <!--</div>-->
                     <!-- 首页搜索按钮 -->
                     <div class="index-search-box">
                         <input class="btn_pink_search" type="button" value="搜索小猪" onclick="javascript:searchCity('home');" />
@@ -78,17 +78,20 @@
                 </div>
                 <div class="content_v2" style="border: 2px darkgray solid;height: 500px;">
                     <ul class="rooms_show_ul">
+                        <span v-for="info in listinfo" >
                         <li>
                             <input type="text" value="6257935516" class="luId" style="display: none">
-                            <img class="img_room" lazy_src="https://image.xiaozhustatic3.com/00,400,326,2/2,9,0,3,5096,1800,1200,25afc714.jpg" alt="小猪-西涌（西冲） 舒适宜居宽敞双床房近沙滩" width="400" height="326"/>
+
+                            <img class="img_room" :src="'http://localhost:8081/'+info.bedroom" alt="小猪-西涌（西冲） 舒适宜居宽敞双床房近沙滩" width="400" height="326"/>
                             <span class="img_upCover"></span>
                             <div class="rooms_intro">
                                 <img class="img_user_fd" lazy_src="https://image.xiaozhustatic1.com/22/s,5,rQ6K,414,414,2,44ece91c.jpg" />
-                                <span class="room_name">西涌蝴蝶家民宿的家 - 深圳</span>
+                                <span class="room_name">{{info.bnbname}} - {{info.city}}</span>
                                 <span class="index_price"><em class="bigFont">&#165;</em>198</span>
                             </div>
                             <a href="//sz.xiaozhu.com/fangzi/6257935516.html" target="_blank" class="room_hover" luid="6257935516"></a>
                         </li>
+                        </span>
                     </ul>
                 </div>
             </div>
@@ -208,7 +211,21 @@
                     {id:1,idView:require("../../static/images/timgSWMA57MC.jpg")},
                     {id:1,idView:require("../../static/images/fang.jpg")},
                     {id:1,idView:require("../../static/images/timgY7KADF2U.jpg")}
-                ]
+                ],
+                listinfo:[]
+            }
+        },
+        created:function(){
+            this.selectAll();
+        },
+        methods:{
+            selectAll(){
+                this.$axios.post('http://localhost:8081/bnbinfo/query')
+                    .then(response => {
+                        this.listinfo = response.data
+                    }).catch(error => {
+
+                })
             }
         }
     }
