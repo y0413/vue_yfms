@@ -65,17 +65,19 @@
 
             <div class="h_wrap pb10 mt20">
                 <h4 class="h_tit">配套设施</h4>
+                <el-form :model="list">
+                <el-checkbox-group v-model="checklist" >
                 <div class="sb_box clearfix">
                     <h4>卫浴：</h4>
                     <ul class="sb_list clearfix">
                         <li>
-                            <el-checkbox>
-                                <p style="margin-left: -20px;" class="linyu_ico" value="linyu_ico_cur">热水淋浴</p>
+                            <el-checkbox label="shower">
+                                <p style="margin-left: -20px;" class="linyu_ico" >热水淋浴</p>
                             </el-checkbox>
                         </li>
                         <li>
-                            <el-checkbox>
-                                <p style="margin-left: -20px" class="shouzhi_ico" value="shouzhi_ico_cur">独卫</p>
+                            <el-checkbox label="guard" prop="guard">
+                                <p style="margin-left: -20px" class="shouzhi_ico" >独卫</p>
                             </el-checkbox>
                         </li>
                     </ul>
@@ -84,13 +86,13 @@
                     <h4>电器：</h4>
                     <ul class="sb_list clearfix">
                         <li>
-                            <el-checkbox>
-                                <p style="margin-left: -20px" class="dianshi_ico" value="dianshi_ico_cur">电视</p>
+                            <el-checkbox label="Television" prop="Television">
+                                <p style="margin-left: -20px" class="dianshi_ico" >电视</p>
                             </el-checkbox>
                         </li>
                         <li>
-                            <el-checkbox>
-                                <p style="margin-left: -20px;" class="kongtiao_ico" value="kongtiao_ico_cur">空调</p>
+                            <el-checkbox label="air" prop="air">
+                                <p style="margin-left: -20px;" class="kongtiao_ico" >空调</p>
                             </el-checkbox>
                         </li>
 
@@ -100,19 +102,20 @@
                     <h4>设施：</h4>
                     <ul class="sb_list clearfix">
                         <li>
-                            <el-checkbox>
-                                <p style="margin-left: -20px;" class="wuxian_ico" value="wuxian_ico_cur">无线网络</p>
+                            <el-checkbox label="network" prop="network">
+                                <p style="margin-left: -20px;" class="wuxian_ico" >无线网络</p>
                             </el-checkbox>
                         </li>
 
                         <li>
-                            <el-checkbox>
-                                <p style="margin-left: -20px;" class="nuanqi_ico" value="nuanqi_ico_cur">暖气</p>
+                            <el-checkbox label="Heating" prop="Heating">
+                                <p style="margin-left: -20px;" class="nuanqi_ico" >暖气</p>
                             </el-checkbox>
                         </li>
                     </ul>
                 </div>
-
+                </el-checkbox-group>
+                </el-form>
                 <div class="h_wrap">
                     <div style="display: block;" id="pictureTypeModules">
                         <div class="h_pic_list clearfix filesInputNew" id="group_bedroom" type="bedroom">
@@ -125,11 +128,14 @@
                             </p>
                             <div class='dp_con '>
                                 <el-upload
-                                    action="#"
+                                    action="http://localhost:8081/bnbinfo/ws"
                                     list-type="picture-card"
                                     :auto-upload="false"
+                                    ref="upload1"
+                                    :file-list="file"
                                     :on-preview="handlePictureCardPreview"
                                     :on-remove="handleRemove">
+
                                     <i slot="default" class="el-icon-plus"></i>
                                 </el-upload>
 
@@ -145,9 +151,11 @@
                                       data-desc="站在厅角拍摄，视野会更广"></span></p>
                             <div class='dp_con '>
                                 <el-upload
-                                    action="#"
+                                    action="http://localhost:8081/bnbinfo/kt"
                                     list-type="picture-card"
                                     :auto-upload="false"
+                                    ref="upload2"
+                                    :file-list="file"
                                     :on-preview="handlePictureCardPreview"
                                     :on-remove="handleRemove">
                                     <i slot="default" class="el-icon-plus"></i>
@@ -168,9 +176,11 @@
                             </p>
                             <div class='dp_con '>
                                 <el-upload
-                                    action="#"
+                                    action="http://localhost:8081/bnbinfo/wsj"
                                     list-type="picture-card"
                                     :auto-upload="false"
+                                    ref="upload3"
+                                    :file-list="file"
                                     :on-preview="handlePictureCardPreview"
                                     :on-remove="handleRemove">
                                     <i slot="default" class="el-icon-plus"></i>
@@ -192,9 +202,11 @@
                             </p>
                             <div class='dp_con '>
                                 <el-upload
-                                    action="#"
+                                    action="http://localhost:8081/bnbinfo/cf"
                                     list-type="picture-card"
                                     :auto-upload="false"
+                                    :file-list="file"
+                                    ref="upload4"
                                     :on-preview="handlePictureCardPreview"
                                     :on-remove="handleRemove">
                                     <i slot="default" class="el-icon-plus"></i>
@@ -215,11 +227,14 @@
                         </p>
                         <div class='dp_con '>
                             <el-upload
-                                action="#"
+                                action="http://localhost:8081/bnbinfo/qt"
                                 list-type="picture-card"
                                 :auto-upload="false"
+                                ref="upload5"
                                 :on-preview="handlePictureCardPreview"
+                                :file-list="file"
                                 :on-remove="handleRemove">
+
                                 <i slot="default" class="el-icon-plus"></i>
                             </el-upload>
 
@@ -232,7 +247,8 @@
 
                 <input type="hidden" value="" id="room_type">
                 <div class="w_960 pb20 clearfix">
-                    <a href="###" class="keep_btn" id="facilitySave">保存并继续</a>
+                    <el-button @click="upsub()">保存并继续</el-button>
+                    <!--<a href="###" class="keep_btn" id="facilitySave">保存并继续</a>-->
                 </div>
 
 
@@ -329,10 +345,24 @@
             return {
                 dialogImageUrl: '',
                 dialogVisible: false,
-                disabled: false
+                disabled: false,
+                file: [],
+                checklist:[],
+                list:{}
             };
         },
         methods: {
+            upsub(){
+                this.$axios.post('http://localhost:8081/bnbinfo/ptss',this.checklist)
+                    .then(res => {
+                        this.$refs.upload1.submit();
+                        this.$refs.upload2.submit();
+                        this.$refs.upload3.submit();
+                        this.$refs.upload4.submit();
+                        this.$refs.upload5.submit();
+                    });
+
+            },
             //删除图片
             handleRemove(file, fileList) {
                 console.log(file, fileList);

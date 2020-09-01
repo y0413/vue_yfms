@@ -155,6 +155,19 @@
                             </el-tooltip>
                         </div>
                     </div>
+                    <div class="h_room_ms clearfix" style="position: relative;">
+                        <label style="width: 100%;">房客要求：<span style="margin-left: 15px;">
+                            对房客的一些要求</span><br />（选填）</label>
+                        <div class="h_room_msg1 h_room_msg12" style="margin-left:90px;">
+                            <el-tooltip class="item" effect="dark" placement="right-start">
+                                <div slot="content">
+                                    例如：请房客不要在室内抽烟<br/>
+                                </div>
+                                <textarea rows="6" autoHeight="true" placeholder="请填写" class="room_msg textarea_detail"
+                                          id= "roomLocationIntro" name="roomLocationIntro" v-model="des.requirement"></textarea>
+                            </el-tooltip>
+                        </div>
+                    </div>
                 </div>
                 </el-form>
             </div>
@@ -275,6 +288,7 @@
                     .then(res => {
                         if (res.data === 1){
                             this.$message.success({message:'添加成功'})
+                            this.$router.push({name:"Housing_fac"});
                         } else {
                             this.$message.error('添加失败');
                         }

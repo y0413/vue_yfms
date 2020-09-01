@@ -9,6 +9,26 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+          path: '/',
+          name: 'Housing_info',
+          component: () => import('../components/Housing_info')
+      },
+      {
+          path: '/Housing_des',
+          name: 'Housing_des',
+          component: () => import('../components/Housing_des')
+      }
+      ,{
+          path: '/Housing_fac',
+          name: 'Housing_fac',
+          component: () => import('../components/Housing_fac')
+      },
+      {
+          path: '/Housing_main',
+          name: 'Housing_main',
+          component: () => import('../components/Housing_main')
+      },
     // {
     //       path: '/',
     //       name: 'Housing_info',
