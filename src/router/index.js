@@ -11,8 +11,8 @@ export default new Router({
   routes: [
     {
           path: '/',
-          name: 'Housing_info',
-          component: () => import('../components/Housing_info')
+          name: 'Housing_main',
+          component: () => import('../components/Housing_main')
       },
       {
           path: '/Housing_des',
@@ -25,34 +25,19 @@ export default new Router({
           component: () => import('../components/Housing_fac')
       },
       {
-          path: '/Housing_main',
-          name: 'Housing_main',
-          component: () => import('../components/Housing_main')
+          path: '/Housing_info',
+          name: 'Housing_info',
+          component: () => import('../components/Housing_info')
       },
-    // {
-    //       path: '/',
-    //       name: 'Housing_info',
-    //       component: () => import('../components/Housing_info')
-    //   },
-    //   {
-    //       path: '/',
-    //       name: 'Housing_des',
-    //       component: () => import('../components/Housing_des')
-    //   },
-    //   {
-    //       path:'/',
-    //       name:'Housing_main',
-    //       component : ()=> import('../components/Housing_main')
-    //   }
-    //   {
-    //       path: '/',
-    //       name: 'Housing_search',
-    //       component: () => import('../components/Housing_search')
-    //   }
       {
-          path: '/',
+          path: '/Housing_details',
           name: 'Housing_details',
           component: () => import('../components/Housing_details')
+      },
+      {
+          path: '/Housing_search',
+          name: 'Housing_search',
+          component: () => import('../components/Housing_search')
       }
   ]
 })

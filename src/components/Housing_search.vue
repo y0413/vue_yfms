@@ -31,37 +31,34 @@
             <div class="city_l">
                 <div class="clearfix mb_14">
                     <div class="city_select city_bg">
-                        <input type="text" value="上海" id="searchcityd" placeholder="城市或目的地">
-
+                        <input v-model="map.city" id="searchcityd" placeholder="城市或目的地">
                     </div>
                     <div class="date_box city_bg city_search_index" id="filter-calendar-box">
-                        <input class="ipt_list1" type="text" readonly="" id="startenddate" name="startenddate"   value="入住离开日期" />
-                        <input type="hidden" name="startdate" id="startdate" value=""/>
-                        <input type="hidden" name="enddate" id="enddate" value=""/>
-                        <div id="calendar-box" class="calendar-box-index calendar-box-index-filter" style="display:none"> </div>
-                        <span class="icon_searchandremove" style="display:none"><span class="ipt_icon icon_delete"></span></span>
-
+                        <el-button @click="selectInfo()">搜索</el-button>
                     </div>
 
                 </div>
 
-                <div class="type_bg clearfix keyword-box">
-                    <h6 class="type_tit1">关键词</h6>
-                    <el-input style="width: 465px;"></el-input>
+                <div class="type_bg clearfix keyword-box" style="border: 1px red solid">
+                    &nbsp;&nbsp;&nbsp;关键词&nbsp;&nbsp;&nbsp;
+                    <el-input v-model="map.bnbname" style="width: 450px;" ></el-input>
                 </div>
 
                 <div class="type_bg clearfix" id="rentType">
                     <h6 class="type_tit1">出租类型</h6>
-                    <ul class="type_list">
-                        <li class="rentType" type="zhengzu">
-                            <span class="type_ico1">整套出租</span>
-                        </li>
-                        <li class="rentType" type="danjian">
-                            <span class="type_ico2" >独立单间</span>
-                        </li>
-                        <li class="rentType" type="shafa">
-                            <span class="type_ico3" >合住房间</span>
-                        </li>
+                    <el-radio-group v-model="map.hid" size="small">
+
+                    <!--<ul class="type_list">-->
+                        <!--<li class="rentType" type="zhengzu">-->
+                            <span class="type_ico1"><el-radio-button  label="1" >整套出租</el-radio-button></span>
+                        <!--</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                        <!--<li class="rentType" type="danjian">-->
+
+                            <span class="type_ico2" ><el-radio-button label="2" >独立单间</el-radio-button></span>
+                        <!--</li>-->
+                        <!--<li class="rentType" type="shafa">-->
+                            <span class="type_ico3" ><el-radio-button label="3" >合住房间</el-radio-button></span>
+                        <!--</li>-->
 
                         <input type="hidden" id="zhengzu" value="https://sh.xiaozhu.com/zhengzu-duanzufang-2/" />
 
@@ -77,7 +74,8 @@
 
                         <input type="hidden" id="danjianshafazhengzu" value="https://sh.xiaozhu.com/danjianshafazhengzu-duanzufang-2/" />
                         <input type="hidden" id="norenttype" value="https://sh.xiaozhu.com/search-duanzufang-0/">
-                    </ul>
+                    <!--</ul>-->
+                    </el-radio-group>
                 </div>
 
             </div>
@@ -104,23 +102,21 @@
                     </div>
                 </div>
                 <div class="type_bg clearfix">
-                    <h6 class="type_tit2">设施</h6>
-                    <div class="info_box" id="facilities">
-
-
-                        <label class=""><input type="checkbox" name="amenities"   onclick="submit_by_attr()" value="facility_Shower"/>淋浴</label> <label class=""><input type="checkbox" name="amenities"   onclick="submit_by_attr()" value="facility_AirCondition"/>空调</label> <label class=""><input type="checkbox" name="amenities"   onclick="submit_by_attr()" value="facility_Tv"/>电视</label> <label class=""><input type="checkbox" name="amenities"   onclick="submit_by_attr()" value="facility_Netword"/>网络</label> <label class=""><input type="checkbox" name="amenities"   onclick="submit_by_attr()" value="facility_Kitchen"/>允许做饭</label> <label class=""><input type="checkbox" name="amenities"   onclick="submit_by_attr()" value="facility_Heater"/>暖气</label> <label class=""><input type="checkbox" name="amenities"   onclick="submit_by_attr()" value="facility_Privatetoilet"/>独卫</label>
-                    </div>
-
+                    &nbsp;&nbsp;&nbsp;<span>价格</span>&nbsp;&nbsp;
+                    <span>起始价格</span>&nbsp;&nbsp;&nbsp;
+                    <el-input v-model="map.startprice" style="width: 100px" placeholder="请输入"></el-input>&nbsp;&nbsp;&nbsp;
+                    <span>结束价格</span>&nbsp;&nbsp;&nbsp;
+                    <el-input v-model="map.endprice" style="width: 100px" placeholder="请输入"></el-input>
                 </div>
                 <div class="type_bg clearfix">
                     <h6 class="type_tit1">最多宜居</h6>
                     <div class="select_box1">
-                        <el-select style="width: 500px" v-model="value" clearable placeholder="请选择">
+                        <el-select style="width: 200px;" v-model="map.liva_id" placeholder="请选择">
                             <el-option
-                                v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
+                                v-for="item in livable"
+                                :key="item.liva_num"
+                                :label="item.liva_num"
+                                :value="item.liva_id">
                             </el-option>
                         </el-select>
                     </div>
@@ -134,66 +130,30 @@
     <!-- 中间 -->
     <div class="clearfix" style="margin-top: 14%;height: 500px;">
         <!--地图-->
-        <div class="city_map" style="border: 1px red solid">
-            <div class="list_map">
-                <h1>地图</h1>
-                <div class="map-canvas">
-                    <div id="XZMap" style="width:100%;height:100%;overflow:hidden;margin:0;"></div>
-                </div>
-            </div>
-        </div>
-        <!--/map-->
-        <!--search list-->
-        <div class="search_box">
-            <div class="result_box clearfix">
-                <div class="fl"> <a href="https://www.xiaozhu.com">小猪</a>&nbsp;&gt;&nbsp;&nbsp;上海短租<span class="paddingL10">
-                    超过<span id="searchTotal">20000</span>个房源
-                     </span>
-                </div>
-                <div class="fr" id="checkfra">
-                    <span class="col_pink pr20" id="defalut_sort">
-                        <a href="javascript:void(0);" onlick="return false;" >推荐排序</a>
-                    </span>
-                    <span class="pr20" id="haoping_sort">
-                        <a title="好评排序" href="https://sh.xiaozhu.com/zuihaoping-duanzufang-10/">好评排序</a>
-                    </span>
-                    <span id="nodefalut_sort">
-                        <a title="点击按价格由低到高排序" href="https://sh.xiaozhu.com/zuipianyi-duanzufang-10/">价格
-                        <span class="arrow_top"></span>
-                            <span class="arrow_down"></span>
-                        </a>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <!--pic list-->
-        <div id="page_list" style="border: 5px blue solid;height: 500px">
-            <ul class="pic_list clearfix list_code" style="border: 1px red solid ">
-                <li lodgeunitid="lodgeunit_7578140916" latlng="31.238349,121.491339">
+
+        <!--<div class="city_map" >-->
+        <div id="allmap" class="auto_fixed" :class="auto_fixed">自动粘滞固定头部，需要一直展示的</div>
+            <!--<div class="auto_fixed" :class="auto_fixed">自动粘滞固定头部，需要一直展示的</div>-->
+
+            <div class="auto_fixed_fake" :style="{display: auto_fixed.fixed ? 'block':'none'}"></div>
+        <div class="content"  style="height: auto">
+            <ul  v-for="info in listinfo">
+                <li>
                     <a target="_blank" href="https://sh.xiaozhu.com/fangzi/7578140916.html" class="resule_img_a">
-                        <img class="lodgeunitpic" title="南京路外滩豫园地铁2号10号线高区大床房整租" data-growing-title="7578140916"
-                             lazy_src="https://image.xiaozhustatic3.com/12/2,9,0,64,3298,1799,1200,878d30db.jpg"
-                             alt="南京路外滩豫园地铁2号10号线高区大床房整租" />
+                        <img style="height: 330px;width: 440px" class="lodgeunitpic" :title="'info.bnbname'" data-growing-title="7578140916"
+                             :src="'http://localhost:8081/'+info.bedroom"
+                             :alt="'{{info.bnbname}}'" />
                     </a>
-                    <div class="favorite  lodge_7578140916 wsc_ico"  al="7578140916"  title="收藏"></div>
-                    <div class="result_btm_con lodgeunitname" detailurl="https://sh.xiaozhu.com/fangzi/7578140916.html" style="cursor:pointer">
-                        <div>
-                            <span class="result_price">&#165;<i>338</i></span>
-                        </div>
-
-                        <div class="result_intro">
-                            <a class="sTitle">
-                                <span class="result_title hiddenTxt">南京路外滩豫园地铁2号10号线高区大床房整租</span>
-                            </a>
-
-                            <em class="hiddenTxt">
-                                整套出租/1室0厅/2张床铺/宜住2人                <span class="commenthref">
-           - 4.3分/80条点评                </span>
-                            </em>
-
-                        </div>
-                    </div>
+                    <a class="sTitle">
+                        <span class="result_title hiddenTxt">{{info.bnbname}}</span>
+                    </a>
+                    <em class="sTitle">&#165;<i>{{info.price}}</i></em>
+                    <em class="hiddenTxt">
+                        {{info.hname}}/宜住{{info.liva_num}}人                <span class="commenthref">
+                          </span>
+                    </em>
                 </li>
+
             </ul>
         </div>
     </div>
@@ -207,10 +167,143 @@
     import ElSelectDropdown from "element-ui/packages/select/src/select-dropdown";
     export default {
         name: "Housing_search",
-        components: {ElSelectDropdown}
+        components: {ElSelectDropdown},
+        data(){
+            return{
+                gjc:"",
+                auto_fixed: {
+                    fixed: false
+                },
+                listinfo:[],
+                map:{city:"",bnbname:"",hid:"",liva_id:0,startprice:0,endprice:9999},
+                livable: [],
+            }
+        },
+        mounted(){
+            this.$nextTick(function () {
+
+            window.addEventListener('scroll', this.onScroll)
+
+        });
+            this.cs();
+            this.selectInfo();
+            this.getlivable ();
+        },
+        methods:{
+            selectInfo(){
+                if(this.map.startprice==null){
+                    this.map.startprice=0;
+                }
+                if(this.map.endprice==null){
+                    this.map.endprice=9999;
+                }
+                this.$axios.post('http://localhost:8081/bnbinfo/select',this.map)
+                    .then(res => {
+                        this.listinfo=res.data;
+                    });
+            },
+            //获取宜居人数
+            getlivable () {
+                this.$axios.post('http://localhost:8081/livable/queryAll')
+                    .then(response => {
+                        this.livable = response.data
+
+                    }).catch(error => {
+
+                })
+            },
+            cs(){
+                var map = new BMap.Map('allmap');
+                var point = new BMap.Point(113.172257, 36.197589) // 创建点坐标，汉得公司的经纬度坐标
+                map.centerAndZoom(point, 15);
+                var marker = new BMap.Marker(point);  // 创建标注
+                map.addOverlay(marker);
+                map.disableDragging();
+            },
+            onScroll(){
+
+                let scrolled = document.documentElement.scrollTop || document.body.scrollTop
+
+                let header_height = null
+
+                if(document.getElementsByClassName('city_wrap')[0]){
+
+                    header_height = document.getElementsByClassName('city_wrap')[0].offsetHeight
+
+                }
+
+                console.log('滚动的距离:'+scrolled,'头部的高度:'+ header_height)
+
+                this.auto_fixed = {
+
+                    auto_fixed: true,
+
+                    fixed: scrolled >= header_height
+
+                }
+
+            }
+        }
     }
 </script>
 
 <style scoped>
+    .el-input >>> .el-input__inner{
+        border:0px;
+        height:14px;
+    }
+    ul{
+        padding-right: -20px;
+        margin-right: -20px;
+        /*margin-top: -260px;*/
+    }
+    .auto_fixed{
 
+        height: 680px;
+        background: orange;
+        position: absolute;
+        line-height: 3em;
+        width:550px;
+        text-align: center;
+        float:left;
+    }
+
+    .fixed{
+
+        position: fixed;
+
+        top: 0px;
+
+        width: 550px;
+
+    }
+
+    .content{
+
+        color: gray;
+        width:830px;
+        padding: 8px;
+        float:right;
+        border: 1px solid red;
+    }
+    .city_wrap{
+
+        padding: 8px 10px;
+
+    }
+    .type_ico1{
+          margin-bottom: 10px;
+        margin-right: 10px;
+      }
+    .type_ico2{
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    .type_ico3{
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    el-radio-button{
+        padding-bottom: 5px;
+    }
 </style>
