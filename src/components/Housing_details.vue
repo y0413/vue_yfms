@@ -1,5 +1,6 @@
 <template>
     <div>
+
     <div class="o_mask" id='maskName'  style="display:none;"></div>
     <div class="detail_wrapper">
         <div class="detail_head clearfix">
@@ -424,27 +425,44 @@
                                 <!--}-->
 
                             <!--</script>-->
+                            <div class="block">
+                                <el-date-picker
+                                    v-model="datavalue"
+                                    type="daterange"
+                                    :editable="false"
+                                    :clearable="false"
+                                    :size="small"
+                                    @change="hqjg"
+                                    format="yyyy-MM-dd"
+                                    value-format="yyyy-MM-dd"
+                                    range-separator="至"
+                                    start-placeholder="开始日期"
+                                    end-placeholder="结束日期">
+                                </el-date-picker>
+                            </div>
                             <div class="reserve_space">
-                                <div class="clearfix">
-                                    <div class="reserve_date">
-                                        <div class="reserve_ico" id="detailCalendarIco"></div>
-                                        <input type="text" class="date_input" id="startenddate" readOnly="" value="2020-8-31至2020-9-1" />
-                                        <input type="hidden" name="startdate" id="startdate" value="2020-08-31"/>
-                                        <input type="hidden" name="enddate" id="enddate" value="2020-09-01"/>
-                                        <div id="calendar-box" style="display:none" class="calendar_box clearfix"> </div>
-                                    </div>
+
+                                <!--<div class="clearfix">-->
+
+                                    <!--<div class="reserve_date">-->
+                                        <!--<div class="reserve_ico" id="detailCalendarIco"></div>-->
+                                        <!--<input type="text" class="date_input" id="startenddate" readOnly="" value="2020-8-31至2020-9-1" />-->
+                                        <!--<input type="hidden" name="startdate" id="startdate" value="2020-08-31"/>-->
+                                        <!--<input type="hidden" name="enddate" id="enddate" value="2020-09-01"/>-->
+                                        <!--<div id="calendar-box" style="display:none" class="calendar_box clearfix"> </div>-->
+                                    <!--</div>-->
                                     <!--<div class="select_box">-->
                                         <!--<div class="select_arrow"></div>-->
                                         <!--<input id="sameRoomNum" readOnly="readOnly" data-bookroomnum="" type="text" value="1间" />-->
                                         <!---->
                                     <!--</div>-->
-                                </div>
+                                <!--</div>-->
                                 <div class="price_top">
 
                                     <!--<div class="reserve_text">在线收取押金￥<span>300</span></div>-->
                                 </div>
                                 <div class="order_btn_container">
-                                    <a class="order_btn" href="#ongo" id="day_yuding">立即预订<span class="f14">（总计￥438）</span></a>
+                                    <a class="order_btn" href="#ongo" id="day_yuding">立即预订<span class="f14">（总计￥{{tprice}}）</span></a>
                                 </div>
                             </div>
                             <!--<div class="white_bg">-->
@@ -684,13 +702,16 @@
 </template>
 
 <script>
+
     export default {
         name: "Housing_details",
         data(){
             return{
                 bnbid:1,
-                listinfo:[],
-                pic:[]
+                listinfo:[],//房源信息
+                pic:[],//图片
+                tprice:1,//总价格
+                datavalue:""//日期
             }
         },
         created:function(){
@@ -698,6 +719,16 @@
             this.queryBnbid(this.bnbid)
         },
         methods:{
+            hqjg(){
+                let start=(this.datavalue[0]).split('-');
+                start=start[0]+start[1]+start[2]
+                start=parseInt(start);
+                let end=(this.datavalue[1]).split('-');
+                end=end[0]+end[1]+end[2];
+                end=parseInt(end);
+                let num=end-start;
+                this.tprice=num*this.listinfo.price;
+            },
             queryBnbid(bnbid){
                 this.$axios.post("http://localhost:8081/bnbinfo/queryId?bnbid="+bnbid)
                     .then(response=>{
@@ -713,6 +744,7 @@
                         this.pic.push(this.listinfo.toilet);
                         this.pic.push(this.listinfo.kitchen);
                         this.pic.push(this.listinfo.other);
+                        this.tprice=this.listinfo.price;
 
                     })
             }
@@ -722,6 +754,9 @@
 </script>
 
 <style scoped>
+    .el-date-editor.el-input, .el-date-editor.el-input__inner {
+        width: 300px;
+    }
     #allmap{
         width: 918px;
         height: 500px;
@@ -742,4 +777,5 @@
     .el-carousel__item:nth-child(2n+1) {
         background-color: #d3dce6;
     }
+
 </style>
