@@ -546,7 +546,7 @@ export default {
       //添加房源信息
       addbnb(){
           this.bnb.longitude=j;
-          this.bnb.latitude=w;
+          this.bnb.latitude=w;0
           this.$axios.post('http://localhost:8081/bnbinfo/add',this.bnb)
               .then(response => {
                 if(response.data!=""){

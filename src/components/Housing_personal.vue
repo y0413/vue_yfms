@@ -1,5 +1,7 @@
 <template>
     <el-container>
+        {{userList}}
+        {{userList1}}
         <el-header>
             <div class="header height56">
                 <div class="top"></div>
@@ -53,8 +55,8 @@
             </div>
         </el-header>
         <el-main >
-            <el-tabs :tab-position="tabPosition='left'" style="height: 500px" type="border-card">
-                <el-tab-pane class="el-icon-s-order">
+            <el-tabs :tab-position="tabPosition='left'" style="height: 700px">
+                <el-tab-pane style="padding-left:20px;">
                     <span slot="label"><i class="el-icon-s-order"></i>我的订单</span>
 
                     <el-tabs v-model="activeName" @tab-click="handleClick"  style="height: 700px;width: 1000px">
@@ -63,27 +65,112 @@
                     </el-tabs>
 
                 </el-tab-pane>
-                <el-tab-pane class="el-icon-user">
+                <el-tab-pane style="padding-left:40px;">
                     <span slot="label"><i class="el-icon-user"></i>个人资料</span>
-                    个人资料
+                    <div style="width: 980px;border: 0px solid red;overflow: auto">
+                        <b style="color: aqua;line-height: 40px;font-size: 20px;padding-left: 20px">基本信息</b>
+                        <hr style="color: honeydew"/>
+                        <div style="padding-left: 40px;line-height: 80px; font-size: 20px;float: left">
+                        <span><span style="color: gray">用户名:
+                        </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{userList[0].uname}}</span>&nbsp&nbsp&nbsp&nbsp
+                            <a style="color: hotpink" @click="dialogdk()">修改</a><br>
+                        <span><span style="color: gray">手机号:
+                        </span>:&nbsp&nbsp&nbsp&nbsp+86&nbsp&nbsp{{userList[0].photo}}&nbsp&nbsp&nbsp&nbsp
+                            <i class="el-icon-circle-check" style="background-color: aqua">
+                            </i>&nbsp&nbsp&nbsp<i style="color: aqua">已验证</i>
+                            &nbsp&nbsp&nbsp&nbsp<a style="color: hotpink"@click="dialogUdk()">修改</a></span>
+                        </div>
+                        <div style="border: 1px solid red;width: 150px; height: 150px;float: right;margin-right: 200px" >
+                            <img src="../../static/images/timgBBHO7ZJF.jpg" style="width: 150px;height: 150px;"/>
+                            <a style="position: absolute;bottom: 190px;left:715px;font-size: 15px; color: white;float: right;"><b>编辑头像</b></a>
+                            </div>
+                    </div>
+                    <el-dialog width="20%" title="修改名字" :visible.sync="dialogName">
+                            <span style="color: gray;margin-left: 20px">用户名:
+                        </span><el-input style="width: 160px" placeholder="用户名" v-model="uname" auto-complete="off"></el-input>
+                        <div style="margin-top: 30px;margin-left: 20px">
+                            <el-button style="width: 100px" type="primary" @click="updateName()">保存</el-button>
+                            <el-button style="width: 100px" type="primary" @click="dialoggb()">关闭</el-button>
+                        </div>
+                    </el-dialog>
+                    <el-dialog width="30%" title="修改手机号" :visible.sync="dialogUpdate">
+                            <span style="color: gray;margin-left: 20px;line-height: 20px">新的手机号:
+                        </span><el-input style="width: 240px" placeholder="手机号" v-model="photo" auto-complete="off"></el-input>
+                        <br><span style="color: gray;margin-left: 20px;line-height: 20px">验证码:
+                        </span><el-input style="width: 110px;margin-top: 20px;margin-left: 28px" placeholder="验证码" v-model="yzm1" auto-complete="off"></el-input>
+                            <a @click="yzm()" id="get-code-btn1" class="have-nb">重新发送</a>
+                        <div style="margin-top: 30px;margin-left: 20px">
+                            <el-button style="width: 100px;margin-left: 90px" type="primary" @click="updatesphoto()">保存</el-button>
+                            <el-button style="width: 100px" type="primary" @click="dialogUgb()">关闭</el-button>
+                        </div>
+                    </el-dialog>
+                    <div style="border: 0px solid red;width:980px;">
+                        <b style="color: aqua;font-size: 20px;padding-left: 20px">身份信息</b>
+                        <b style="color: gray;line-height: 50px;font-size: 18px;padding-left: 20px">仅用于必要的安全环节，其他情况下将为您严格保密</b>
+                        <a style="color: gray;line-height: 50px;font-size: 18px;padding-left: 400px;"  @click="handleSubmit()" v-show="te">编辑</a>
+                        <a style="color: gray;line-height: 50px;font-size: 18px;padding-left: 400px;"  @click="handleSubmit()" v-show="tex">保存</a>
+
+                        <hr style="color: white"/>
+                        <el-form :model="userList1" status-icon :rules="rules2" ref="userList1" label-width="80px" class="demo-ruleForm">
+                            <el-form-item label="真实姓名:" prop="truename">
+                                <el-input v-model="userList1.truename" style="width: 290px" value="123" v-bind:disabled="diasabledInput"></el-input>
+                            </el-form-item>
+                            <el-form-item label="身份证号:" prop="idcard">
+                                <el-input v-model="userList1.idcard" style="width: 290px" v-bind:disabled="diasabledInput"></el-input>
+                            </el-form-item>
+                            <el-form-item label="性别:" prop="usex">
+                                <el-radio v-model="userList1.usex" label="0" checked v-bind:disabled="diasabledInput">男</el-radio>
+                                <el-radio v-model="userList1.usex" label="1" v-bind:disabled="diasabledInput">女</el-radio>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+
                 </el-tab-pane>
-                <el-tab-pane class="el-icon-edit-outline">
+                <el-tab-pane style="padding-left:40px;">
                     <span slot="label"><i class="el-icon-edit-outline"></i>我的点评</span>
                     我的点评
                 </el-tab-pane>
-                <el-tab-pane class="el-icon-star-off">
+                <el-tab-pane style="padding-left:40px;">
                     <span slot="label"><i class="el-icon-star-off"></i>我的收藏</span>
                     我的收藏
                 </el-tab-pane>
-                <el-tab-pane class="el-icon-lock">
+                <el-tab-pane style="padding-left:40px;">
                     <span slot="label"><i class="el-icon-lock"></i>密码设置</span>
-                    密码设置
-                </el-tab-pane>
-                <el-tab-pane class="el-icon-setting">
-                    <span slot="label"><i class="el-icon-setting"></i>注销账号</span>
-                    注销账号
-                </el-tab-pane>
+                    <span style="font-size: 18px " >密码修改</span>
+                    <el-form :model="upwdList" label-width="80px"  label-position="left">
+                        <el-form-item label="手机号" prop="phone">
+                            <p>+86 {{this.jequ}}</p>
+                        </el-form-item>
+                        <el-form-item label="验证码" prop="yzm">
+                            <el-input style="width: 130px" placeholder="用户名" v-model="yzm1"></el-input>
+                            <a @click="yzm()" id="get-code-btn" class="have-nb">重新发送</a>
+                        </el-form-item>
 
+                        <el-form-item label="密码" prop="1">
+                            <el-input  type="password" v-model="upwd"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button style="width: 250px" type="primary" @click="updateupwd()">修改</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-tab-pane>
+                <el-tab-pane style="padding-left:40px;" >
+                    <span slot="label"><i class="el-icon-setting"></i>注销账号</span>
+                    <b style="font-size: 26px">申请注销小猪账号</b>
+                    <p style="line-height: 50px;font-size: 16px">在你提交了注销申请之后，系统将进行以下验证，以确保你的账号、财产安全。</p>
+                    <hr>
+                    <b style="font-size: 16px" class="mt_12">1、订单状态为可注销的状态</b>
+                    <p style="line-height: 40px; font-size: 16px " >（1）您的订单状态应为“已取消”或“入住完成”；</p>
+                    <p style="line-height: 40px; font-size: 16px"> （2）先住后付的订单结算状态为扣除成功；</p>
+                    <p style="line-height: 40px; font-size: 16px">（3）在线收取的押金保证全退或已扣除，押金担保的状态为无需索赔/索赔成功；</p>
+                    <p style="line-height: 40px; font-size: 16px"> （4）有特殊财务处理的订单处于完成状态；</p>
+                    <p style="line-height: 40px; font-size: 16px">（5）需打款的订单皆为完成状态；</p>
+                    <b style="line-height: 50px; font-size: 16px">2、您的所有房源为下线状态</b><br>
+                    <b style="line-height: 50px; font-size: 16px">3、您的保洁订单为服务完成状态</b><br>
+                    <b style="line-height: 50px; font-size: 16px">4、订单涉及到的智能门锁已停用</b><br>
+                    <b style="line-height: 50px; font-size: 16px">5、所有订单交易为完成状态</b><br>
+                    <el-button style="line-height: 20px; width: 220px; background-color: deeppink;color: white" >申请注销</el-button>
+                </el-tab-pane>
             </el-tabs>
         </el-main>
         <el-footer>
@@ -176,12 +263,126 @@
 <script>
     export default {
         name: "df",
-        return:{
-            activeName: 'first'
+        data(){
+            return {
+                upwdList:{},
+                userList1:{},
+                userList:{},
+                jequ:"",
+                jequ1:"",
+                upwd:"",
+                photo:"",
+                yzm1:"",
+                uname:"",
+                te:true,
+                tex:false,
+                diasabledInput:true,
+                dialogName:false,
+                dialogUpdate:false
+            }
+        }
+       ,created:function(){
+            this.jazai();
+            this.jequ=this.userList[0].photo.replace(this.userList[0].photo.substr(4,4),"****");
+        },methods:{
+            updateupwd:function () {
+                this.$axios.post("http://localhost:8081/test/content?mobile="+this.yzm1).then(res=>{
+                    if(res.data===1){
+                        this.$axios.post("http://localhost:8081/UsersController/updateUpwd?upwd="+this.upwd+"&photo="+this.userList[0].photo).then(res=>{
+                            if(res.data>0){
+                                this.$message({
+                                    showClose: false,
+                                    message: '修改成功',
+                                    type: 'success'
+                                });
+                                this.yzm1="";
+                                this.upwd="";
+                            }else {
+                                this.$message({
+                                    showClose: false,
+                                    message: '修改失败',
+                                    type: 'success'
+                                })
+                            }
+                        })
+                    }else {
+                        this.$message({
+                            showClose: true,
+                            message: '验证码有误',
+                            type: 'success'
+                        })
+                    }
+                })
+            },yzm:function () {
+                this.$axios.post("http://localhost:8081/test/show?phone="+this.userList[0].photo).then(res => {
+                })
+            }, handleSubmit:function () {
+                if(this.diasabledInput){
+                    this.diasabledInput=false;
+                    this.te=false;
+                    this.tex=true;
+                }else{
+                    this.diasabledInput=true;
+                    this.te=true;
+                    this.tex=false;
+                    this.updates()
+
+                }
+            },updates:function () {
+                this.$axios.post("http://localhost:8081/UsersController/updates?usex="+this.userList1.usex+"&truename="+this.userList1.truename+"&idcard="+this.userList1.idcard+"&uid="+this.userList[0].uid)
+                    .then(res=>{
+                        if(res.data>0){
+                            alert("修改成功")
+                            this.userList[0].usex=this.userList1.usex
+                            this.userList[0].truename=this.userList1.truename;
+                            this.userList[0].idcard=this.userList1.idcard;
+                        }
+                    })
+            },dialogdk:function () {
+                this.dialogName=true;
+            },dialoggb:function () {
+                this.dialogName=false;
+            },dialogUdk:function () {
+                this.dialogUpdate=true;
+            },dialogUgb:function () {
+                this.dialogUpdate=false;
+            },updateName:function () {
+                this.$axios.post("http://localhost:8081/UsersController/updateUname?uname="+this.uname+"&uid="+this.userList[0].uid)
+                    .then(res=>{
+                        if(res.data>0){
+                            this.dialogName=false;
+                            this.userList[0].uname=this.uname;
+                        }
+                })
+            },jazai:function () {
+                if (localStorage.getItem("acc") != null) {
+                    this.userList=JSON.parse(localStorage.getItem('acc'));
+                }else{
+                    alert('key 不存在')
+                }
+            },yzm:function () {
+                this.$axios.post("http://localhost:8081/test/show?phone=" + this.photo).then(res => {
+                })
+            },updatesphoto:function(){
+                this.$axios.post("http://localhost:8081/test/content?mobile="+this.yzm1).then(res=>{
+                    if(res.data===1){
+                        alert("登录成功");
+                        this.$axios.post("http://localhost:8081/UsersController/updatephoto?photo="+this.phone+"&uid="+this.userList[0].uid).then(res=>{
+                            if(res.data>0){
+                                this.dialogUpdate=false;
+                                this.userList[0].photo=this.photo;
+                            }
+
+                        })
+                    }else {
+                        alert("验证码有误");
+                    }
+                });
+
+            }
         }
     }
 </script>
 
 <style scoped>
-
 </style>
