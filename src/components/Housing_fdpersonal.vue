@@ -26,7 +26,7 @@
                                         <a href="https://www.xiaozhu.com/xzweb.php?op=FD_DiaryList">短租日记</a>
                                         <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_UserInfo">个人资料</a>
                                     </div>
-                                    <p class="p1"><a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Index"><strong>房客中心</strong></a></p>
+                                    <p class="p1"><a @click="fkzx()"><strong>房客中心</strong></a></p>
                                     <div class="twobox clearfix">
                                         <a href="https://www.xiaozhu.com/xz_web2/order/pages/lodger/list.html">我的订单</a>
                                         <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_ShowLetter">聊天记录</a>
@@ -315,6 +315,9 @@
             this.jequ=this.userList[0].photo.replace(this.userList[0].photo.substr(4,4),"****");
 
         },methods:{
+            fdzx(){
+                this.$router.push({name:"Housing_fdpersonal"})
+            },
             //查看提现记录
             queryTx(){
                 var uid=JSON.parse(localStorage.getItem('acc'));

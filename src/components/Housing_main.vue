@@ -48,7 +48,7 @@
                 <h1>别住酒店，住阳房</h1>
                 <span>莫愁前路无知己，天下谁人不识君 </span>
             </div>
-            <div class="content_v2" style="border: 2px darkgray solid;height: 500px;">
+            <div class="content_v2" style="border: 2px darkgray solid;height: auto;">
                 <ul class="rooms_show_ul">
                         <span v-for="info in listinfo" >
                         <li>

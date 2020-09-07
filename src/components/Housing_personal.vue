@@ -15,7 +15,7 @@
                             <li class="active">
                                 <a class="icon_zhinan"  href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index" rel="nofollow">用户名</a>
                                 <div class="sel_box sel_fd">
-                                    <p class="p1"><a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index"><strong>房东中心</strong></a></p>
+                                    <p class="p1"><a @click="fdzx()"><strong>房东中心</strong></a></p>
                                     <div class="twobox clearfix">
                                         <a href="https://www.xiaozhu.com/xz_web2/order/pages/landlord/orderList.html">订单管理</a>
                                         <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_SettlementInfo">结算统计</a>
@@ -383,6 +383,9 @@
             this.jequ=this.userList[0].photo.replace(this.userList[0].photo.substr(4,4),"****");
 
         },methods:{
+            fdzx(){
+                this.$router.push({name:"Housing_fdpersonal"})
+            },
             queryComments(){
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post("http://localhost:8081/orders/queryComments?uid="+uid).then(res => {

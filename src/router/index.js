@@ -10,7 +10,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-          path: '/Housing_main',
+          path: '/',
           name: 'Housing_main',
           component: () => import('../components/Housing_main')
       },
@@ -43,6 +43,16 @@ export default new Router({
           path:'/Housing_order',
           name:'Housing_order',
           component : ()=> import('../components/Housing_order')
+      },
+      {
+          path:'/Housing_personal',
+          name:'Housing_personal',
+          component : ()=> import('../components/Housing_personal')
+      },
+      {
+          path:'/Housing_fdpersonal',
+          name:'Housing_fdpersonal',
+          component : ()=> import('../components/Housing_fdpersonal')
       },
       {
           path:'/Housing_pay',
