@@ -87,9 +87,7 @@
                         </dl>
                     </div>
                 </div>
-
                 </div>
-
                 <div class="checkout-confirm">
                     <el-button round @click="addOrd()">立即下单</el-button>
                 </div>
