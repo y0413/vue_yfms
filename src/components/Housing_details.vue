@@ -710,7 +710,7 @@
                     bnbid : 1,
                     order_price : 20,
                     order_people:1,
-                    order_number:8098080980
+                    order_number:8098080920
                 },
                 activeName:'xz',
                 btnShow: false,
