@@ -6,8 +6,9 @@ import router from './router'
 import axios from 'axios'
 import elementui from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import moment from 'moment'
 
-
+Vue.prototype.$moment = moment;
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.use(elementui)

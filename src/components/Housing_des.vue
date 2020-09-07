@@ -2,52 +2,53 @@
     <div>
         <div class="top"></div>
         <div class="o_mask" id='maskName'  style="display:none;"></div>
-        <div class="detail_wrapper">
-            <div class="detail_head clearfix">
-                <a href="https://www.xiaozhu.com" class="xz_logo_detail">阳房</a><span class="slogan_v2 slogan_black"></span>
-                <ul class="nav_R nav_commen">
-                    <input type="hidden" value="landlord" id="userCurrentRole"/>
-                    <input type="hidden" value="144260581897" id="loginUserId"/>
-                    <li class="current">
-                        <a href="" class="openTri_R" rel="nofollow">用户名称</a>
-                        <div class="head_pop top40">
-                            <div class="pop_column">
-                                <a class="pop_T" href="">房东中心</a>
-                                <span>
-                                    <a class="fl" href="">订单管理</a>
-                                    <a class="fr" href="">结算统计</a>
-                                </span>
-                                <span>
-                                    <a class="fl" href="">我的点评</a>
-                                    <a class="fr" href="">个人资料</a>
-                                </span>
-                            </div>
-                            <div class="pop_column">
-                                <a class="pop_T pop_bor" href="">房客中心</a>
-                                <span>
-                                    <a class="fl" href="">我的订单</a>
-                                    <a class="fr" href="">我的点评</a>
-                                    <a class="fl" href="">个人资料</a>
-                                    <a class="fr" href="">退出</a>
-                                </span>
-                            </div>
-                        </div>
-                    </li>
+        <Header></Header>
+        <!--<div class="detail_wrapper">-->
+            <!--<div class="detail_head clearfix">-->
+                <!--<a href="https://www.xiaozhu.com" class="xz_logo_detail">阳房</a><span class="slogan_v2 slogan_black"></span>-->
+                <!--<ul class="nav_R nav_commen">-->
+                    <!--<input type="hidden" value="landlord" id="userCurrentRole"/>-->
+                    <!--<input type="hidden" value="144260581897" id="loginUserId"/>-->
+                    <!--<li class="current">-->
+                        <!--<a href="" class="openTri_R" rel="nofollow">用户名称</a>-->
+                        <!--<div class="head_pop top40">-->
+                            <!--<div class="pop_column">-->
+                                <!--<a class="pop_T" href="">房东中心</a>-->
+                                <!--<span>-->
+                                    <!--<a class="fl" href="">订单管理</a>-->
+                                    <!--<a class="fr" href="">结算统计</a>-->
+                                <!--</span>-->
+                                <!--<span>-->
+                                    <!--<a class="fl" href="">我的点评</a>-->
+                                    <!--<a class="fr" href="">个人资料</a>-->
+                                <!--</span>-->
+                            <!--</div>-->
+                            <!--<div class="pop_column">-->
+                                <!--<a class="pop_T pop_bor" href="">房客中心</a>-->
+                                <!--<span>-->
+                                    <!--<a class="fl" href="">我的订单</a>-->
+                                    <!--<a class="fr" href="">我的点评</a>-->
+                                    <!--<a class="fl" href="">个人资料</a>-->
+                                    <!--<a class="fr" href="">退出</a>-->
+                                <!--</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
 
-                    <li class="current">
-                        <a href="" class="openTri_R">短租指南</a>
-                        <div class="head_pop width_58 top40">
-                            <div class="pop_column">
-                                <span><a class="fl" href="">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>
-                            </div>
-                        </div>
-                    </li>
+                    <!--<li class="current">-->
+                        <!--<a href="" class="openTri_R">短租指南</a>-->
+                        <!--<div class="head_pop width_58 top40">-->
+                            <!--<div class="pop_column">-->
+                                <!--<span><a class="fl" href="">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
 
-                    <li>
-                        <a rel="nofollow" data-href="" class="btn_free" id = "Pub_Btn">免费发布房源</a>
-                    </li>
-                </ul>
-            </div>
+                    <!--<li>-->
+                        <!--<a rel="nofollow" data-href="" class="btn_free" id = "Pub_Btn">免费发布房源</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
 
             <div class='h_top_box'>
                 <div style="margin-left: 12%;margin-right: 10%;margin-top: 2%">
@@ -261,10 +262,11 @@
 
             </div>
         </div>
-    </div>
+    <!--</div>-->
 </template>
 
 <script>
+    import header from "../components/Housing_header.vue"
     export default {
         name: "Housing_des",
         data(){
@@ -282,6 +284,9 @@
                     ]
                  }
             }
+        },
+        components:{
+            Header:header
         },methods:{
             addDes(){  //添加房源描述
                 this.$axios.post('http://localhost:8081/bnbinfo/addDes',this.des)

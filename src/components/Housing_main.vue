@@ -1,160 +1,8 @@
 <template>
     <div>
-        <div class="head_bar">
-            <div class="head_bar_con">
-                <a href="https://www.xiaozhu.com" class="logo_index">小猪</a>
-                <ul class="nav_R">
-                    <li>
-                        <div v-if="userList[0]==null">
 
-                        <a class="show-register-box" @click="zc()">注册</a>
-                        </div>
-                    </li>
-                    <li >
-                        <div v-if="userList[0]==null">
-                            <a class="show-register-box" @click="dl()">登录</a>
-                        </div>
-                        <div v-else>
-                                <a class="show-register-box" @click="dl()">{{userList[0].uname}}</a>
-                            <div class="head_pop width_58"  id="csr" >
-                                <div class="pop_column">
-                                    <div>
-                                        <a class="fl" @click="personal()">房客中心</a>
-                                        <a class="fr">房东中心</a>
-                                        <a @click="dele()">退出</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>           </li>
-                    <li class="current">
-                        <a href="#ongo" class="openTri_R marginR10">短租指南</a>
-                        <div class="head_pop width_58" id="csre">
-                            <div class="pop_column">
-                                <div>
-                                    <a class="fl">房东指南</a>
-                                    <a class="fr">房客指南</a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+<Header></Header>
 
-                    <li><a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free show-register-box" id="Pub_Btn">免费发布房间</a></li>
-                </ul>
-            </div>
-        </div>
-        <el-dialog width="50%"  :visible.sync="dialogVisible">
-            <el-form :model="userSign" status-icon :rules="rules2" ref="userSign" label-width="80px" class="demo-ruleForm">
-                <div class="w_698">
-                    <div class="clearfix">
-                        <div class="r_main_l">
-                            <ul class="r_tab clearfix">
-                                <p>用户登录</p>
-                            </ul>
-                            <div id="generalLogin">
-                                <ul class="register_list">
-                                    <li>
-                                        <el-form-item label="账号" prop="uname">
-                                            <input v-model="userSign.uname" class="r_input_1"   placeholder="手机号,邮箱">
-                                        </el-form-item>
-                                        <el-form-item label="密码" prop="upwd">
-                                            <input type="password" class="r_input_1"  v-model="userSign.upwd" auto-complete="off" placeholder="密码">
-                                        </el-form-item>
-                                    </li>
-                                </ul>
-                                <el-button style="width: 350px" type="primary" class="r_input mt_10" id="orgBtn" @click="queryName()">提交</el-button>
-                                <div class="r_login_space clearfix"><span class="fl cur "><input class="ipt-checkbox2" type="checkbox" id="setcookie" checked="checked" />自动登录</span>
-                                    <span class="fr col_gray"><a href="https://www.xiaozhu.com/findpwdbyphone">忘记密码?</a></span></div>
-                            </div>
-                        </div>
-                        <div class="r_main_r">
-                            <h5>合作网站账户登录</h5>
-                            <ul class="r_wedsitev1">
-                                <li>
-                                    <a class="hz_qqv1" href="https://www.xiaozhu.com/xzweb.php?op=GetOpenSnsAuthUrl&snsType=qqzone&state=login&next=https%3A%2F%2Fwww.xiaozhu.com%2F"><i></i>QQ登录</a>
-                                </li>
-                            </ul><p>还没有注册？<a  class="col_pink show-register-box" @click="zc()">注册账号&gt;&gt;</a></p>
-                            <p style="width: 400px">短信快捷登录？<a  class="col_pink show-register-box" @click="dx()">短信快捷登录&gt;&gt;</a></p>
-                        </div>
-                    </div>
-                </div>
-            </el-form>
-        </el-dialog>
-        <el-dialog width="50%" title="短信快捷登录" :visible.sync="dialogVisibletade">
-            <div class="w_698">
-                <div class="clearfix">
-                    <div class="r_main_l">
-                        <el-form>
-                            <el-form-item label="手机号" prop="phone">
-                                <el-input style="width: 250px" v-model="phone" placeholder="手机号" auto-complete="off"></el-input>
-                            </el-form-item>
-                            <el-form-item label="验证码" prop="yzm">
-                                <el-input style="width: 130px" placeholder="验证码" v-model="yzm1" auto-complete="off"></el-input>
-                                <a @click="yzm()"  class="have-nb">重新发送</a>
-                            </el-form-item>
-                            <el-form-item>
-                                <el-button style="width: 250px" type="primary" @click="usersphoto()">登录</el-button>
-                            </el-form-item>
-                        </el-form>
-                        <span class="check_css3 agreeResBox">
-                            <input type="checkbox"  class="input_check" id="check4">
-                            <label for="check4"></label>
-                                    我同意  <a href="https://www.xiaozhu.com/help/service" class="r-service-protocol" target="_blank">《服务协议》、</a><a href="https://www.xiaozhu.com/help/privacy" class="r-service-protocol" target="_blank">《隐私保护声明》</a>
-                                 </span>
-                    </div>
-                    <div class="r_main_r">
-                        <h5>合作网站账户登录</h5>
-                        <ul class="r_wedsitev1">
-                            <li>
-                                <a class="hz_qqv1" href="https://www.xiaozhu.com/xzweb.php?op=GetOpenSnsAuthUrl&snsType=qqzone&state=login&next=https%3A%2F%2Fwww.xiaozhu.com%2F"><i></i>QQ登录</a>
-                            </li>
-                        </ul>
-                        <p class="">已有账号？<a  class="col_pink logindialog" @click="dl()">登录&gt;&gt;</a></p>
-                    </div>
-                </div>
-            </div>
-        </el-dialog>
-        <el-dialog width="50%" title="注册小猪账号" :visible.sync="dialogVisibleta">
-            <div class="w_698 login_register_box "  id="registerDialog">
-                <div class="clearfix">
-                    <div class="r_main_l">
-                        <el-form :model="userSign" status-icon :rules="rules2" ref="userSign" label-width="80px" class="demo-ruleForm">
-                            <el-form-item label="手机号" prop="phone">
-                                <el-input v-model="phone" placeholder="手机号" auto-complete="off"></el-input>
-                            </el-form-item>
-                            <el-form-item label="验证码" prop="yzm">
-                                <el-input style="width: 130px" placeholder="用户名" v-model="yzm1" auto-complete="off"></el-input>
-                                <a @click="yzm()" id="get-code-btn" class="have-nb">重新发送</a>
-                            </el-form-item>
-                            <el-form-item label="用户名" prop="uname">
-                                <el-input  placeholder="用户名" v-model="userSign.uname" auto-complete="off"></el-input>
-                            </el-form-item>
-                            <el-form-item label="密码" prop="upwd">
-                                <el-input  type="password" placeholder="密码" v-model="userSign.upwd" auto-complete="off"></el-input>
-                            </el-form-item>
-                            <el-form-item>
-                                <el-button style="width: 250px" type="primary" @click="addusers()">注册</el-button>
-                            </el-form-item>
-                        </el-form>
-                        <span class="check_css3 agreeResBox">
-                            <input type="checkbox"  class="input_check" id="check3">
-                            <label for="check3"></label>
-                                    我同意  <a href="https://www.xiaozhu.com/help/service" class="r-service-protocol" target="_blank">《服务协议》、</a><a href="https://www.xiaozhu.com/help/privacy" class="r-service-protocol" target="_blank">《隐私保护声明》</a>
-                                 </span> </div>
-                    <div class="r_main_r">
-                        <h5>合作网站账户登录</h5>
-                        <ul class="r_wedsitev1">
-                            <li>
-                                <a class="hz_qqv1" href="https://www.xiaozhu.com/xzweb.php?op=GetOpenSnsAuthUrl&snsType=qqzone&state=login&next=https%3A%2F%2Fwww.xiaozhu.com%2F"><i></i>QQ登录</a>
-                            </li>
-                        </ul>
-                        <p class="">已有账号？<a id="loginDialogBtn" class="col_pink logindialog" @click="dl()">登录&gt;&gt;</a></p>
-                    </div>
-                </div>
-
-            </div>
-        </el-dialog>
         <div class="banner_con" style="height: 720px">
             <el-carousel indicator-position="outside" height="720px">
                 <el-carousel-item v-for="item in imagesbox" :key="item.id">
@@ -202,17 +50,20 @@
             </div>
             <div class="content_v2" style="border: 2px darkgray solid;height: 500px;">
                 <ul class="rooms_show_ul">
-                    <li>
-                        <input type="text" value="6257935516" class="luId" style="display: none">
-                        <img class="img_room" lazy_src="https://image.xiaozhustatic3.com/00,400,326,2/2,9,0,3,5096,1800,1200,25afc714.jpg" alt="小猪-西涌（西冲） 舒适宜居宽敞双床房近沙滩" width="400" height="326"/>
-                        <span class="img_upCover"></span>
-                        <div class="rooms_intro">
-                            <img class="img_user_fd" lazy_src="https://image.xiaozhustatic1.com/22/s,5,rQ6K,414,414,2,44ece91c.jpg" />
-                            <span class="room_name">西涌蝴蝶家民宿的家 - 深圳</span>
-                            <span class="index_price"><em class="bigFont">&#165;</em>198</span>
-                        </div>
-                        <a href="//sz.xiaozhu.com/fangzi/6257935516.html" target="_blank" class="room_hover" luid="6257935516"></a>
-                    </li>
+                        <span v-for="info in listinfo" >
+                        <li>
+                            <input type="text" value="6257935516" class="luId" style="display: none">
+
+                            <img class="img_room" :src="'http://localhost:8081/'+info.bedroom" alt="小猪-西涌（西冲） 舒适宜居宽敞双床房近沙滩" width="400" height="326"/>
+                            <span class="img_upCover"></span>
+                            <div class="rooms_intro">
+                                <img class="img_user_fd" lazy_src="https://image.xiaozhustatic1.com/22/s,5,rQ6K,414,414,2,44ece91c.jpg" />
+                                <span class="room_name">{{info.bnbname}} - {{info.city}}</span>
+                                <span class="index_price"><em class="bigFont">&#165;</em>{{info.price}}</span>
+                            </div>
+                            <a @click="details(info.bnbid)" target="_blank" class="room_hover" ></a>
+                        </li>
+                        </span>
                 </ul>
             </div>
         </div>
@@ -323,8 +174,10 @@
 </template>
 
 <script>
+    import header from "../components/Housing_header.vue"
     export default {
         name: "Housing_main",
+        inject:['reload'],
         data(){
             return{
                 userSign:{},
@@ -335,22 +188,62 @@
                 userList:{},
                 phone:"",
                 yzm1:"",
+
                 imagesbox:[
                     {id:0,idView:require("../../static/images/timgBBHO7ZJF.jpg")},
                     {id:1,idView:require("../../static/images/timgSWMA57MC.jpg")},
                     {id:1,idView:require("../../static/images/fang.jpg")},
                     {id:1,idView:require("../../static/images/timgY7KADF2U.jpg")}
-                ]
+                ],
+                listinfo:[]
             }
-        },created:function (){
-            this.userList=JSON.parse(localStorage.getItem('acc'));
+        },
+        components:{
+            Header:header
+        },
+        created:function (){
+            if(localStorage.getItem('acc')!=null){
+                // alert(1)
+                // this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+1).then(res=>{
+                //     this.userList=res.data;
+                //
+                //     // this.dialogVisibletade=false;
+                // })
+                var uid=JSON.parse(localStorage.getItem('acc'))
+                this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+uid).then(res=>{
+                    this.userList=res.data;
+                    localStorage.setItem('acc',JSON.stringify(this.userList[0].uid));
+                    this.dialogVisible=false;
+                    // this.reload();
+                })
+                // this.userList.uname="nh";
+                // this.userList=JSON.parse(localStorage.getItem('acc'));
+            }
+            this.selectAll();
+            // this.reload();
         },methods:{
+            selectAll(){
+                this.$axios.post('http://localhost:8081/bnbinfo/query')
+                    .then(response => {
+                        this.listinfo = response.data
+                    }).catch(error => {
+
+                })
+            },
             queryName:function () {
                 this.$axios.post("http://localhost:8081/UsersController/queryName?uname="+
                     this.userSign.uname+"&upwd="+this.userSign.upwd).then(res=>{
                     if(res.data!=""){
-                        this.dialogVisible=false;
-                        this.userList=localStorage.setItem('acc',JSON.stringify(res.data));
+                        var uid=res.data[0].uid;
+                        this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+uid).then(res=>{
+                            this.userList=res.data;
+                            localStorage.setItem('acc',JSON.stringify(this.userList[0].uid));
+                            this.dialogVisible=false;
+                            this.reload();
+                        })
+                        // this.dialogVisible=false;
+                        // localStorage.setItem('acc',JSON.stringify(res.data));
+                        // this.reload();
                     }else {
                         alert("登录失败");
                     }
@@ -364,14 +257,20 @@
                         this.$axios.post("http://localhost:8081/test/usersphoto?photo="+this.phone).then(res=>{
                             localStorage.setItem('acc',JSON.stringify(res.data));
                             this.userList=JSON.parse(localStorage.getItem('acc'));
-                            this.dialogVisibletade=false;
 
+                            // this.userList=JSON.parse(localStorage.getItem('acc'));
+
+                            this.dialogVisibletade=false;
                         })
                     }else {
                         alert("验证码有误");
                     }
                 });
 
+            },
+            dele(){
+                localStorage.clear();
+                this.reload();
             },
             zc:function () {
                 this.dialogVisible=false;
@@ -406,6 +305,9 @@
                 })
             },personal:function () {
                 this.$router.push({name: 'Housing_personal'})
+            },
+            details(bnbid){
+                this.$router.push({name: 'Housing_details',params: {bnbid}})
             }
         }
     }

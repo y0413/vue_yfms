@@ -2,30 +2,31 @@
 <div>
     <!-- 头部 -->
     <div class="o_mask" id='maskName'  style="display:none;"></div>
-    <div class="detail_wrapper">
-        <div class="detail_head clearfix">
-            <a href="https://www.xiaozhu.com"  style="margin-left: -270px;" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>
-            <ul class="nav_R nav_commen" style="margin-right: -270px;">
-                <li><a rel="nofollow" title="" class="show-register-box" href="https://www.xiaozhu.com/register?next=https%3A%2F%2Fbj.xiaozhu.com%2Ffangzi%2F1209886305.html">注册</a></li>
-                <li>&middot;</li>
-                <li><a rel="nofollow" class="logindialog" href="https://www.xiaozhu.com/login?next=https%3A%2F%2Fbj.xiaozhu.com%2Ffangzi%2F1209886305.html">登录</a></li>
-                <li>&middot;</li>
-                <li class="current">
-                    <a href="#ongo" class="openTri_R">短租指南</a>
-                    <div class="head_pop width_58 top40">
-                        <div class="pop_column">
-                            <span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>
-                        </div>
-                    </div>
-                </li>
-                <li><a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free show-register-box" id = "Pub_Btn">免费发布房源</a></li>
-            </ul>
-        </div>
-    </div>
+    <Header></Header>
+    <!--<div class="detail_wrapper">-->
+        <!--<div class="detail_head clearfix">-->
+            <!--<a href="https://www.xiaozhu.com"  style="margin-left: -270px;" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>-->
+            <!--<ul class="nav_R nav_commen" style="margin-right: -270px;">-->
+                <!--<li><a rel="nofollow" title="" class="show-register-box" href="https://www.xiaozhu.com/register?next=https%3A%2F%2Fbj.xiaozhu.com%2Ffangzi%2F1209886305.html">注册</a></li>-->
+                <!--<li>&middot;</li>-->
+                <!--<li><a rel="nofollow" class="logindialog" href="https://www.xiaozhu.com/login?next=https%3A%2F%2Fbj.xiaozhu.com%2Ffangzi%2F1209886305.html">登录</a></li>-->
+                <!--<li>&middot;</li>-->
+                <!--<li class="current">-->
+                    <!--<a href="#ongo" class="openTri_R">短租指南</a>-->
+                    <!--<div class="head_pop width_58 top40">-->
+                        <!--<div class="pop_column">-->
+                            <!--<span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li><a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free show-register-box" id = "Pub_Btn">免费发布房源</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
         <!-- /底部 -->
 
     <!--搜索框-->
-    <div class="city_wrap" style="margin: -55px">
+    <div class="city_wrap" style="margin: -55px;margin-top: -25px">
         <!--city top-->
         <div class="city_top_box clearfix" id="list_filter">
             <div class="city_l">
@@ -104,9 +105,18 @@
                 <div class="type_bg clearfix">
                     &nbsp;&nbsp;&nbsp;<span>价格</span>&nbsp;&nbsp;
                     <span>起始价格</span>&nbsp;&nbsp;&nbsp;
-                    <el-input v-model="map.startprice" style="width: 100px" placeholder="请输入"></el-input>&nbsp;&nbsp;&nbsp;
+                    <el-input-number
+                        min="0"
+                        size="small"
+                        max="9999"
+
+                        v-model="map.startprice" style="width: 200px" placeholder="请输入"></el-input-number>&nbsp;&nbsp;&nbsp;
                     <span>结束价格</span>&nbsp;&nbsp;&nbsp;
-                    <el-input v-model="map.endprice" style="width: 100px" placeholder="请输入"></el-input>
+                    <el-input-number
+                        min="0"
+                        size="small"
+                        max="9999"
+                        v-model="map.endprice" style="width: 200px" placeholder="请输入"></el-input-number>
                 </div>
                 <div class="type_bg clearfix">
                     <h6 class="type_tit1">最多宜居</h6>
@@ -128,7 +138,7 @@
     <!-- /搜索框 -->
 
     <!-- 中间 -->
-    <div class="clearfix" style="margin-top: 14%;height: 500px;">
+    <div class="clearfix" style="margin-top: 300px;height: 500px;">
         <!--地图-->
 
         <!--<div class="city_map" >-->
@@ -139,8 +149,9 @@
         <div class="content"  style="height: auto">
             <ul  v-for="info in listinfo">
                 <li>
-                    <a target="_blank" href="https://sh.xiaozhu.com/fangzi/7578140916.html" class="resule_img_a">
-                        <img style="height: 330px;width: 440px" class="lodgeunitpic" :title="'info.bnbname'" data-growing-title="7578140916"
+
+                    <a target="_blank"  class="resule_img_a">
+                        <img @click="details(info.bnbid)" style="height: 330px;width: 440px" class="lodgeunitpic" :title="'info.bnbname'"
                              :src="'http://localhost:8081/'+info.bedroom"
                              :alt="'{{info.bnbname}}'" />
                     </a>
@@ -164,10 +175,15 @@
 </div>
 </template>
 <script>
+    import header from "../components/Housing_header.vue"
     import ElSelectDropdown from "element-ui/packages/select/src/select-dropdown";
+    // const map=new BMap.Map('allmap');
     export default {
         name: "Housing_search",
-        components: {ElSelectDropdown},
+        components: {
+            ElSelectDropdown,
+            Header:header
+        },
         data(){
             return{
                 gjc:"",
@@ -179,27 +195,46 @@
                 livable: [],
             }
         },
-        mounted(){
+        created(){
             this.$nextTick(function () {
-
-            window.addEventListener('scroll', this.onScroll)
-
-        });
-            this.cs();
+                window.addEventListener('scroll', this.onScroll)
+            });
+            // this.cs();
             this.selectInfo();
             this.getlivable ();
         },
+        mounted(){
+
+            this.cs();
+            this.selectInfo();
+            this.getlivable ();
+            this.$nextTick(function () {
+
+                window.addEventListener('scroll', this.onScroll)
+
+            });
+        },
         methods:{
             selectInfo(){
-                if(this.map.startprice==null){
+                console.log(this.map)
+                if(this.map.startprice==null || this.map.startprice===""){
                     this.map.startprice=0;
                 }
-                if(this.map.endprice==null){
+                if(this.map.endprice==null || this.map.endprice===""){
                     this.map.endprice=9999;
                 }
                 this.$axios.post('http://localhost:8081/bnbinfo/select',this.map)
                     .then(res => {
                         this.listinfo=res.data;
+                        var map = new BMap.Map('allmap');
+                        for(var i=0;i<this.listinfo.length;i++){
+                            var point = new BMap.Point(this.listinfo[i].longitude, this.listinfo[i].latitude) // 创建点坐标，汉得公司的经纬度坐标
+                            map.centerAndZoom(point, 12);
+                            var marker = new BMap.Marker(point);  // 创建标注
+                            map.addOverlay(marker);
+                        }
+
+                        map.disableDragging();
                     });
             },
             //获取宜居人数
@@ -212,6 +247,9 @@
 
                 })
             },
+            details(bnbid){
+                this.$router.push({name: 'Housing_details',params: {bnbid}})
+            },
             cs(){
                 var map = new BMap.Map('allmap');
                 var point = new BMap.Point(113.172257, 36.197589) // 创建点坐标，汉得公司的经纬度坐标
@@ -222,9 +260,9 @@
             },
             onScroll(){
 
-                let scrolled = document.documentElement.scrollTop || document.body.scrollTop
+                let scrolled = document.documentElement.scrollTop || document.body.scrollTop;
 
-                let header_height = null
+                let header_height = null;
 
                 if(document.getElementsByClassName('city_wrap')[0]){
 
@@ -232,7 +270,7 @@
 
                 }
 
-                console.log('滚动的距离:'+scrolled,'头部的高度:'+ header_height)
+                // console.log('滚动的距离:'+scrolled,'头部的高度:'+ header_height);
 
                 this.auto_fixed = {
 
@@ -258,28 +296,22 @@
         /*margin-top: -260px;*/
     }
     .auto_fixed{
-
         height: 680px;
         background: orange;
         position: absolute;
         line-height: 3em;
-        width:550px;
+        width:600px;
         text-align: center;
         float:left;
     }
 
     .fixed{
-
         position: fixed;
-
         top: 0px;
-
-        width: 550px;
-
+        width: 600px;
     }
 
     .content{
-
         color: gray;
         width:830px;
         padding: 8px;

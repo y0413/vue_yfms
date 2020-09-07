@@ -104,98 +104,57 @@
 
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-user"></i>个人资料</span>
+                    <span slot="label"><i class="el-icon-user"></i>房源查看</span>
                     <div style="width: 980px;border: 0px solid red;overflow: auto">
-                        <b style="color: aqua;line-height: 40px;font-size: 20px;padding-left: 20px">基本信息</b>
-                        <hr style="color: honeydew"/>
-                        <div style="padding-left: 40px;line-height: 80px; font-size: 20px;float: left">
-                        <span><span style="color: gray">用户名:
-                        </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{userList[0].uname}}</span>&nbsp&nbsp&nbsp&nbsp
-                            <a style="color: hotpink" @click="dialogdk()">修改</a><br>
-                        <span><span style="color: gray">手机号:
-                        </span>:&nbsp&nbsp&nbsp&nbsp+86&nbsp&nbsp{{userList[0].photo}}&nbsp&nbsp&nbsp&nbsp
-                            <i class="el-icon-circle-check" style="background-color: aqua">
-                            </i>&nbsp&nbsp&nbsp<i style="color: aqua">已验证</i>
-                            &nbsp&nbsp&nbsp&nbsp<a style="color: hotpink"@click="dialogUdk()">修改</a></span>
-                        </div>
-                        <div style="width: 150px; height: 200px;float: right;margin-right: 200px" >
-                            <img :src="'http://localhost:8081/'+userList[0].ptel" style="width: 150px;height: 150px;"/>
-                            <el-button @click="dialogPtel=true">编辑头像</el-button>
-                            <el-dialog width="40%" height="400px" title="编辑头像" :visible.sync="dialogPtel">
-                            <span style="color: gray;margin-left: 20px">头像:
-                            </span>
-                                <el-upload
-                                   action="http://localhost:8081/UsersController/singlefile"
-                                    list-type="picture-card"
-                                    :auto-upload="false"
-                                    ref="upload"
-                                    :on-preview="handlePictureCardPreview"
-                                    :file-list="file"
-                                    :on-remove="handleRemove">
-                                    <i slot="default" class="el-icon-plus"></i>
-                                </el-upload>
-                                <div style="margin-top: 30px;margin-left: 20px">
-                                    <el-button style="width: 100px" type="primary" @click="updatePtel()">保存</el-button>
-                                    <el-button style="width: 100px" type="primary" @click="dialogptel()">关闭</el-button>
-                                </div>
-                            </el-dialog>
-                            <!--<a style="position: absolute;bottom: 190px;left:715px;font-size: 15px; color: white;float: right;"><b>编辑头像</b></a>-->
-                            </div>
+                        <el-table :data="bnblist" border style="width: 100%">
+                            <el-table-column label="房源编号" prop="bnbid"></el-table-column>
+                            <el-table-column label="房源名称" prop="bnbname"></el-table-column>
+                            <el-table-column label="房源价格" prop="price"></el-table-column>
+                            <el-table-column label="用户昵称" prop="uname"></el-table-column>
+                        </el-table>
                     </div>
-                    <el-dialog width="20%" title="修改名字" :visible.sync="dialogName">
-                            <span style="color: gray;margin-left: 20px">用户名:
-                        </span><el-input style="width: 160px" placeholder="用户名" v-model="uname" auto-complete="off"></el-input>
-                        <div style="margin-top: 30px;margin-left: 20px">
-                            <el-button style="width: 100px" type="primary" @click="updateName()">保存</el-button>
-                            <el-button style="width: 100px" type="primary" @click="dialoggb()">关闭</el-button>
-                        </div>
-                    </el-dialog>
-                    <el-dialog width="30%" title="修改手机号" :visible.sync="dialogUpdate">
-                            <span style="color: gray;margin-left: 20px;line-height: 20px">新的手机号:
-                        </span><el-input style="width: 240px" placeholder="手机号" v-model="photo" auto-complete="off"></el-input>
-                        <br><span style="color: gray;margin-left: 20px;line-height: 20px">验证码:
-                        </span><el-input style="width: 110px;margin-top: 20px;margin-left: 28px" placeholder="验证码" v-model="yzm1" auto-complete="off"></el-input>
-                            <a @click="yzm()" id="get-code-btn1" class="have-nb">重新发送</a>
-                        <div style="margin-top: 30px;margin-left: 20px">
-                            <el-button style="width: 100px;margin-left: 90px" type="primary" @click="updatesphoto()">保存</el-button>
-                            <el-button style="width: 100px" type="primary" @click="dialogUgb()">关闭</el-button>
-                        </div>
-                    </el-dialog>
-                    <div style="border: 0px solid red;width:980px;">
-                        <b style="color: aqua;font-size: 20px;padding-left: 20px">身份信息</b>
-                        <b style="color: gray;line-height: 50px;font-size: 18px;padding-left: 20px">仅用于必要的安全环节，其他情况下将为您严格保密</b>
-                        <a style="color: gray;line-height: 50px;font-size: 18px;padding-left: 400px;"  @click="handleSubmit()" v-show="te">编辑</a>
-                        <a style="color: gray;line-height: 50px;font-size: 18px;padding-left: 400px;"  @click="handleSubmit()" v-show="tex">保存</a>
-
-                        <hr style="color: white"/>
-                        <el-form :model="userList1" status-icon :rules="rules2" ref="userList1" label-width="80px" class="demo-ruleForm">
-                            <el-form-item label="真实姓名:" prop="truename">
-                                <el-input v-model="userList1.truename" style="width: 290px" value="123" v-bind:disabled="diasabledInput"></el-input>
-                            </el-form-item>
-                            <el-form-item label="身份证号:" prop="idcard">
-                                <el-input v-model="userList1.idcard" style="width: 290px" v-bind:disabled="diasabledInput"></el-input>
-                            </el-form-item>
-                            <el-form-item label="性别:" prop="usex">
-                                <el-radio v-model="userList1.usex" label="0" checked v-bind:disabled="diasabledInput">男</el-radio>
-                                <el-radio v-model="userList1.usex" label="1" v-bind:disabled="diasabledInput">女</el-radio>
-                            </el-form-item>
-                            <el-form-item label="邮箱:" prop="email">
-                                <el-input v-model="userList1.email" style="width: 290px" v-bind:disabled="diasabledInput"></el-input>
-                            </el-form-item>
-                            <el-form-item label="地址:" prop="address">
-                                <el-input v-model="userList1.address" style="width: 290px" v-bind:disabled="diasabledInput"></el-input>
-                            </el-form-item>
-                        </el-form>
-                    </div>
-
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-edit-outline"></i>我的点评</span>
-                    <el-table :data="commentsList.slice((currentPage-1)*PageSize,currentPage*PageSize)" border style="width: 100%">
-                        <el-table-column label="评论编号" prop="cid"></el-table-column>
-                        <el-table-column label="评论内容" prop="context"></el-table-column>
-                        <el-table-column label="评论用户" prop="uname"></el-table-column>
-                        <el-table-column label="房源" prop="bnbname"></el-table-column>
+                    <span slot="label"><i class="el-icon-edit-outline"></i>支付宝设置</span>
+                    <el-form :model="upzf" label-width="80px"  label-position="left">
+                        <el-form-item label="支付宝账号" prop="acc">
+                            <el-input   v-model="upzf.acc"></el-input>
+                        </el-form-item>
+                        <el-form-item label="身份证号" prop="idcard">
+                            <el-input   v-model="upzf.idcard"></el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button style="width: 250px" type="primary" @click="updatezf()">设置</el-button>
+                        </el-form-item>
+                    </el-form>
+                </el-tab-pane>
+                <!--<el-tab-pane style="padding-left:40px;">-->
+                <!--<span slot="label"><i class="el-icon-star-off"></i>我的收藏</span>-->
+                <!--我的收藏-->
+                <!--</el-tab-pane>-->
+                <el-tab-pane style="padding-left:40px;">
+                    <span slot="label"><i class="el-icon-lock"></i>提现</span>
+                    余额:{{userList1.money}}
+                    <el-button @click="tx()">提现</el-button>
+                    <el-dialog width="30%" title="提现" :visible.sync="dialogTx">
+                            <span style="color: gray;margin-left: 20px;line-height: 20px">提现金额:
+                        </span><el-input style="width: 240px" placeholder="提现金额" v-model="upmoney" auto-complete="off"></el-input>
+                        <div style="margin-top: 30px;margin-left: 20px">
+                            <el-button style="width: 100px;margin-left: 90px" type="primary" @click="updatemoney()">确定</el-button>
+                            <el-button style="width: 100px" type="primary" @click="dialogTx=false">关闭</el-button>
+                        </div>
+                    </el-dialog>
+                </el-tab-pane>
+                <el-tab-pane style="padding-left:40px;" >
+                    <span slot="label"><i class="el-icon-setting"></i>提现记录</span>
+                    <el-table :data="Txjl.slice((currentPage-1)*PageSize,currentPage*PageSize)" border style="width: 100%">
+                        <el-table-column label="提现编号" prop="wid"></el-table-column>
+                        <el-table-column label="提现用户" prop="uname"></el-table-column>
+                        <el-table-column label="提现时间" prop="times">
+
+                        </el-table-column>
+                        <el-table-column label="提现金额" prop="total_price"></el-table-column>
+                        <el-table-column label="提现账号" prop="acc"></el-table-column>
                     </el-table>
                     <el-pagination
                         layout="total, sizes, prev, pager, next, jumper"
@@ -206,47 +165,6 @@
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange">
                     </el-pagination>
-                </el-tab-pane>
-                <!--<el-tab-pane style="padding-left:40px;">-->
-                    <!--<span slot="label"><i class="el-icon-star-off"></i>我的收藏</span>-->
-                    <!--我的收藏-->
-                <!--</el-tab-pane>-->
-                <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-lock"></i>密码设置</span>
-                    <span style="font-size: 18px " >密码修改</span>
-                    <el-form :model="upwdList" label-width="80px"  label-position="left">
-                        <el-form-item label="手机号" prop="phone">
-                            <p>+86 {{this.jequ}}</p>
-                        </el-form-item>
-                        <el-form-item label="验证码" prop="yzm">
-                            <el-input style="width: 130px" placeholder="用户名" v-model="yzm1"></el-input>
-                            <a @click="yzm()" id="get-code-btn" class="have-nb">重新发送</a>
-                        </el-form-item>
-
-                        <el-form-item label="密码" prop="1">
-                            <el-input  type="password" v-model="upwd"></el-input>
-                        </el-form-item>
-                        <el-form-item>
-                            <el-button style="width: 250px" type="primary" @click="updateupwd()">修改</el-button>
-                        </el-form-item>
-                    </el-form>
-                </el-tab-pane>
-                <el-tab-pane style="padding-left:40px;" >
-                    <span slot="label"><i class="el-icon-setting"></i>注销账号</span>
-                    <b style="font-size: 26px">申请注销小猪账号</b>
-                    <p style="line-height: 50px;font-size: 16px">在你提交了注销申请之后，系统将进行以下验证，以确保你的账号、财产安全。</p>
-                    <hr>
-                    <b style="font-size: 16px" class="mt_12">1、订单状态为可注销的状态</b>
-                    <p style="line-height: 40px; font-size: 16px " >（1）您的订单状态应为“已取消”或“入住完成”；</p>
-                    <p style="line-height: 40px; font-size: 16px"> （2）先住后付的订单结算状态为扣除成功；</p>
-                    <p style="line-height: 40px; font-size: 16px">（3）在线收取的押金保证全退或已扣除，押金担保的状态为无需索赔/索赔成功；</p>
-                    <p style="line-height: 40px; font-size: 16px"> （4）有特殊财务处理的订单处于完成状态；</p>
-                    <p style="line-height: 40px; font-size: 16px">（5）需打款的订单皆为完成状态；</p>
-                    <b style="line-height: 50px; font-size: 16px">2、您的所有房源为下线状态</b><br>
-                    <b style="line-height: 50px; font-size: 16px">3、您的保洁订单为服务完成状态</b><br>
-                    <b style="line-height: 50px; font-size: 16px">4、订单涉及到的智能门锁已停用</b><br>
-                    <b style="line-height: 50px; font-size: 16px">5、所有订单交易为完成状态</b><br>
-                    <el-button style="line-height: 20px; width: 220px; background-color: deeppink;color: white" >申请注销</el-button>
                 </el-tab-pane>
             </el-tabs>
         </el-main>
@@ -338,11 +256,14 @@
 </template>
 
 <script>
+    import moment from 'moment'
     export default {
-        name: "df",
+        name: "Housing_fdpersonal",
         inject:['reload'],
         data(){
             return {
+                bnblist:[],
+                upzf:{},
                 upwdList:{},
                 userList1:{},
                 userList:{},
@@ -361,7 +282,7 @@
                 dialogImageUrl: '',
                 dialogVisible: false,
                 file: [],
-
+                dialogTx:false,
                 // 个数选择器
                 pageSizes: [1, 2, 3, 4],
                 // 每页显示的条数
@@ -372,22 +293,100 @@
                 total: 1,
                 orderjxzList:[],
                 orderjsList:[],
-                commentsList:[]
+                commentsList:[],
+                upmoney:"",//提现金额
+                Txjl:[],
             }
         }
-       ,created:function(){
+        ,created:function(){
+
+            //提现记录
+            this.queryTx();
+            //支付宝
+            this.queryacc();
+            //房源
+            this.querybnb();
+            //进行中订单
             this.queryOrdersjxz();
+            //结束订单
             this.queryOrdersjs();
             this.queryComments();
             this.jazai();
             this.jequ=this.userList[0].photo.replace(this.userList[0].photo.substr(4,4),"****");
 
         },methods:{
+            //查看提现记录
+            queryTx(){
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                this.$axios.post("http://localhost:8081/UsersController/queryTx?uid="+uid).then(resp => {
+                    let jl = resp.data;
+                    this.total = jl.length;
+                    this.Txjl=jl;
+                    this.start();
+                });
+            },
+            //修改金额 添加提现记录
+            updatemoney(){
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                if(this.upmoney>this.userList1.money){
+                    alert("余额不足");
+                }else {
+                    this.$axios.post("http://localhost:8081/UsersController/upMoney?upmoney="+this.upmoney+"&uid="+uid).then(res => {
+                        if(res.data>0){
+                            alert("提现成功");
+                            this.$axios.post("http://localhost:8081/UsersController/addTx?uid="+uid+"&total_price="+this.upmoney+"&aid="+this.upzf.aid).then(resp => {
+                                this.dialogTx=false;
+                                this.jazai();
+                                this.upmoney="";
+                                this.queryTx();
+                            });
+
+                        }
+                    })
+                }
+
+            },
+            //查询是否有支付宝
+            tx(){
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                this.$axios.post("http://localhost:8081/UsersController/queryAcc?uid="+uid).then(res => {
+                    if(res.data==0){
+                        alert("请设置支付宝");
+                    }else {
+                        this.dialogTx=true;
+                    }
+
+                })
+            },
+            //修改支付宝
+            updatezf(){
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                this.$axios.post("http://localhost:8081/UsersController/updateAcc?acc="+this.upzf.acc+"&idcard="+this.upzf.idcard+"&uid="+uid).then(res => {
+                    if(res.data>0){
+                        alert("修改成功")
+                    }
+                })
+            },
+            queryacc(){
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                this.$axios.post("http://localhost:8081/UsersController/queryAcc?uid="+uid).then(res => {
+                    this.upzf = res.data;
+                    console.log(this.upzf)
+                })
+            },
+            querybnb(){
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                this.$axios.post("http://localhost:8081/UsersController/queryBnb?uid="+uid).then(res => {
+                    // let b = res.data;
+                    // this.total = bnb.length;
+                    this.bnblist = res.data
+                })
+            },
             queryComments(){
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post("http://localhost:8081/orders/queryComments?uid="+uid).then(res => {
                     let comment = res.data;
-                    this.total = comment.length;
+                    // this.total = comment.length;
                     this.commentsList = comment
                 })
             },
@@ -395,7 +394,7 @@
                 var uid=JSON.parse(localStorage.getItem('acc'))
                 this.$axios.post("http://localhost:8081/orders/queryOrders?uid="+uid+"&state="+0).then(res => {
                     let order = res.data;
-                    this.total = order.length
+                    // this.total = order.length
                     this.orderjxzList = order
                 })
             },
@@ -403,97 +402,11 @@
                 var uid=JSON.parse(localStorage.getItem('acc'))
                 this.$axios.post("http://localhost:8081/orders/queryOrders?uid="+uid+"&state="+1).then(res => {
                     let order = res.data;
-                    this.total = order.length
+                    // this.total = order.length
                     this.orderjsList = order
                 })
             },
-            updateupwd:function () {
-                this.$axios.post("http://localhost:8081/test/content?mobile="+this.yzm1).then(res=>{
-                    if(res.data===1){
-                        this.$axios.post("http://localhost:8081/UsersController/updateUpwd?upwd="+this.upwd+"&photo="+this.userList[0].photo).then(res=>{
-                            if(res.data>0){
-                                this.$message({
-                                    showClose: false,
-                                    message: '修改成功',
-                                    type: 'success'
-                                });
-                                this.yzm1="";
-                                this.upwd="";
-                            }else {
-                                this.$message({
-                                    showClose: false,
-                                    message: '修改失败',
-                                    type: 'success'
-                                })
-                            }
-                        })
-                    }else {
-                        this.$message({
-                            showClose: true,
-                            message: '验证码有误',
-                            type: 'success'
-                        })
-                    }
-                })
-            },yzm:function () {
-                this.$axios.post("http://localhost:8081/test/show?phone="+this.userList[0].photo).then(res => {
-                })
-            }, handleSubmit:function () {
-                if(this.diasabledInput){
-                    this.diasabledInput=false;
-                    this.te=false;
-                    this.tex=true;
-                }else{
-                    this.diasabledInput=true;
-                    this.te=true;
-                    this.tex=false;
-                    this.updates()
-
-                }
-            },updates:function () {
-                this.$axios.post("http://localhost:8081/UsersController/updates?usex="+this.userList1.usex+"&truename="+this.userList1.truename+"&idcard="+this.userList1.idcard+"&email="+this.userList1.email+"&address="+this.userList1.address+"&uid="+this.userList[0].uid)
-                    .then(res=>{
-                        if(res.data>0){
-                            alert("修改成功");
-                            this.userList[0].usex=this.userList1.usex;
-                            this.userList[0].truename=this.userList1.truename;
-                            this.userList[0].idcard=this.userList1.idcard;
-                        }
-                    })
-            },dialogdk:function () {
-                this.dialogName=true;
-            },dialoggb:function () {
-                this.dialogName=false;
-            },dialogUdk:function () {
-                this.dialogUpdate=true;
-            },dialogUgb:function () {
-                this.dialogUpdate=false;
-            },dialogptel(){
-                this.dialogPtel=false;
-            },
-            // queryUname(){
-            //     this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+this.userList[0].uid)
-            //         .then(res=>{
-            //             if(res.data>0){
-            //                 alert(123)
-            //                 localStorage.clear();
-            //                 this.reload();
-            //                 localStorage.setItem('acc',JSON.stringify(res.data));
-            //
-            //                 this.userList[0]=JSON.parse(localStorage.getItem('acc'));
-            //                 console.log(this.userList[0]);
-            //             }
-            //         })
-            // },
-            updateName:function () {
-                this.$axios.post("http://localhost:8081/UsersController/updateUname?uname="+this.uname+"&uid="+this.userList[0].uid)
-                    .then(res=>{
-                        if(res.data>0){
-                            this.dialogName=false;
-                            this.userList[0].uname=this.uname;
-                        }
-                })
-            },jazai:function () {
+            jazai:function () {
                 if (localStorage.getItem("acc") != null ) {
                     var uid=JSON.parse(localStorage.getItem('acc'))
                     this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+uid).then(res=>{
@@ -504,8 +417,6 @@
                         // this.reload();
                     })
 
-
-
                     // this.userList=JSON.parse(localStorage.getItem('acc'));
                     // this.userList1=this.userList[0];
                 }else{
@@ -515,27 +426,13 @@
                 this.$axios.post("http://localhost:8081/test/show?phone=" + this.photo).then(res => {
                 })
             },
-            updatePtel(){
-                this.$axios.post("http://localhost:8081/UsersController/Uid?uid="+this.userList[0].uid).then(res => {
-                    // if(res.data=="1"){
-                        this.$refs.upload.submit();
-                    // }
-                })
-
-            },
-            //删除图片
-            handleRemove(file, fileList) {
-                console.log(file, fileList);
-            },
-            //查看图片
-            handlePictureCardPreview(file) {
-                this.dialogImageUrl = file.url;
-                this.dialogVisible = true;
+            start () {
+                this.Txjl.times = moment(this.Txjl.times).format('YYYY-MM-DD HH:mm:ss')
             },
             // 每页显示的条数
             handleSizeChange (val) {
                 // 改变每页显示的条数
-                this.PageSize = val
+                this.PageSize = val;
                 // 注意：在改变每页显示的条数时，要将页码显示到第一页
                 this.currentPage = 1
             },
@@ -543,23 +440,6 @@
             handleCurrentChange (val) {
                 // 改变默认的页数
                 this.currentPage = val
-            }
-            ,updatesphoto:function(){
-                this.$axios.post("http://localhost:8081/test/content?mobile="+this.yzm1).then(res=>{
-                    if(res.data===1){
-                        alert("登录成功");
-                        this.$axios.post("http://localhost:8081/UsersController/updatephoto?photo="+this.phone+"&uid="+this.userList[0].uid).then(res=>{
-                            if(res.data>0){
-                                this.dialogUpdate=false;
-                                this.userList[0].photo=this.photo;
-                            }
-
-                        })
-                    }else {
-                        alert("验证码有误");
-                    }
-                });
-
             }
         }
     }

@@ -1,60 +1,80 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-      <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>vue_yfms</title>
-      <link rel="shortcut icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
-      <link rel="icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
-      <title>发布您的房间</title>
-      <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=base,header,footer,publishRoomV2,photoScroll,jquery-ui,nyroModal,mysite" />
-      <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery.mCustomScrollbar,nyroModal,uploadify,shadepage" />
-      <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=houseHover,realNamePop,jquery-ui,nyroModal" />
-      <script type="text/javascript" src="//jci.xiaozhustatic3.com/e20200803/js/jquery/jquery.js"></script>
-      <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer&httphost=www.xiaozhu.com"></script>
+    <link rel="shortcut icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
+    <title>发布您的房间</title>
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=base,header,footer,publishRoomV2,photoScroll,jquery-ui,nyroModal,mysite" />
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery.mCustomScrollbar,nyroModal,uploadify,shadepage" />
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=houseHover,realNamePop,jquery-ui,nyroModal" />
+    <script type="text/javascript" src="//jci.xiaozhustatic3.com/e20200803/js/jquery/jquery.js"></script>
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer&httphost=www.xiaozhu.com"></script>
 
-      <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/js/jquery/lazyload.js"></script>
-      <!--<script type="text/javascript" src="https://www.xiaozhu.com/e20200803/js/webimv4/application/xzim4.js?source=xiaozhu&dm=xiaozhu.com" id="webimSource"></script>-->
-      <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Pub_Index&httphost=www.xiaozhu.com"></script>
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/js/jquery/lazyload.js"></script>
+    <!--<script type="text/javascript" src="https://www.xiaozhu.com/e20200803/js/webimv4/application/xzim4.js?source=xiaozhu&dm=xiaozhu.com" id="webimSource"></script>-->
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Pub_Index&httphost=www.xiaozhu.com"></script>
 
-      <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer&httphost=www.xiaozhu.com"></script>
-      <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery.mCustomScrollbar,nyroModal,uploadify,shadepage" />
-      <!--<script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/js/jquery/lazyload.js"></script>-->
-      <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Front_Index&httphost=www.xiaozhu.com"></script>
-      <link rel="shortcut icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
-      <link rel="icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
-      <script src="static/js/tingyun-rum.js"></script>
-      <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=global,page,jquery-ui,dialog_front,calendar,suggest,play,shareinvite" />
-      <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=houseHover,realNamePop,jquery-ui,nyroModal" />
-      <!--<script type="text/javascript" src="//jci.xiaozhustatic3.com/e20200803/js/jquery/jquery.js"></script>-->
-      <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer&httphost=www.xiaozhu.com"></script>
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer&httphost=www.xiaozhu.com"></script>
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery.mCustomScrollbar,nyroModal,uploadify,shadepage" />
+    <!--<script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/js/jquery/lazyload.js"></script>-->
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Front_Index&httphost=www.xiaozhu.com"></script>
+    <link rel="shortcut icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
+    <script src="static/js/tingyun-rum.js"></script>
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=global,page,jquery-ui,dialog_front,calendar,suggest,play,shareinvite" />
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=houseHover,realNamePop,jquery-ui,nyroModal" />
+    <!--<script type="text/javascript" src="//jci.xiaozhustatic3.com/e20200803/js/jquery/jquery.js"></script>-->
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer&httphost=www.xiaozhu.com"></script>
 
-      <script type="text/javascript" src="https://www.xiaozhu.com/e20200803/js/webimv4/application/xzim4.js?source=xiaozhu&dm=xiaozhu.com" id="webimSource"></script>
+    <script type="text/javascript" src="https://www.xiaozhu.com/e20200803/js/webimv4/application/xzim4.js?source=xiaozhu&dm=xiaozhu.com" id="webimSource"></script>
 
-      <script type="text/javascript" src="/js/jquery/jquery.js"></script>
-      <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery.mCustomScrollbar,nyroModal,uploadify" />
+    <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery.mCustomScrollbar,nyroModal,uploadify" />
 
-      <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer&httphost=bj.xiaozhu.com"></script>
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer&httphost=bj.xiaozhu.com"></script>
 
-      <link rel="shortcut icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
-      <link rel="icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
-      <link href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery-ui,global,page,city,suggest,calendar,sc" rel="stylesheet" />
-      <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=houseHover,realNamePop,jquery-ui,nyroModal" />
+    <link rel="shortcut icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
+    <link href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery-ui,global,page,city,suggest,calendar,sc" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=houseHover,realNamePop,jquery-ui,nyroModal" />
 
-      <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery.mCustomScrollbar,nyroModal,uploadify" />
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery.mCustomScrollbar,nyroModal,uploadify" />
 
-      <!--&ndash;&gt;-->
-      <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/js/jquery/lazyload.js"></script>
-      <!--<script type="text/javascript" src="https://www.xiaozhu.com/e20200803/js/webimv4/application/xzim4.js?source=xiaozhu&dm=xiaozhu.com" id="webimSource"></script>
-               !--search list-->
-      <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Front_Search&httphost=bj.xiaozhu.com"></script>
+    <!--&ndash;&gt;-->
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/js/jquery/lazyload.js"></script>
+    <!--<script type="text/javascript" src="https://www.xiaozhu.com/e20200803/js/webimv4/application/xzim4.js?source=xiaozhu&dm=xiaozhu.com" id="webimSource"></script>
+             !--search list-->
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Front_Search&httphost=bj.xiaozhu.com"></script>
 
+    <link rel="shortcut icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="https://www.xiaozhu.com/favicon.ico?v=20190820" type="image/vnd.microsoft.icon">
+    <title>地铁四号线清源路站 （艺术气息温馨大主卧）-北京大兴短租房|日租房 -小猪</title><meta http-equiv="Cache-Control" content="no-transform " />
+    <meta http-equiv="mobile-agent" content="format=html5; url=https://m.xiaozhu.com/j/bj/fangzi/1209886305" />
+    <script src="/js/common/tingyun-rum.js"></script>
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=global,page,suggest,jquery-ui,calendar,rz,newdetailpage,zhima_icon_span,shareinvite,sc" />
 
-  </head>
-  <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-    <script src='http://api.map.baidu.com/api?v=2.0&ak=lKbXTOTdQ9v50RdoCZcAzyiNHc0CfwPi &callback=init'></script>
-     </body>
+    <input type="hidden" name="actionName" id="actionName" value="Front_Search"/>
+    <input type="hidden" name="xz_srf_token" id="xz_srf_token" value="6a99b8930d10ddfd6101f669d555948d"/>
+    <!--<script type="text/javascript" src="/js/jquery/jquery.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=jquery.mCustomScrollbar,nyroModal,uploadify" />
+
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer&httphost=sh.xiaozhu.com"></script>
+    <!--
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer1&httphost=sh.xiaozhu.com"></script>
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/xzjs?k=Footer2&httphost=sh.xiaozhu.com"></script>
+    -->
+    <script type="text/javascript" src="//jci.xiaozhustatic1.com/e20200803/js/jquery/lazyload.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=houseHover,realNamePop,jquery-ui,nyroModal" />
+
+</head>
+<body>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+<script src='http://api.map.baidu.com/api?v=2.0&ak=lKbXTOTdQ9v50RdoCZcAzyiNHc0CfwPi &callback=init'></script>
+</body>
 </html>

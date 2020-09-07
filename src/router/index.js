@@ -11,8 +11,8 @@ export default new Router({
   routes: [
     {
           path: '/',
-          name: 'Housing_info',
-          component: () => import('../components/Housing_info')
+          name: 'Housing_main',
+          component: () => import('../components/Housing_main')
       },
       {
           path: '/Housing_des',
@@ -24,35 +24,35 @@ export default new Router({
           name: 'Housing_fac',
           component: () => import('../components/Housing_fac')
       },
-      {
-          path: '/Housing_main',
-          name: 'Housing_main',
-          component: () => import('../components/Housing_main')
+    {
+          path: '/Housing_info',
+          name: 'Housing_info',
+          component: () => import('../components/Housing_info')
       },
-    // {
-    //       path: '/',
-    //       name: 'Housing_info',
-    //       component: () => import('../components/Housing_info')
-    //   },
-    //   {
-    //       path: '/',
-    //       name: 'Housing_des',
-    //       component: () => import('../components/Housing_des')
-    //   },
-    //   {
-    //       path:'/',
-    //       name:'Housing_main',
-    //       component : ()=> import('../components/Housing_main')
-    //   }
-    //   {
-    //       path: '/',
-    //       name: 'Housing_search',
-    //       component: () => import('../components/Housing_search')
-    //   }
       {
-          path: '/',
+          path: '/Housing_personal',
+          name: 'Housing_personal',
+          component: () => import('../components/Housing_personal')
+      },
+      {
+          path: '/Housing_fdpersonal',
+          name: 'Housing_fdpersonal',
+          component: () => import('../components/Housing_fdpersonal')
+      },
+      {
+          path: '/Housing_search',
+          name: 'Housing_search',
+          component: () => import('../components/Housing_search')
+      },
+      {
+          path: '/Housing_details',
           name: 'Housing_details',
           component: () => import('../components/Housing_details')
+      },
+      {
+          path: '/Housing_header',
+          name: 'Housing_header',
+          component: () => import('../components/Housing_header')
       }
   ]
 })
