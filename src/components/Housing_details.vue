@@ -23,7 +23,6 @@
                 <li><a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free show-register-box" id = "Pub_Btn">免费发布房源</a></li>
             </ul>
         </div>
-
         <!--/header-->
 
         <!--subNav-->
@@ -60,17 +59,14 @@
         </div>
         <!--/subNav-->
 
-
         <!--main -->
         <div class="wrap clearfix con_bg">
-
             <!--left content-->
             <div class="con_l">
                 <div class="pho_info">
                     <h4>
                         <em>{{listinfo.bnbname}}</em>
                     </h4>
-
                     <p :title="listinfo.city+listinfo.address">
                         <em class="col_pink">
                             <a href="https://www.xiaozhu.com" >小猪</a>
@@ -82,10 +78,7 @@
                                   </span>
                     </p>
                     <div class="labels">
-
-
-
-                                               <span class="col_slogn" title="设施齐全、服务贴心、体验优质">
+                        <span class="col_slogn" title="设施齐全、服务贴心、体验优质">
                         <i class="new_ico" ></i>优品
                     </span>
 
@@ -687,6 +680,7 @@
             document.addEventListener('click', documentHandler);
         },
         update() {},
+
         unbind(el, binding) {
             // 解除事件监听
             document.removeEventListener('click', el.vueClickOutside);
