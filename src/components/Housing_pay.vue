@@ -20,11 +20,6 @@
                     <dd>
                         <input id="WIDtotal_amount" name="WIDtotal_amount" v-model="pay.order_price" />
                     </dd>
-                    <!--<hr class="one_line">-->
-                    <!--<dt>商品描述：</dt>-->
-                    <!--<dd>-->
-                        <!--<input id="WIDbody" name="WIDbody" />-->
-                    <!--</dd>-->
                     <hr class="one_line">
                     <dt></dt>
                     <dd id="btn-dd">
@@ -43,15 +38,6 @@
         </div>
     </div>
 
-    <!--<div>-->
-    <!--<el-form style="text-align: left;margin: 0px 20px; "label-width="80px" :model="pay" class="form" ref="fm">-->
-        <!--<el-input label="订单单号" v-model="pay.order_number" name="WIDout_trade_no"></el-input>-->
-        <!--<el-input label="订单名称" v-model="pay.bnbname" name="WIDsubject"></el-input>-->
-        <!--<el-input label="订单金额" v-model="pay.order_price" name="WIDtotal_amount"></el-input>-->
-        <!--&lt;!&ndash;<el-input type="button" @click="payquery" value="提交"></el-input>&ndash;&gt;-->
-        <!--<span @click="payquery">提交</span>-->
-    <!--</el-form>-->
-    <!--</div>-->
 </template>
 <script>
     export default {

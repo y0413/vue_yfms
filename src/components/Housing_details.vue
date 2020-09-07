@@ -728,6 +728,7 @@
             }
         },
         directives: {clickoutside},
+
         created:function(){
             this.bnbid=this.$route.params.bnbid;
             this.queryBnbid(this.bnbid);
