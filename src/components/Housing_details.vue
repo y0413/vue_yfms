@@ -172,8 +172,6 @@
                             <div class=" intro_item_content">
                                 <p>{{listinfo.desbes}}</p>
                             </div>
-                            <div class="open" style="display:none;">查看全部<span></span></div>
-                            <div class="stop" style="display:none;">收起<span></span></div>
                         </div>
                     </div>
 
@@ -186,8 +184,7 @@
                             <div class=" intro_item_content">
                                 <p>{{listinfo.Internal}}</p>
                             </div>
-                            <div class="open" style="display:none;">查看全部<span></span></div>
-                            <div class="stop" style="display:none;">收起<span></span></div>
+
                         </div>
                     </div>
                     <div class="box_white clearfix detail_intro_item" hideheight="135" showheight="120" >
@@ -199,8 +196,7 @@
                             <div class=" intro_item_content">
                                 <p>{{listinfo.Traffic}}</p>
                             </div>
-                            <div class="open" style="display:none;">查看全部<span></span></div>
-                            <div class="stop" style="display:none;">收起<span></span></div>
+
                         </div>
                     </div>
 
@@ -213,8 +209,7 @@
                             <div class=" intro_item_content">
                                 <p>{{listinfo.spots}}</p>
                             </div>
-                            <div class="open" style="display:none;">查看全部<span></span></div>
-                            <div class="stop" style="display:none;">收起<span></span></div>
+
                         </div>
                     </div>
 
@@ -290,8 +285,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="open" style="display:none;">查看全部<span></span></div>
-                            <div class="stop" style="display:none;">收起<span></span></div>
+
                         </div>
                     </div>
 
@@ -345,26 +339,60 @@
                         </p>
                     </div>
 
-
-
                 </div>
 
                 <!--点评-->
 
-
                 <div id="load_Ajax_GetDetalCommentAndOtherComment" class="commentlist bg_box mt_10">
-                    <layzeload key="Ajax_GetDetalCommentAndOtherComment" memkey="layzeload_0114Ajax_GetDetalCommentAndOtherComment_1209886305" memtimeout="3600" turl="/ajax.php?op=Ajax_GetDetalCommentAndOtherComment&roomId=1209886305" jsexecafterload="initCommentClick()"></layzeload>
+                    <el-tabs v-model="activeName">
+                        <el-tab-pane name="xz">
+                          <span slot="label">本房源点评
+                          </span>
+                            <div>
+                                <!--发表评论-->
+                                <el-form style="text-align: left;margin: 0px 20px;" label-width="180px" :model="com" class="form">
+                                    <div v-clickoutside="hideReplyBtn" @click="inputFocus" class="my-reply">
+                                        <el-avatar class="header-img" :size="40" :src="myHeader"></el-avatar>
+                                        <div class="reply-info" >
+                                            <el-input
+                                                placeholder="输入评论..."
+                                                class="reply-input"
+                                                @focus="showReplyBtn"
+                                                @input="onDivInput($event)"
+                                                v-model="com.context"></el-input>
+
+                                        </div>
+                                        <div class="reply-btn-box" v-show="btnShow">
+                                            <el-button class="reply-btn" size="medium" @click="sendComment" type="primary">发表评论</el-button>
+                                        </div>
+                                    </div>
+                                </el-form>
+
+                                <!--显示评论-->
+                                <div v-for="(item,i) in comments" :key="i" class="author-title reply-father">
+                                    <el-avatar class="header-img" :size="40" :src="item.headImg"></el-avatar>
+                                    <div class="author-info" style="width: 400px;margin-left: 50px;margin-top: -31px;height: 50px">
+                                        <span class="author-name" style="color:red;margin-right: 5px">{{item.uname}}</span>
+                                        <span class="author-time">评论时间:  {{item.ctime | moment("YYYY-MM-DD")}}</span>
+                                    </div>
+                                    <div class="icon-btn">
+                                        <!--<span @click="showReplyInput(i,item.uname,item.cid)"><i class="iconfont el-icon-s-comment"></i></span>-->
+                                    </div>
+                                    <div class="talk-box">
+                                        <p>
+                                            <span class="reply" style="margin-left: 50px">{{item.context}}</span>
+                                        </p>
+                                    </div>
+                                    <el-divider></el-divider>
+
+                                </div>
+                            </div>
+
+                        </el-tab-pane>
+                    </el-tabs>
+
                 </div>
-                <div class="daily_box bg_box" id="diaryPart">
-                    <a href="https://www.xiaozhu.com/fangdong/1156304605/"><div class="date_tip">43篇房东日记&nbsp;></div></a>
-                    <h6 title="让每一位房客都要安全愉快的住宿">让每一位房客都要安全愉快...</h6>
-                    <p class="daily_date">2016-7-17</p>
-                    <div class="daily_con">
-                        <p>随着天气的炎热，暑期来临来自全国各地的朋友们都奔赴北京旅游观光，和小猪在一起一年多了接触客人很多，最主要的是房客的人生安全，一直对安全非常重视，做小猪深深的体会到房租只是一部分，没有比安全最贴心最重要的，每天都要看北京电视台的《法制进行时》栏目，主要讲述北京每天发生在我们身边的安全隐患事故，所以我在家里的常年备着灭火器材，最近把家里的所有大功率电器全部安装了漏电保护装置，特别是热水器这样每天都要使用的大功率电器，看完节目发现之前住的宾馆想起来都很后怕。因为我们大家不能保证家里所装修的插座施工人员...</p>
-                    </div>
-                    <a class="btn_1" href="https://www.xiaozhu.com/fangdong/1156304605/diary/3755500128.html#" target="_blank">查看全文</a>
-                </div>
-                <input type="hidden" id="landlordHasDiary" value="1" />
+
                 <!--/点评-->
 
             </div>
@@ -411,19 +439,6 @@
                         <div class="reserve_box">
                             <input type="hidden" name="newfiexdPrice" id="newfiexdPrice" value="0"></input>
 
-                            <!--<script>-->
-
-                                <!--var isHideOrderNotice = document.getElementById('newfiexdPrice').value;-->
-                                <!--var order_hh = document.getElementsByClassName('order_h');-->
-                                <!--var orderNoticeText = '已参与特价活动，不可退订';-->
-                                <!--var orderNotice = document.getElementsByClassName('new_pos_notice');-->
-                                <!--if (isHideOrderNotice == '1') {-->
-                                    <!--orderNotice.innerHTML = orderNoticeText;-->
-                                    <!--order_hh[0].style.display = 'none';-->
-                                <!--} else {-->
-                                    <!--order_hh[0].style.display = 'block';-->
-                                <!--}-->
-
                             <!--</script>-->
                             <div class="block">
                                 <el-date-picker
@@ -442,47 +457,19 @@
                             </div>
                             <div class="reserve_space">
 
-                                <!--<div class="clearfix">-->
-
-                                    <!--<div class="reserve_date">-->
-                                        <!--<div class="reserve_ico" id="detailCalendarIco"></div>-->
-                                        <!--<input type="text" class="date_input" id="startenddate" readOnly="" value="2020-8-31至2020-9-1" />-->
-                                        <!--<input type="hidden" name="startdate" id="startdate" value="2020-08-31"/>-->
-                                        <!--<input type="hidden" name="enddate" id="enddate" value="2020-09-01"/>-->
-                                        <!--<div id="calendar-box" style="display:none" class="calendar_box clearfix"> </div>-->
-                                    <!--</div>-->
-                                    <!--<div class="select_box">-->
-                                        <!--<div class="select_arrow"></div>-->
-                                        <!--<input id="sameRoomNum" readOnly="readOnly" data-bookroomnum="" type="text" value="1间" />-->
-                                        <!---->
-                                    <!--</div>-->
-                                <!--</div>-->
                                 <div class="price_top">
 
-                                    <!--<div class="reserve_text">在线收取押金￥<span>300</span></div>-->
                                 </div>
                                 <div class="order_btn_container">
-                                    <a class="order_btn" href="#ongo" id="day_yuding">立即预订<span class="f14">（总计￥{{tprice}}）</span></a>
+                                    <a class="order_btn" @click="addOrder" id="day_yuding">立即预订<span class="f14">（总计￥{{tprice}}）</span></a>
                                 </div>
                             </div>
-                            <!--<div class="white_bg">-->
-                                <!--<input type="hidden" id="avgprice" value="138" />-->
-                                <!--<input type="hidden" id="priceTip" value="" />-->
-                                <!--<ul class="cal_box clearfix">-->
-                                    <!--<li>今天<br/>¥138</li>-->
-                                    <!--<li>01<br/>¥138</li>-->
-                                    <!--<li>02<br/>¥138</li>-->
-                                    <!--<li>03<br/>¥138</li>-->
-                                    <!--<li>04<br/>¥138</li>-->
-                                    <!--<li class="line_none_r"><a id="showMoreCalendar" href="#">全部<br>日历</a> </li>-->
-                                <!--</ul>-->
-                            <!--</div>-->
+
                         </div>
                     </div>
                     <!--预定end-->
 
                     <!--landlord info start-->
-
                     <div class="js_box clearfix">
                         <div class="member_pic">
                             <div class="member_ico"></div>
@@ -501,27 +488,6 @@
                                 <!--<span class="zm_ico zm_credit">750</span>-->
                                 <!---->
                             </p>
-
-                            <div id="alipay-trust-box" class="zhima_layer add4" style="display: none">
-                                <div class="zhima_box_top">
-                                    <div class="zhima_jh">
-                                        <h4 class="zhima_score_tit">芝麻分</h4>
-                                        <h4 class="zhima_score">750</h4>
-                                        <h4 class="zhima_score_result">信用极好</h4>
-                                    </div>
-                                    <p class="zhima_score_text">优秀的信用评分也在一定程度上体现出，这是一位身份可靠、重诺守信的房东，值得向您推荐！<a class="col_pink" href="https://www.xiaozhu.com/yunying/AlipayTrust" target="_blank">了解更多&gt;&gt;</a></p>
-                                </div>
-                                <div class="zhima_box_bottom">
-                                    <em class="xz_zm_logov2"></em>
-                                    <h4 class="f12">有信用，免押金</h4>
-                                    <p class="f12">授权芝麻信用，芝麻分满600</p>
-                                    <p class="f12">可在全国范围享受免押金入住</p>
-                                    <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo" target="_blank" class="look_score">查看我的芝麻分>></a>
-                                </div>
-                            </div>                                      </div>
-                        <div class="on_line col_pink">
-                            <span></span>
-                            <a class="btn_chat  show-register-box " href="#ongo" id="webim-chat-user" userid="1156304605" roomid="1209886305">在线聊天</a>
                         </div>
                     </div>
                     <!--landlord info end-->
@@ -702,7 +668,31 @@
 </template>
 
 <script>
-
+    const clickoutside = {
+        // 初始化指令
+        bind(el, binding, vnode) {
+            function documentHandler(e) {
+                // 这里判断点击的元素是否是本身，是本身，则返回
+                if (el.contains(e.target)) {
+                    return false;
+                }
+                // 判断指令中是否绑定了函数
+                if (binding.expression) {
+                    // 如果绑定了函数 则调用那个函数，此处binding.value就是handleClose方法
+                    binding.value(e);
+                }
+            }
+            // 给当前元素绑定个私有变量，方便在unbind中可以解除事件监听
+            el.vueClickOutside = documentHandler;
+            document.addEventListener('click', documentHandler);
+        },
+        update() {},
+        unbind(el, binding) {
+            // 解除事件监听
+            document.removeEventListener('click', el.vueClickOutside);
+            delete el.vueClickOutside;
+        },
+    };
     export default {
         name: "Housing_details",
         data(){
@@ -710,15 +700,98 @@
                 bnbid:1,
                 listinfo:[],//房源信息
                 pic:[],//图片
-                tprice:1,//总价格
-                datavalue:""//日期
+                tprice:10,//总价格
+                datavalue:"", //日期
+                jasj:{
+                    uid : 1,
+                    name : "张三",
+                    phone : "131235643215",
+                    bnbname:"sss",
+                    bnbid : 1,
+                    order_price : 20,
+                    order_people:1,
+                    order_number:8098080980
+                },
+                activeName:'xz',
+                btnShow: false,
+                index:'0',
+                com:{},
+                myHeader:'https://ae01.alicdn.com/kf/Hd60a3f7c06fd47ae85624badd32ce54dv.jpg',
+                comments:[{
+                    headImg:'https://ae01.alicdn.com/kf/Hd60a3f7c06fd47ae85624badd32ce54dv.jpg',
+                    inputShow:false
+                }],
+                reply: [{
+                    fromHeadImg: 'https://ae01.alicdn.com/kf/H94c78935ffa64e7e977544d19ecebf06L.jpg',
+                    inputShow: false
+                }]
             }
         },
+        directives: {clickoutside},
         created:function(){
             this.bnbid=this.$route.params.bnbid;
-            this.queryBnbid(this.bnbid)
+            this.queryBnbid(this.bnbid);
+            this.query();
+            this.reqQuery();
         },
         methods:{
+            addOrder(){
+                var list = this.jasj
+                this.$router.push({name:"Housing_order",params:{list:list}});
+            },
+            //查询评论
+            query() {
+                this.$axios.post('http://localhost:8081/comment/listAll')
+                    .then(res => {
+                        this.comments = res.data
+                    });
+            },reqQuery(){  //查询回复
+                this.$axios.post('http://localhost:8081/rep/listAll')
+                    .then(res => {
+                        this.reply = res.data
+                    });
+            },
+
+            inputFocus(){
+                var replyInput = document.getElementById('replyInput');
+                replyInput.style.padding= "8px 8px"
+                replyInput.style.border ="2px solid blue"
+                replyInput.focus()
+            },
+            showReplyBtn(){
+                this.btnShow = true
+            },
+            hideReplyBtn(){
+                this.btnShow = false
+                replyInput.style.padding= "10px"
+                replyInput.style.border ="none"
+            },
+            showReplyInput(i,name,id){
+                this.comments[this.index].inputShow = false
+                this.index =i
+                this.comments[i].inputShow = true
+                this.to = name
+                this.toId = id
+            },
+            _inputShow(i){
+                return this.comments[i].inputShow
+            },
+            sendComment(){
+                //添加评论
+                this.$axios.post("http://localhost:8081/comment/addCom", this.com)
+                    .then(res => {
+                        if (res.data == 1) {
+                            this.$message.success("评论成功");
+                            this.query();
+                        } else {
+                            this.$message.error("评论失败");
+                        }
+                    })
+            },
+            onDivInput: function(e) {
+                this.replyComment = e.target.innerHTML;
+            },
+
             hqjg(){
                 let start=(this.datavalue[0]).split('-');
                 start=start[0]+start[1]+start[2]
@@ -745,7 +818,6 @@
                         this.pic.push(this.listinfo.kitchen);
                         this.pic.push(this.listinfo.other);
                         this.tprice=this.listinfo.price;
-
                     })
             }
         },
@@ -753,8 +825,97 @@
     }
 </script>
 
-<style scoped>
-    .el-date-editor.el-input, .el-date-editor.el-input__inner {
+<style lang="stylus" scoped>
+
+    .my-reply
+        padding 10px
+        background-color #fafbfc
+        .header-img
+            display inline-block
+            vertical-align top
+        .reply-info
+            display inline-block
+            margin-left 5px
+            width 90%
+            @media screen and (max-width:1200px) {
+                width 80%
+            }
+            .reply-input
+                min-height 20px
+                line-height 22px
+                padding 10px 10px
+                color #ccc
+                background-color #fff
+                border-radius 5px
+                &:empty:before
+                    content attr(placeholder)
+                &:focus:before
+                    content none
+                &:focus
+                    padding 8px 8px
+                    border 2px solid blue
+                    box-shadow none
+                    outline none
+        .reply-btn-box
+            height 25px
+            margin 10px 0
+            .reply-btn
+                position relative
+                float right
+                margin-right 15px
+        .my-comment-reply
+            margin-left 50px
+            .reply-input
+                width flex
+        .author-title:not(:last-child)
+            border-bottom: 1px solid rgba(178,186,194,.3)
+        .author-title
+            padding 10px
+            .header-img
+                display inline-block
+                vertical-align top
+            .author-info
+                display inline-block
+                margin-left 5px
+                width 60%
+                height 40px
+                line-height 20px
+                >span
+                    display block
+                    cursor pointer
+                    overflow hidden
+                    white-space nowrap
+                    text-overflow ellipsis
+                .author-name
+                    color #000
+                    font-size 18px
+                    font-weight bold
+                .author-time
+                    font-size 14px
+            .icon-btn
+                width 30%
+                padding 0 !important
+                float right
+                @media screen and (max-width : 1200px){
+                    width 20%
+                    padding 7px
+                }
+                >span
+                    cursor pointer
+                .iconfont
+                    margin 0 5px
+            .talk-box
+                margin 0 50px
+                >p
+                    margin 0
+                .reply
+                    font-size 16px
+                    color #000
+            .reply-box
+                margin 10px 0 0 50px
+                background-color #efefef
+
+        .el-date-editor.el-input, .el-date-editor.el-input__inner {
         width: 300px;
     }
     #allmap{

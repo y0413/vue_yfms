@@ -11,6 +11,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.use(elementui)
+Vue.use(require('vue-moment'))
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

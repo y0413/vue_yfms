@@ -19,9 +19,13 @@
     "better-scroll": "^2.0.1",
     "element-china-area-data": "^5.0.1",
     "element-ui": "^2.13.2",
+    "moment": "^2.27.0",
+    "stylus": "^0.54.8",
+    "stylus-loader": "^3.0.2",
     "view-design": "^4.3.2",
     "vue": "^2.5.2",
     "vue-baidu-map": "^0.21.22",
+    "vue-moment": "^4.1.0",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
