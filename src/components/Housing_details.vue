@@ -3,67 +3,67 @@
 
         <div class="o_mask" id='maskName'  style="display:none;"></div>
         <Header></Header>
-        <div class="detail_wrapper">
-            <div class="detail_head clearfix">
-                <a href="https://www.xiaozhu.com" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>
-                <ul class="nav_R nav_commen">
-                    <li><a rel="nofollow" title="" class="show-register-box" href="https://www.xiaozhu.com/register?next=https%3A%2F%2Fbj.xiaozhu.com%2Ffangzi%2F1209886305.html">注册</a></li>
-                    <li>&middot;</li>
-                    <li><a rel="nofollow" class="logindialog" href="https://www.xiaozhu.com/login?next=https%3A%2F%2Fbj.xiaozhu.com%2Ffangzi%2F1209886305.html">登录</a></li>
-                    <li>&middot;</li>
-                    <li class="current">
-                        <a href="#ongo" class="openTri_R">短租指南</a>
-                        <div class="head_pop width_58 top40">
-                            <div class="pop_column">
-                                <span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>
-                            </div>
-                        </div>
-                    </li>
+        <!--<div class="detail_wrapper">-->
+            <!--<div class="detail_head clearfix">-->
+                <!--<a href="https://www.xiaozhu.com" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>-->
+                <!--<ul class="nav_R nav_commen">-->
+                    <!--<li><a rel="nofollow" title="" class="show-register-box" href="https://www.xiaozhu.com/register?next=https%3A%2F%2Fbj.xiaozhu.com%2Ffangzi%2F1209886305.html">注册</a></li>-->
+                    <!--<li>&middot;</li>-->
+                    <!--<li><a rel="nofollow" class="logindialog" href="https://www.xiaozhu.com/login?next=https%3A%2F%2Fbj.xiaozhu.com%2Ffangzi%2F1209886305.html">登录</a></li>-->
+                    <!--<li>&middot;</li>-->
+                    <!--<li class="current">-->
+                        <!--<a href="#ongo" class="openTri_R">短租指南</a>-->
+                        <!--<div class="head_pop width_58 top40">-->
+                            <!--<div class="pop_column">-->
+                                <!--<span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
 
 
-                    <li><a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free show-register-box" id = "Pub_Btn">免费发布房源</a></li>
-                </ul>
-            </div>
+                    <!--<li><a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free show-register-box" id = "Pub_Btn">免费发布房源</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
 
-            <!--/header-->
+            <!--&lt;!&ndash;/header&ndash;&gt;-->
 
-            <!--subNav-->
-            <div class="header_bg" style="position:fixed;width:100%;top:0;left:0;z-index:999;display:none;" id="scrollHeader">
-                <div class="detail_header clearfix">
-                    <div class="nav_l">
-                        <a class="xz_logo" href="#">小猪</a>
-                        <ul id="scorllFather">
-                            <li>
-                                <a href="#ongo">实拍照片</a>
-                            </li>
-                            <li>
-                                <a href="#ongo">详细介绍</a>
-                            </li>
-                            <li>
-                                <a href="#ongo">位置地图</a>
-                            </li>
-                            <li>
-                                <a href="#ongo">预订须知</a>
-                            </li>
-                            <li>
-                                <a href="#ongo">入住点评</a>
-                            </li>
-                            <li>
-                                <a href="#ongo">房东日记</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="nav_r clearfix" id="scrollPrice">
-                        <div class="fl">&#165;<span class="detail_avgprice">138</span><em></em></div>
-                        <div class="time_r">每晚</div>
-                    </div>
-                </div>
-            </div>
-            <!--/subNav-->
+            <!--&lt;!&ndash;subNav&ndash;&gt;-->
+            <!--<div class="header_bg" style="position:fixed;width:100%;top:0;left:0;z-index:999;display:none;" id="scrollHeader">-->
+                <!--<div class="detail_header clearfix">-->
+                    <!--<div class="nav_l">-->
+                        <!--<a class="xz_logo" href="#">小猪</a>-->
+                        <!--<ul id="scorllFather">-->
+                            <!--<li>-->
+                                <!--<a href="#ongo">实拍照片</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="#ongo">详细介绍</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="#ongo">位置地图</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="#ongo">预订须知</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="#ongo">入住点评</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="#ongo">房东日记</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                    <!--<div class="nav_r clearfix" id="scrollPrice">-->
+                        <!--<div class="fl">&#165;<span class="detail_avgprice">138</span><em></em></div>-->
+                        <!--<div class="time_r">每晚</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;/subNav&ndash;&gt;-->
 
 
             <!--main -->
-            <div class="wrap clearfix con_bg">
+            <div class="wrap clearfix con_bg" style="margin-top: 80px">
 
                 <!--left content-->
                 <div class="con_l">
@@ -282,8 +282,6 @@
                                         </span>
                                     </span>
                                         </li>
-                                        <li class="s_ico_no">牙具
-                                        </li>
                                     </ul>
                                 </div>
 
@@ -352,6 +350,8 @@
                                 <div>
                                     <!--发表评论-->
                                     <el-form style="text-align: left;margin: 0px 20px;" label-width="180px" :model="com" class="form">
+                                        <el-input v-model="com.uid"></el-input>
+                                        <el-input v-model="com.bnbid"></el-input>
                                         <div v-clickoutside="hideReplyBtn" @click="inputFocus" class="my-reply">
                                             <el-avatar class="header-img" :size="40" :src="myHeader"></el-avatar>
                                             <div class="reply-info" >
@@ -665,7 +665,6 @@
                 <input type="hidden" name="xz_srf_token" id="xz_srf_token" value="c7d30e242ec2b969231c09400c9a65c4"/>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -695,6 +694,8 @@
         },
     };
     import header from "../components/Housing_header.vue"
+    var userid=JSON.parse(localStorage.getItem('acc'))
+
     export default {
         name: "Housing_details",
         data(){
@@ -717,7 +718,10 @@
                 activeName:'xz',
                 btnShow: false,
                 index:'0',
-                com:{},
+                com:{
+                    uid: null,
+                    bnbid: null,
+                },
                 myHeader:'https://ae01.alicdn.com/kf/Hd60a3f7c06fd47ae85624badd32ce54dv.jpg',
                 comments:[{
                     headImg:'https://ae01.alicdn.com/kf/Hd60a3f7c06fd47ae85624badd32ce54dv.jpg',
@@ -734,7 +738,10 @@
         },
         directives: {clickoutside},
         created:function(){
-            this.bnbid=this.$route.params.bnbid;
+            this.bnbid = this.$route.params.bnbid
+            this.com.bnbid = this.$route.params.bnbid;
+            this.com.uid = JSON.parse(localStorage.getItem('acc'));
+            // alert(JSON.parse(localStorage.getItem('acc')))
             this.queryBnbid(this.bnbid);
             this.query();
             this.reqQuery();

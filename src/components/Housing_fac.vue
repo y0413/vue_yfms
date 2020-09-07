@@ -365,6 +365,9 @@
                         this.$refs.upload3.submit();
                         this.$refs.upload4.submit();
                         this.$refs.upload5.submit();
+
+                        this.$message.success("发布成功");
+                        this.$router.push({name:"Housing_main"});
                     });
 
             },
