@@ -2,57 +2,58 @@
     <div>
         <div class="top"></div>
         <div class="o_mask" id='maskName'  style="display:none;"></div>
-        <div class="detail_wrapper">
-            <div class="detail_head clearfix">
-                <a href="https://www.xiaozhu.com" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>
-                <ul class="nav_R nav_commen">
-                    <input type="hidden" value="landlord" id="userCurrentRole"/>
-                    <input type="hidden" value="144260581897" id="loginUserId"/>
-                    <li class="current">
-                        <a href="" class="openTri_R" rel="nofollow">aaaa</a>
-                        <div class="head_pop top40">
-                            <div class="pop_column">
-                                <a class="pop_T" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index">房东中心</a>
-                                <span>
-                            <a class="fl" href="https://www.xiaozhu.com/xz_web2/order/pages/landlord/orderList.html">订单管理</a>
-                            <a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_SettlementInfo">结算统计</a>
-                        </span>
-                                <span>
-                            <a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Comment&filterType=waitComment&fkCmtFilter=all">我的点评</a>
-                        </span>
-                                <span>
-                            <a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_UserInfo">个人资料</a>
-                        </span>
-                            </div>
-                            <div class="pop_column">
-                                <a class="pop_T pop_bor" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Index">房客中心</a>
-                                <span>
-                            <a class="fl" href="https://www.xiaozhu.com/xz_web2/order/pages/lodger/list.html">我的订单</a>
-                        </span>
-                                <span>
-                            <a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Comment">我的点评</a>
-                            <a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo">个人资料</a>
-                        </span>
-                                <span class="textCt"><a href="https://www.xiaozhu.com/logout" id="IM-Logout">退出</a></span>
-                            </div>
-                        </div>
-                    </li>
+        <Header></Header>
+        <!--<div class="detail_wrapper">-->
+            <!--<div class="detail_head clearfix">-->
+                <!--<a href="https://www.xiaozhu.com" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>-->
+                <!--<ul class="nav_R nav_commen">-->
+                    <!--<input type="hidden" value="landlord" id="userCurrentRole"/>-->
+                    <!--<input type="hidden" value="144260581897" id="loginUserId"/>-->
+                    <!--<li class="current">-->
+                        <!--<a href="" class="openTri_R" rel="nofollow">aaaa</a>-->
+                        <!--<div class="head_pop top40">-->
+                            <!--<div class="pop_column">-->
+                                <!--<a class="pop_T" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index">房东中心</a>-->
+                                <!--<span>-->
+                            <!--<a class="fl" href="https://www.xiaozhu.com/xz_web2/order/pages/landlord/orderList.html">订单管理</a>-->
+                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_SettlementInfo">结算统计</a>-->
+                        <!--</span>-->
+                                <!--<span>-->
+                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Comment&filterType=waitComment&fkCmtFilter=all">我的点评</a>-->
+                        <!--</span>-->
+                                <!--<span>-->
+                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_UserInfo">个人资料</a>-->
+                        <!--</span>-->
+                            <!--</div>-->
+                            <!--<div class="pop_column">-->
+                                <!--<a class="pop_T pop_bor" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Index">房客中心</a>-->
+                                <!--<span>-->
+                            <!--<a class="fl" href="https://www.xiaozhu.com/xz_web2/order/pages/lodger/list.html">我的订单</a>-->
+                        <!--</span>-->
+                                <!--<span>-->
+                            <!--<a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Comment">我的点评</a>-->
+                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo">个人资料</a>-->
+                        <!--</span>-->
+                                <!--<span class="textCt"><a href="https://www.xiaozhu.com/logout" id="IM-Logout">退出</a></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
 
-                    <li class="current">
-                        <a href="" class="openTri_R">短租指南</a>
-                        <div class="head_pop width_58 top40">
-                            <div class="pop_column">
-                                <span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>
-                            </div>
-                        </div>
-                    </li>
+                    <!--<li class="current">-->
+                        <!--<a href="" class="openTri_R">短租指南</a>-->
+                        <!--<div class="head_pop width_58 top40">-->
+                            <!--<div class="pop_column">-->
+                                <!--<span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
 
-                    <li>
-                        <a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free" id = "Pub_Btn">免费发布房源
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                    <!--<li>-->
+                        <!--<a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free" id = "Pub_Btn">免费发布房源-->
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
 
             <div id="regSuccessDialog" class="reg_success_box login_register_box" style="display:none;">
                 <div class="">
@@ -63,7 +64,7 @@
             </div><div>        </div>
 
 
-            <div class="h_wrap pb10 mt20">
+            <div class="h_wrap pb10 mt20" style="margin-top: 100px">
                 <h4 class="h_tit">配套设施</h4>
                 <el-form :model="list">
                 <el-checkbox-group v-model="checklist" >
@@ -335,10 +336,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    <!--</div>-->
 </template>
 
 <script>
+    import header from "../components/Housing_header.vue"
     export default {
         name: "Housing_fac",
         data() {
@@ -350,6 +352,9 @@
                 checklist:[],
                 list:{}
             };
+        },
+        components:{
+            Header:header
         },
         methods: {
             upsub(){
