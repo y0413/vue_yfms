@@ -88,7 +88,6 @@
                     </div>
                 </div>
 
-    <!--S 保障计划 产品选择弹框 -->
                 </div>
 
                 <div class="checkout-confirm">
