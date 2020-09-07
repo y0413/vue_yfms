@@ -1,5 +1,4 @@
 <template>
-
     <div id="main" style="margin-left:200px;">
         <div id="tabhead" class="tab-head">
             <h2 id="tab1" class="selected" name="tab">付 款</h2>
