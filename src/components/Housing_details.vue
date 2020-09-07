@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div class="o_mask" id='maskName'  style="display:none;"></div>
         <Header></Header>
         <!--<div class="detail_wrapper">-->
@@ -64,7 +63,6 @@
 
             <!--main -->
             <div class="wrap clearfix con_bg" style="margin-top: 80px">
-
                 <!--left content-->
                 <div class="con_l">
                     <div class="pho_info">
@@ -83,10 +81,7 @@
                                   </span>
                         </p>
                         <div class="labels">
-
-
-
-                                               <span class="col_slogn" title="设施齐全、服务贴心、体验优质">
+                            <span class="col_slogn" title="设施齐全、服务贴心、体验优质">
                         <i class="new_ico" ></i>优品
                     </span>
 
@@ -350,23 +345,20 @@
                                 <div>
                                     <!--发表评论-->
                                     <el-form style="text-align: left;margin: 0px 20px;" label-width="180px" :model="com" class="form">
-                                        <el-input v-model="com.uid"></el-input>
-                                        <el-input v-model="com.bnbid"></el-input>
-                                        <div v-clickoutside="hideReplyBtn" @click="inputFocus" class="my-reply">
+                                        <div v-clickoutside="hideReplyBtn" @click="inputFocus" class="my-reply" v-show="com.uid !== null">
                                             <el-avatar class="header-img" :size="40" :src="myHeader"></el-avatar>
-                                            <div class="reply-info" >
+                                            <div class="reply-info">
                                                 <el-input
                                                     placeholder="输入评论..."
-                                                    class="reply-input"
                                                     @focus="showReplyBtn"
-                                                    @input="onDivInput($event)"
                                                     v-model="com.context"></el-input>
-
                                             </div>
                                             <div class="reply-btn-box" v-show="btnShow">
                                                 <el-button class="reply-btn" size="medium" @click="sendComment" type="primary">发表评论</el-button>
                                             </div>
                                         </div>
+                                        <el-input v-model="com.uid" hidden></el-input>
+                                        <el-input v-model="com.bnbid" hidden></el-input>
                                     </el-form>
 
                                     <!--显示评论-->
@@ -664,6 +656,8 @@
                 <input type="hidden" name="actionName" id="actionName" value="Pub_Index"/>
                 <input type="hidden" name="xz_srf_token" id="xz_srf_token" value="c7d30e242ec2b969231c09400c9a65c4"/>
             </div>
+
+        {{listinfo}}
         </div>
 </template>
 
@@ -694,7 +688,7 @@
         },
     };
     import header from "../components/Housing_header.vue"
-    var userid=JSON.parse(localStorage.getItem('acc'))
+    var uid=JSON.parse(localStorage.getItem('acc'))
 
     export default {
         name: "Housing_details",
@@ -743,8 +737,7 @@
             this.com.uid = JSON.parse(localStorage.getItem('acc'));
             // alert(JSON.parse(localStorage.getItem('acc')))
             this.queryBnbid(this.bnbid);
-            this.query();
-            this.reqQuery();
+            this.query(this.bnbid);
         },
         methods:{
             addOrder(){
@@ -752,15 +745,11 @@
                 this.$router.push({name:"Housing_order",params:{list:list}});
             },
             //查询评论
-            query() {
-                this.$axios.post('http://localhost:8081/comment/listAll')
+            query(bnbid) {
+                this.$axios.post('http://localhost:8081/comment/listAll?bnbid='+this.bnbid)
                     .then(res => {
+                        // alert(this.bnbid)
                         this.comments = res.data
-                    });
-            },reqQuery(){  //查询回复
-                this.$axios.post('http://localhost:8081/rep/listAll')
-                    .then(res => {
-                        this.reply = res.data
                     });
             },
 
@@ -794,6 +783,7 @@
                     .then(res => {
                         if (res.data == 1) {
                             this.$message.success("评论成功");
+                            this.com.context="";
                             this.query();
                         } else {
                             this.$message.error("评论失败");
