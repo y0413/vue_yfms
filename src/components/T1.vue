@@ -1,714 +1,100 @@
 <template>
-    <div class="main">
-
-        <div class="header">
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-            <div>头部展示内容-------------</div>
-
-        </div>
-
-        <div class="auto_fixed" :class="auto_fixed">自动粘滞固定头部，需要一直展示的</div>
-
-        <div class="auto_fixed_fake" :style="{display: auto_fixed.fixed ? 'block':'none'}"></div>
-
-        <div class="content">
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-            <div>
-
-                tabs内部内容，最帅程序员专享受------我的最爱--李易峰
-
-            </div>
-
-        </div>
-
+    <div class="week">
+        <el-row id="nav-fixed" :class="{nav_fixed : isFixed}">
+            <el-col :span="3">
+                <div class="grid-content"><span class="sun">Sun.</span>日曜日</div>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
 <script>
     export default {
-        name: "T1",
-        data(){
-            return{
-                msg: 'Welcome to Your Vue.js App',
-
-                auto_fixed: {
-                    fixed: false
-
-                }
-            }
+        name: 'week',
+        data() {
+            return {
+                isFixed: false,
+                offsetTop: 0
+            };
         },
         mounted() {
-            this.$nextTick(function () {
-
-                window.addEventListener('scroll', this.onScroll)
-
-            })
+            // 设置bar浮动阈值为 #fixedBar 至页面顶部的距离
+            this.offsetTop = document.querySelector('#nav-fixed').offsetTop;
+            // 开启滚动监听
+            window.addEventListener('scroll', this.handleScroll);
         },
-        methods:{
-            onScroll(){
-
-                let scrolled = document.documentElement.scrollTop || document.body.scrollTop
-
-                let header_height = null
-
-                if(document.getElementsByClassName('header')[0]){
-
-                    header_height = document.getElementsByClassName('header')[0].offsetHeight
-
+        methods: {
+            // 滚动监听  滚动触发的效果写在这里
+            handleScroll() {
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                if (scrollTop >= this.offsetTop) {
+                    this.isFixed = true;
+                } else {
+                    this.isFixed = false;
                 }
-
-                console.log('滚动的距离:'+scrolled,'头部的高度:'+ header_height)
-
-                this.auto_fixed = {
-
-                    auto_fixed: true,
-
-                    fixed: scrolled >= header_height
-
-                }
-
             }
+        },
+        destroyed() {
+            // 离开页面 关闭监听 不然会报错
+            window.removeEventListener('scroll', this.handleScroll);
         }
     }
 </script>
 
-<style  scoped>
-    .main{
-
-
-
+<style>
+    .week {
+        margin-bottom: 1.25rem;
     }
 
-    .header{
-
-        padding: 8px 10px;
-
+    #nav-fixed {
+        background: rgba(255, 255, 255, 0.8);
+        border: 0;
+        border-radius: 10px;
     }
 
-    .auto_fixed{
-
-        height: 400px;
-
-        background: orange;
-        position: absolute;
-        line-height: 3em;
-        width:300px;
-        text-align: center;
-        float:left;
-    }
-
-    .fixed{
-
+    .nav_fixed {
         position: fixed;
+        z-index: 2;
+        top: 0;
+        width: 77.2%;
+    }
 
-        top: 0px;
+    .el-row {
+        background: rgba(255, 255, 255, 0);
+        border-radius: 10px;
+        line-height: 2.2rem;
+    }
 
-        width: 300px;
+    &:last-child {
+         margin-bottom: 0;
 
     }
 
-    .content{
-
-        color: gray;
-
-        padding: 8px;
-        float:right;
-        border: 1px solid red;
+    .el-col {
+        margin: 0.625rem 1.5rem;
     }
+
+    .el-col div:hover {
+        background: #E0E0E0;
+        border-radius: 0.625rem;
+        cursor: pointer;
+        transition: all 0.5s;
+    }
+
+    .grid-content {
+        border-radius: 4px;
+        min-height: 36px;
+    }
+
+    .grid-content span {
+        border: 1px solid;
+        border-radius: 50px;
+        padding: 5px;
+        margin-right: 0.5rem;
+    }
+
+    .sun {
+        color: #f60;
+    }
+
 </style>

@@ -507,8 +507,6 @@
                         // this.reload();
                     })
 
-
-
                     // this.userList=JSON.parse(localStorage.getItem('acc'));
                     // this.userList1=this.userList[0];
                 }else{

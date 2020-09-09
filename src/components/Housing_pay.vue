@@ -1,5 +1,6 @@
 <template>
     <div id="main" style="margin-left:200px;">
+        <!--{{this.$route.params.o}}-->
         <div id="tabhead" class="tab-head">
             <h2 id="tab1" class="selected" name="tab">付 款</h2>
         </div>
@@ -8,23 +9,18 @@
                 <dl class="content">
                     <dt>商户订单号 ：</dt>
                     <dd>
-                        <input id="WIDout_trade_no" name="WIDout_trade_no" v-model="pay.order_number" />
+                        <el-input id="WIDout_trade_no" name="WIDout_trade_no" v-model="pay.order_num" :disabled="true"/>
                     </dd>
                     <hr class="one_line">
                     <dt>订单名称 ：</dt>
                     <dd>
-                        <input id="WIDsubject" name="WIDsubject" v-model="pay.bnbname" />
+                        <el-input id="WIDsubject" name="WIDsubject" v-model="pay.bnbname" :disabled="true"/>
                     </dd>
                     <hr class="one_line">
                     <dt>付款金额 ：</dt>
                     <dd>
-                        <input id="WIDtotal_amount" name="WIDtotal_amount" v-model="pay.order_price" />
+                        <el-input id="WIDtotal_amount" name="WIDtotal_amount" v-model="pay.order_price" :disabled="true"/>
                     </dd>
-                    <!--<hr class="one_line">-->
-                    <!--<dt>商品描述：</dt>-->
-                    <!--<dd>-->
-                    <!--<input id="WIDbody" name="WIDbody" />-->
-                    <!--</dd>-->
                     <hr class="one_line">
                     <dt></dt>
                     <dd id="btn-dd">
@@ -44,15 +40,7 @@
         </div>
     </div>
 
-    <!--<div>-->
-    <!--<el-form style="text-align: left;margin: 0px 20px; "label-width="80px" :model="pay" class="form" ref="fm">-->
-    <!--<el-input label="订单单号" v-model="pay.order_number" name="WIDout_trade_no"></el-input>-->
-    <!--<el-input label="订单名称" v-model="pay.bnbname" name="WIDsubject"></el-input>-->
-    <!--<el-input label="订单金额" v-model="pay.order_price" name="WIDtotal_amount"></el-input>-->
-    <!--&lt;!&ndash;<el-input type="button" @click="payquery" value="提交"></el-input>&ndash;&gt;-->
-    <!--<span @click="payquery">提交</span>-->
-    <!--</el-form>-->
-    <!--</div>-->
+
 </template>
 <script>
     export default {
@@ -63,10 +51,10 @@
             }
         },
         created(){
-            this.pay = this.$route.params.x
+            this.pay = this.$route.params.o
         },methods:{
             payquery(){
-                window.location.href="http://localhost:8081/order/pay?order_number="+this.pay.order_number+
+                window.location.href="http://localhost:8081/order/pay?order_number="+this.pay.order_num+
                     "&bnbname="+this.pay.bnbname+"&order_price="+this.pay.order_price
             }
         }
