@@ -55,7 +55,7 @@
         <el-main >
             <el-tabs :tab-position="tabPosition='left'" style="height: 700px">
                 <el-tab-pane style="padding-left:20px;">
-                    <span slot="label"><i class="el-icon-s-order"></i>我的订单</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-s-order"></i>我的订单</span>
 
                     <el-tabs v-model="activeName" @tab-click="handleClick"  style="height: 700px;width: 1000px">
                         <el-tab-pane label="进行中" name="first">进行中
@@ -110,7 +110,7 @@
 
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-user"></i>房源查看</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-user"></i>房源查看</span>
                     <div style="width: 980px;border: 0px solid red;overflow: auto">
                         <el-table :data="bnblist" border style="width: 100%">
                             <el-table-column label="房源编号" prop="bnbid"></el-table-column>
@@ -121,7 +121,7 @@
                     </div>
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-edit-outline"></i>支付宝设置</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-edit-outline"></i>支付宝设置</span>
                     <el-form :model="upzf" label-width="80px"  label-position="left">
                         <el-form-item label="支付宝账号" prop="acc">
                             <el-input   v-model="upzf.acc"></el-input>
@@ -139,7 +139,7 @@
                 <!--我的收藏-->
                 <!--</el-tab-pane>-->
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-lock"></i>提现</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-lock"></i>提现</span>
                     余额:{{userList1.money}}
                     <el-button @click="tx()">提现</el-button>
                     <el-dialog width="30%" title="提现" :visible.sync="dialogTx">
@@ -152,7 +152,7 @@
                     </el-dialog>
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;" >
-                    <span slot="label"><i class="el-icon-setting"></i>提现记录</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-setting"></i>提现记录</span>
                     <el-table :data="Txjl.slice((currentPage-1)*PageSize,currentPage*PageSize)" border style="width: 100%">
                         <el-table-column label="提现编号" prop="wid"></el-table-column>
                         <el-table-column label="提现用户" prop="uname"></el-table-column>

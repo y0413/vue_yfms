@@ -52,10 +52,10 @@
                 </div>
             </div>
         </el-header>
-        <el-main >
+        <el-main>
             <el-tabs :tab-position="tabPosition='left'" style="height: 700px">
-                <el-tab-pane style="padding-left:20px;">
-                    <span slot="label"><i class="el-icon-s-order"></i>我的订单</span>
+                <el-tab-pane style="padding-left:20px">
+                    <span slot="label"  style="font:18px large"><i class="el-icon-s-order"></i>我的订单</span>
 
                     <el-tabs v-model="activeName" @tab-click="handleClick"  style="height: 700px;width: 1000px">
                         <el-tab-pane label="进行中" name="first">进行中
@@ -110,7 +110,7 @@
 
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-user"></i>个人资料</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-user"></i>个人资料</span>
                     <div style="width: 980px;border: 0px solid red;overflow: auto">
                         <b style="color: aqua;line-height: 40px;font-size: 20px;padding-left: 20px">基本信息</b>
                         <hr style="color: honeydew"/>
@@ -196,7 +196,7 @@
 
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-edit-outline"></i>我的点评</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-edit-outline"></i>我的点评</span>
                     <el-table :data="commentsList.slice((currentPage-1)*PageSize,currentPage*PageSize)" border style="width: 100%">
                         <el-table-column label="评论编号" prop="cid"></el-table-column>
                         <el-table-column label="评论内容" prop="context"></el-table-column>
@@ -218,7 +218,7 @@
                     <!--我的收藏-->
                 <!--</el-tab-pane>-->
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-lock"></i>密码设置</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-lock"></i>密码设置</span>
                     <span style="font-size: 18px " >密码修改</span>
                     <el-form :model="upwdList" label-width="80px"  label-position="left">
                         <el-form-item label="手机号" prop="phone">
@@ -238,7 +238,7 @@
                     </el-form>
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;" >
-                    <span slot="label"><i class="el-icon-setting"></i>注销账号</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-setting"></i>注销账号</span>
                     <b style="font-size: 26px">申请注销小猪账号</b>
                     <p style="line-height: 50px;font-size: 16px">在你提交了注销申请之后，系统将进行以下验证，以确保你的账号、财产安全。</p>
                     <hr>

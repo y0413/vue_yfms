@@ -4,7 +4,7 @@
         <div class="o_mask" id='maskName'  style="display:none;"></div>
         <Header></Header>
             <!--main -->
-            <div class="wrap clearfix con_bg" style="margin-top: 80px">
+            <div class="wrap clearfix con_bg">
                 <!--left content-->
                 <div class="con_l">
                     <!--{{order[0]}}-->
@@ -292,11 +292,20 @@
                 </div>
                 <!--/left content-->
 
-
+                <div class="wrapper">
                 <!--right content-->
-                <div id="rel_div" class="con_r">
+                <div id="nav_keleyi_com" class="con_r" style="width:auto;background-color: #F8F8F8">
 
-                    <div class="bg_box" id="floatRightBox" style="margin-top: 130px">
+                    <div class="top_bar clearfix" style="background-color: #F8F8F8">
+                        <ul>
+                            <li class="top_bar_w1 detail-default-share">
+                                <a href="#ongo" class="share_ico">分享</a>
+                            </li>
+                            <li class="top_bar_w2 border_right_none" style="margin-right: 140px;">评分：<em class="score-rate">4.9分</em></li>
+                        </ul>
+                    </div>
+
+                    <div class="bg_box" id="floatRightBox" style="margin-top: 20px; background-color: #F8F8F8">
                         <div class="day_top clearfix" id="pricePart">
                             <div class="day_l">&#165;<span>{{listinfo.price}}</span><em></em></div>
                             <div class="day_r">每晚</div>
@@ -363,6 +372,7 @@
 
                 </div>
                 <!--/right content-->
+                </div>
             </div>
 
             <div class="wrap" id="otherRoomPart"></div>
@@ -507,6 +517,29 @@
             delete el.vueClickOutside;
         },
     };
+
+    function menuFixed(id){
+        var obj = document.getElementById(id);
+        var _getHeight = obj.offsetTop;
+
+        window.onscroll = function(){
+            changePos(id,_getHeight);
+        }
+    }
+    function changePos(id,height){
+        var obj = document.getElementById(id);
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if(scrollTop < height){
+            obj.style.position = 'relative';
+        }else{
+            obj.style.position = 'fixed';
+        }
+    }
+    window.onload = function(){
+        menuFixed('nav_keleyi_com');
+    }
+
+
     import header from "../components/Housing_header.vue"
     var uid=JSON.parse(localStorage.getItem('acc'))
 
@@ -697,6 +730,21 @@
 </script>
 
 <style lang="stylus" scoped>
+
+    .wrapper{
+        width:auto;
+        margin-left:auto;
+        margin-right:auto;
+        margin-left 1000px
+    }
+    #nav_keleyi_com{
+        position:relative;
+        top:0;
+        background:bottom;
+        width:200px;
+        float: left;
+        margin-left: -60px;
+    }
 
     .my-reply
         padding 10px

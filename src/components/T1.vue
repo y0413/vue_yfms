@@ -1,21 +1,32 @@
 <template>
-    <div class="week">
-        <el-row id="nav-fixed" :class="{nav_fixed : isFixed}">
-            <el-col :span="3">
-                <div class="grid-content"><span class="sun">Sun.</span>日曜日</div>
-            </el-col>
-        </el-row>
-    </div>
+    <!--<div class="week">-->
+        <!--<el-row id="nav-fixed" :class="{nav_fixed : isFixed}">-->
+            <!--<el-col :span="3">-->
+                <!--<div class="grid-content"><span class="sun">Sun.</span>日曜日</div>-->
+            <!--</el-col>-->
+        <!--</el-row>-->
+    <!--</div>-->
+
+
 </template>
 
 <script>
+    function scrollLis(){
+    var toTop = offs.top-$(window).scrollTop();
+    if(toTop==0||toTop<0){
+        if(!$('#fixed').hasClass('ab'))$('#fixed').addClass('ab');
+    }else{
+        $('#fixed').removeClass('ab');
+    }
+    }
+    var offs=$('#fixed').offset();
+    $(window).scroll(function(){
+        scrollLis();
+    });
     export default {
         name: 'week',
         data() {
-            return {
-                isFixed: false,
-                offsetTop: 0
-            };
+            return {}
         },
         mounted() {
             // 设置bar浮动阈值为 #fixedBar 至页面顶部的距离
@@ -42,6 +53,13 @@
 </script>
 
 <style>
+
+    .fixed{
+        border: 1px red solid;
+        height:100px;
+        width:50px;
+    }
+
     .week {
         margin-bottom: 1.25rem;
     }
