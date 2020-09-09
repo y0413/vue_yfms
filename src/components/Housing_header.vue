@@ -1,50 +1,94 @@
 <template>
     <div>
-        <div class="head_bar" style="background-color: black">
-            <div class="head_bar_con">
-                <a href="https://www.xiaozhu.com" class="logo_index">小猪</a>
-                <ul class="nav_R">
-                    <li>
-                        <div v-if="userList[0]==null">
-
-                            <a class="show-register-box" @click="zc()">注册</a>
-                        </div>
-                    </li>
-                    <li >
-                        <div v-if="userList[0]==null">
-                            <a class="show-register-box" @click="dl()">登录</a>
-                        </div>
-                        <div v-else>
-                            <a class="show-register-box" @click="dl()">{{userList[0].uname}}</a>
-                            <div class="head_pop width_58"  id="csr" >
-                                <div class="pop_column">
-                                    <div>
-                                        <a class="fl" @click="personal()">房客中心</a>
-
-                                        <a v-show="userList[0].state==0" class="fr" @click="fdpersonal()">房东中心</a>
-                                        <a @click="dele()">退出</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <!--<li>           </li>-->
-                    <li class="current">
-                        <a href="#ongo" class="openTri_R marginR10">短租指南</a>
-                        <div class="head_pop width_58" id="csre">
+        <div class="head_wrapper">
+            <a href="https://www.xiaozhu.com" class="logo_v2">小猪</a><span class="slogan_v2 slogan_black"></span>
+            <!--    <span class="list_city" id="suggest_icon4Search">西安<i id="showCitySuggestion" class="icon_tri_down tri_down_f"></i><i id="closeCitySuggestion" class="icon_tri_down icon_tri_up"></i></span>-->
+            <ul class="nav_R nav_commen" id="u">
+                <li>
+                    <div v-if="userList[0]==null">
+                        <a rel="nofollow" title="" class="show-register-box"  @click="zc()">注册</a>
+                    </div>
+                </li>
+                <li>·</li>
+                <li>
+                    <div v-if="userList[0]==null">
+                        <a rel="nofollow"  class="logindialog" @click="dl()">登录</a>
+                    </div>
+                    <div v-else>
+                        <a class="show-register-box" @click="dl()">{{userList[0].uname}}</a>
+                        <div class="head_pop width_58"  id="csr" >
                             <div class="pop_column">
                                 <div>
-                                    <a class="fl">房东指南</a>
-                                    <a class="fr">房客指南</a>
+                                    <a class="fl" @click="personal()">房客中心</a>
+
+                                    <a v-show="userList[0].state==0" class="fr" @click="fdpersonal()">房东中心</a>
+                                    <a @click="dele()">退出</a>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </div>
+                </li>
+                <li>·</li>
+                <li class="current">
+                    <a href="#ongo" class="openTri_R">短租指南</a>
+                    <div class="head_pop width_58 top40">
+                        <div class="pop_column">
+                            <span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&amp;type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&amp;type=landlord">房东指南</a></span>
+                        </div>
 
-                    <li><a rel="nofollow" @click="fy()" class="btn_free show-register-box" id="Pub_Btn">免费发布房间</a></li>
-                </ul>
-            </div>
+                    </div>
+                </li>
+                <li><a rel="nofollow" @click="fy()"  class="btn_free show-register-box" id="Pub_Btn">免费发布房源</a></li>
+            </ul>
         </div>
+
+
+
+        <!--<div class="head_bar" >-->
+
+            <!--<div class="head_bar_con">-->
+                <!--<a href="https://www.xiaozhu.com" class="logo_index">小猪</a>-->
+                <!--<ul class="nav_R">-->
+                    <!--<li>-->
+                        <!--<div v-if="userList[0]==null">-->
+                            <!--<a class="show-register-box" @click="zc()">注册</a>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<div v-if="userList[0]==null">-->
+                            <!--<a class="show-register-box" @click="dl()">登录</a>-->
+                        <!--</div>-->
+                        <!--<div v-else>-->
+                            <!--<a class="show-register-box" @click="dl()">{{userList[0].uname}}</a>-->
+                            <!--<div class="head_pop width_58"  id="csr" >-->
+                                <!--<div class="pop_column">-->
+                                    <!--<div>-->
+                                        <!--<a class="fl" @click="personal()">房客中心</a>-->
+
+                                        <!--<a v-show="userList[0].state==0" class="fr" @click="fdpersonal()">房东中心</a>-->
+                                        <!--<a @click="dele()">退出</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--&lt;!&ndash;<li>           </li>&ndash;&gt;-->
+                    <!--<li class="current">-->
+                        <!--<a href="#ongo" class="openTri_R marginR10">短租指南</a>-->
+                        <!--<div class="head_pop width_58" id="csre">-->
+                            <!--<div class="pop_column">-->
+                                <!--<div>-->
+                                    <!--<a class="fl">房东指南</a>-->
+                                    <!--<a class="fr">房客指南</a>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
+
+                    <!--<li><a rel="nofollow" @click="fy()" class="btn_free show-register-box" id="Pub_Btn">免费发布房间</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
         <el-dialog width="50%"  :visible.sync="dialogVisible">
             <el-form :model="userSign" status-icon :rules="rules2" ref="userSign" label-width="80px" class="demo-ruleForm">
                 <div class="w_698">

@@ -1,7 +1,163 @@
 <template>
     <div>
+        <div>
+            <div class="head_bar" >
+                <div class="head_bar_con">
+                    <a href="https://www.xiaozhu.com" class="logo_index">小猪</a>
+                    <ul class="nav_R">
+                        <li>
+                            <div v-if="userList[0]==null">
+                                <a class="show-register-box" @click="zc()">注册</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div v-if="userList[0]==null">
+                                <a class="show-register-box" @click="dl()">登录</a>
+                            </div>
+                            <div v-else>
+                                <a class="show-register-box" @click="dl()">{{userList[0].uname}}</a>
+                                <div class="head_pop width_58"  id="csr" >
+                                    <div class="pop_column">
+                                        <div>
+                                            <a class="fl" @click="personal()">房客中心</a>
 
-<Header></Header>
+                                            <a v-show="userList[0].state==0" class="fr" @click="fdpersonal()">房东中心</a>
+                                            <a @click="dele()">退出</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--<li>           </li>-->
+                        <li class="current">
+                            <a href="#ongo" class="openTri_R marginR10">短租指南</a>
+                            <div class="head_pop width_58" id="csre">
+                                <div class="pop_column">
+                                    <div>
+                                        <a class="fl">房东指南</a>
+                                        <a class="fr">房客指南</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li><a rel="nofollow" @click="fy()" class="btn_free show-register-box" id="Pub_Btn">免费发布房间</a></li>
+                    </ul>
+                </div>
+            </div>
+            <el-dialog width="50%"  :visible.sync="dialogVisible">
+                <el-form :model="userSign" status-icon :rules="rules2" ref="userSign" label-width="80px" class="demo-ruleForm">
+                    <div class="w_698">
+                        <div class="clearfix">
+                            <div class="r_main_l">
+                                <ul class="r_tab clearfix">
+                                    <p>用户登录</p>
+                                </ul>
+                                <div id="generalLogin">
+                                    <ul class="register_list">
+                                        <li>
+                                            <el-form-item label="账号" prop="uname">
+                                                <input v-model="userSign.uname" class="r_input_1"   placeholder="手机号,邮箱">
+                                            </el-form-item>
+                                            <el-form-item label="密码" prop="upwd">
+                                                <input type="password" class="r_input_1"  v-model="userSign.upwd" auto-complete="off" placeholder="密码">
+                                            </el-form-item>
+                                        </li>
+                                    </ul>
+                                    <el-button style="width: 350px" type="primary" class="r_input mt_10" id="orgBtn" @click="queryName()">提交</el-button>
+                                    <div class="r_login_space clearfix"><span class="fl cur "><input class="ipt-checkbox2" type="checkbox" id="setcookie" checked="checked" />自动登录</span>
+                                        <span class="fr col_gray"><a href="https://www.xiaozhu.com/findpwdbyphone">忘记密码?</a></span></div>
+                                </div>
+                            </div>
+                            <div class="r_main_r">
+                                <h5>合作网站账户登录</h5>
+                                <ul class="r_wedsitev1">
+                                    <li>
+                                        <a class="hz_qqv1" href="https://www.xiaozhu.com/xzweb.php?op=GetOpenSnsAuthUrl&snsType=qqzone&state=login&next=https%3A%2F%2Fwww.xiaozhu.com%2F"><i></i>QQ登录</a>
+                                    </li>
+                                </ul><p>还没有注册？<a  class="col_pink show-register-box" @click="zc()">注册账号&gt;&gt;</a></p>
+                                <p style="width: 400px">短信快捷登录？<a  class="col_pink show-register-box" @click="dx()">短信快捷登录&gt;&gt;</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </el-form>
+            </el-dialog>
+            <el-dialog width="50%" title="短信快捷登录" :visible.sync="dialogVisibletade">
+                <div class="w_698">
+                    <div class="clearfix">
+                        <div class="r_main_l">
+                            <el-form>
+                                <el-form-item label="手机号" prop="phone">
+                                    <el-input style="width: 250px" v-model="phone" placeholder="手机号" auto-complete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item label="验证码" prop="yzm">
+                                    <el-input style="width: 130px" placeholder="验证码" v-model="yzm1" auto-complete="off"></el-input>
+                                    <a @click="yzm()"  class="have-nb">重新发送</a>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button style="width: 250px" type="primary" @click="usersphoto()">登录</el-button>
+                                </el-form-item>
+                            </el-form>
+                            <span class="check_css3 agreeResBox">
+                            <input type="checkbox"  class="input_check" id="check4">
+                            <label for="check4"></label>
+                                    我同意  <a href="https://www.xiaozhu.com/help/service" class="r-service-protocol" target="_blank">《服务协议》、</a><a href="https://www.xiaozhu.com/help/privacy" class="r-service-protocol" target="_blank">《隐私保护声明》</a>
+                                 </span>
+                        </div>
+                        <div class="r_main_r">
+                            <h5>合作网站账户登录</h5>
+                            <ul class="r_wedsitev1">
+                                <li>
+                                    <a class="hz_qqv1" href="https://www.xiaozhu.com/xzweb.php?op=GetOpenSnsAuthUrl&snsType=qqzone&state=login&next=https%3A%2F%2Fwww.xiaozhu.com%2F"><i></i>QQ登录</a>
+                                </li>
+                            </ul>
+                            <p class="">已有账号？<a  class="col_pink logindialog" @click="dl()">登录&gt;&gt;</a></p>
+                        </div>
+                    </div>
+                </div>
+            </el-dialog>
+            <el-dialog width="50%" title="注册小猪账号" :visible.sync="dialogVisibleta">
+                <div class="w_698 login_register_box "  id="registerDialog">
+                    <div class="clearfix">
+                        <div class="r_main_l">
+                            <el-form :model="userSign" status-icon :rules="rules2" ref="userSign" label-width="80px" class="demo-ruleForm">
+                                <el-form-item label="手机号" prop="phone">
+                                    <el-input v-model="phone" placeholder="手机号" auto-complete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item label="验证码" prop="yzm">
+                                    <el-input style="width: 130px" placeholder="用户名" v-model="yzm1" auto-complete="off"></el-input>
+                                    <a @click="yzm()" id="get-code-btn" class="have-nb">重新发送</a>
+                                </el-form-item>
+                                <el-form-item label="用户名" prop="uname">
+                                    <el-input  placeholder="用户名" v-model="userSign.uname" auto-complete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item label="密码" prop="upwd">
+                                    <el-input  type="password" placeholder="密码" v-model="userSign.upwd" auto-complete="off"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button style="width: 250px" type="primary" @click="addusers()">注册</el-button>
+                                </el-form-item>
+                            </el-form>
+                            <span class="check_css3 agreeResBox">
+                            <input type="checkbox"  class="input_check" id="check3">
+                            <label for="check3"></label>
+                                    我同意  <a href="https://www.xiaozhu.com/help/service" class="r-service-protocol" target="_blank">《服务协议》、</a><a href="https://www.xiaozhu.com/help/privacy" class="r-service-protocol" target="_blank">《隐私保护声明》</a>
+                                 </span> </div>
+                        <div class="r_main_r">
+                            <h5>合作网站账户登录</h5>
+                            <ul class="r_wedsitev1">
+                                <li>
+                                    <a class="hz_qqv1" href="https://www.xiaozhu.com/xzweb.php?op=GetOpenSnsAuthUrl&snsType=qqzone&state=login&next=https%3A%2F%2Fwww.xiaozhu.com%2F"><i></i>QQ登录</a>
+                                </li>
+                            </ul>
+                            <p class="">已有账号？<a id="loginDialogBtn" class="col_pink logindialog" @click="dl()">登录&gt;&gt;</a></p>
+                        </div>
+                    </div>
+
+                </div>
+            </el-dialog>
+        </div>
+<!--<Header></Header>-->
 
         <div class="banner_con" style="height: 720px">
             <el-carousel indicator-position="outside" height="720px">
@@ -48,12 +204,27 @@
                 <h1>别住酒店，住阳房</h1>
                 <span>莫愁前路无知己，天下谁人不识君 </span>
             </div>
-            <div class="content_v2">
-                <ul class="rooms_show_ul">
+            <div class="content_v2" >
+                <ul class="rooms_show_ul" style="width:1300px">
+                    <li >         <img class="img_room city_big" lazy_src="finish" width="820" height="326" src="https://www.xiaozhu.com/images/index_city/city_hz_big.jpg">
+                        <div class="rooms_intro city_big">
+                            <span class="room_name">最忆西湖  ·  杭州</span><br>
+                            <!--<span class="index_price">10000+<em class="bigFont">套</em></span>-->
+                        </div>
+                        <a href="https://hz.xiaozhu.com/" class="room_hover" target="_blank"></a>
+                        <input type="text" value="26" class="cityId" style="display: none">
+                    </li>
+                    <li >         <img class="img_room" lazy_src="finish" width="400" height="326" src="https://www.xiaozhu.com/images/index_city/city_sh.jpg">
+                        <div class="rooms_intro city_top">
+                            <!--<span class="index_price">20000+<em class="bigFont">套</em></span>-->
+                            <span class="room_name">东方之珠  ·  上海</span>
+                        </div>
+                        <a href="https://sh.xiaozhu.com/" class="room_hover" target="_blank"></a>
+                        <input type="text" value="13" class="cityId" style="display: none">
+                    </li>
                         <span v-for="info in listinfo" >
                         <li>
                             <input type="text" value="6257935516" class="luId" style="display: none">
-
                             <img class="img_room" :src="'http://localhost:8081/'+info.bedroom" alt="小猪-西涌（西冲） 舒适宜居宽敞双床房近沙滩" width="400" height="326"/>
                             <span class="img_upCover"></span>
                             <div class="rooms_intro">
@@ -64,6 +235,14 @@
                             <a @click="details(info.bnbid)" target="_blank" class="room_hover" ></a>
                         </li>
                         </span>
+                    <li>         <img class="img_room city_big" lazy_src="finish" width="820" height="326" src="../../static/images/city_xa_big.jpg">
+                        <div class="rooms_intro city_big">
+                            <span class="room_name">千年古都  ·  西安</span><br>
+                            <!--<span class="index_price">10000+<em class="bigFont">套</em></span>-->
+                        </div>
+                        <a href="https://xa.xiaozhu.com/" class="room_hover" target="_blank"></a>
+                        <input type="text" value="176" class="cityId" style="display: none">
+                    </li>
                 </ul>
             </div>
         </div>
@@ -222,6 +401,9 @@
             this.selectAll();
             // this.reload();
         },methods:{
+            fy(){
+                this.$router.push({name:"Housing_info"})
+            },
             selectAll(){
                 this.$axios.post('http://localhost:8081/bnbinfo/query')
                     .then(response => {
@@ -314,6 +496,25 @@
 </script>
 
 <style scoped>
+    /*ul {*/
+        /*display: block;*/
+        /*list-style-type: disc;*/
+        /*margin-block-start: 1em;*/
+        /*margin-block-end: 1em;*/
+        /*margin-inline-start: 0px;*/
+        /*margin-inline-end: 0px;*/
+        /*padding-inline-start: 40px;*/
+    /*}*/
+    /*.rooms_show_ul li {*/
+        /*position: relative;*/
+        /*float: left;*/
+        /*margin: 0 20px 20px 0;*/
+    /*}*/
+    /*li {*/
+        /*display: list-item;*/
+        /*text-align: -webkit-match-parent;*/
+    /*}*/
+
     .el-dialog__body {
         padding: 30px 20px;
         color: #606266;
@@ -343,4 +544,5 @@
         left: -35px;
         width: 78px;
     }
+
 </style>

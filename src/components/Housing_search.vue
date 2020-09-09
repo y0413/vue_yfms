@@ -2,6 +2,28 @@
 <div>
     <!-- 头部 -->
     <div class="o_mask" id='maskName'  style="display:none;"></div>
+    <!--<div class="head_wrapper">-->
+        <!--<a href="https://www.xiaozhu.com" class="logo_v2">小猪</a><span class="slogan_v2 slogan_black"></span>-->
+        <!--&lt;!&ndash;    <span class="list_city" id="suggest_icon4Search">西安<i id="showCitySuggestion" class="icon_tri_down tri_down_f"></i><i id="closeCitySuggestion" class="icon_tri_down icon_tri_up"></i></span>&ndash;&gt;-->
+        <!--<ul class="nav_R nav_commen" id="u">-->
+            <!--<li><a rel="nofollow" title="" class="show-register-box" href="https://www.xiaozhu.com/register?next=https%3A%2F%2Fxa.xiaozhu.com%2F">注册</a></li>-->
+            <!--<li>·</li>-->
+            <!--<li><a rel="nofollow" href="https://www.xiaozhu.com/login?next=https%3A%2F%2Fxa.xiaozhu.com%2F" class="logindialog">登录</a></li>-->
+            <!--<li>·</li>-->
+            <!--<li class="current">-->
+                <!--<a href="#ongo" class="openTri_R">短租指南</a>-->
+                <!--<div class="head_pop width_58 top40">-->
+                    <!--<div class="pop_column">-->
+                        <!--<span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&amp;type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&amp;type=landlord">房东指南</a></span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li><a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free show-register-box" id="Pub_Btn">免费发布房源</a></li>-->
+        <!--</ul>-->
+    <!--</div>-->
+
+
+
     <Header></Header>
     <!--<div class="detail_wrapper">-->
         <!--<div class="detail_head clearfix">-->
@@ -26,7 +48,7 @@
         <!-- /底部 -->
 
     <!--搜索框-->
-    <div class="city_wrap" style="margin: -55px;margin-top: -25px">
+    <div class="city_wrap" style="margin: -55px;margin-top: -50px">
         <!--city top-->
         <div class="city_top_box clearfix" id="list_filter">
             <div class="city_l">
@@ -138,33 +160,76 @@
     <!-- /搜索框 -->
 
     <!-- 中间 -->
-    <div class="clearfix" style="margin-top: 300px;height: 500px;">
+    <div class="clearfix" style="margin-top: 230px;height: 500px;">
         <!--地图-->
 
         <!--<div class="city_map" >-->
-        <div id="allmap" class="auto_fixed" :class="auto_fixed">自动粘滞固定头部，需要一直展示的</div>
+        <div id="allmap" class="auto_fixed" :class="auto_fixed" style="margin-top: -12px"></div>
             <!--<div class="auto_fixed" :class="auto_fixed">自动粘滞固定头部，需要一直展示的</div>-->
 
             <div class="auto_fixed_fake" :style="{display: auto_fixed.fixed ? 'block':'none'}"></div>
-        <div class="content"  style="height: auto">
-            <ul  v-for="info in listinfo">
-                <li>
+        <div class="content"   style="height: auto;margin-top: -20px">
+            <ul  id="uinfo">
+                <span v-for="info in listinfo">
+                <li >
 
                     <a target="_blank"  class="resule_img_a">
                         <img @click="details(info.bnbid)" style="height: 330px;width: 440px" class="lodgeunitpic" :title="'info.bnbname'"
                              :src="'http://localhost:8081/'+info.bedroom"
                              :alt="'{{info.bnbname}}'" />
                     </a>
-                    <a class="sTitle">
-                        <span class="result_title hiddenTxt">{{info.bnbname}}</span>
-                    </a>
-                    <em class="sTitle">&#165;<i>{{info.price}}</i></em>
-                    <em class="hiddenTxt">
-                        {{info.hname}}/宜住{{info.liva_num}}人                <span class="commenthref">
-                          </span>
-                    </em>
-                </li>
 
+
+                    <div id="pic" >
+                                        <div>
+        <span class="result_price">¥<i>{{info.price}}</i>起/晚</span>
+        </div>
+
+        <span class="result_img" >
+            <!--<a class="=&quot;search_result_gridsum&quot;" href="https://www.xiaozhu.com/fangdong/41687294701/" target="_blank">-->
+                <img  width="42" height="42"  src="https://image.xiaozhustatic1.com/23/5,17,0,89,19158,260,260,7951e0d2.jpg">
+            <!--</a>-->
+        </span>
+        <div class="result_intro">
+
+            <a class="sTitle">
+                                                <span class="result_title hiddenTxt">{{info.bnbname}}</span>
+            </a>
+
+            <em class="hiddenTxt">
+
+                {{info.hname}}/宜住{{info.liva_num}}人
+                <!--<span class="commenthref">-->
+                     <!-- - 5分/76条点评                </span>-->
+            </em>
+            <p class="hiddenTxt newLabel">
+
+                                                                                                                                <!--<span class="col_slogn" title="速订：下单即可入住，无需房东确认"><i class="new_ico"></i>速订</span>-->
+
+                                                    <!--<span class="col_slogn" title="优品：设施齐全、服务贴心、体验优质"><i class="new_ico"></i>优品</span>-->
+
+                <!--<span class="mianyajin_ico" title="免押金：小猪在线担保、无需支付押金"></span>-->
+
+                <!--<span class="yanzhen_ico" title="验真：小猪实地考察，确保房源真实性"></span>-->
+                <!--<span class="shipai_ico" title="实拍：摄影师上门拍摄，100%还原房源"></span>-->
+
+                                                &nbsp;
+            </p>
+        </div>
+    </div>
+
+
+
+                    <!--<a class="sTitle">-->
+                        <!--<span class="result_title hiddenTxt">{{info.bnbname}}</span>-->
+                    <!--</a>-->
+                    <!--<em class="sTitle">&#165;<i>{{info.price}}</i></em>-->
+                    <!--<em class="hiddenTxt">-->
+                        <!--{{info.hname}}/宜住{{info.liva_num}}人                <span class="commenthref">-->
+                          <!--</span>-->
+                    <!--</em>-->
+                </li>
+</span>
             </ul>
         </div>
     </div>
@@ -215,6 +280,9 @@
             });
         },
         methods:{
+            fy(){
+                this.$router.push("Housing_info");
+            },
             selectInfo(){
                 console.log(this.map)
                 if(this.map.startprice==null || this.map.startprice===""){
@@ -234,7 +302,9 @@
                             map.addOverlay(marker);
                         }
 
-                        map.disableDragging();
+                        // map.disableDragging();
+                        marker.enableDragging()
+                        map.enableScrollWheelZoom(false)
                     });
             },
             //获取宜居人数
@@ -290,17 +360,28 @@
         border:0px;
         height:14px;
     }
-    ul{
-        padding-right: -20px;
-        margin-right: -20px;
-        /*margin-top: -260px;*/
+    /*ul{*/
+        /*padding-right: -20px;*/
+        /*margin-right: -20px;*/
+        /*!*margin-top: -260px;*!*/
+    /*}*/
+    #uinfo li{
+
+        float: left;
+        width: 50%;
+        /*padding-right: 12px;*/
+        /*margin-bottom: 89px;*/
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        position: relative;
+        z-index: 1;
     }
     .auto_fixed{
-        height: 680px;
+        height: 750px;
         background: orange;
         position: absolute;
         line-height: 3em;
-        width:600px;
+        width:39%;
         text-align: center;
         float:left;
     }
@@ -308,15 +389,15 @@
     .fixed{
         position: fixed;
         top: 0px;
-        width: 600px;
+        width: 39%;
     }
 
     .content{
         color: gray;
-        width:830px;
+        width:60%;
         padding: 8px;
         float:right;
-        border: 1px solid red;
+        /*border: 1px solid red;*/
     }
     .city_wrap{
 
@@ -337,5 +418,30 @@
     }
     el-radio-button{
         padding-bottom: 5px;
+    }
+    #pic{
+        margin-top: -48px;
+        width: 440px;
+    }
+    .nav_commen li {
+        height: 40px;
+        line-height: 40px;
+    }
+    .nav_R li {
+        float: left;
+        color: #fff;
+        height: 44px;
+        line-height: 44px;
+        position: relative;
+        z-index: 999;
+    }
+    #u li{
+        display: list-item;
+        text-align: -webkit-match-parent;
+    }
+    .nav_R {
+        float: right;
+        font-family: "microsoft yahei";
+        font-size: 14px;
     }
 </style>

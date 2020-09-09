@@ -31,7 +31,7 @@ export default {
 
         reload (){
 
-            this.isRouterAlive = false
+            this.isRouterAlive = false;
 
             this.$nextTick(function(){
 

@@ -67,7 +67,13 @@
                                         {{scope.row.state==0?'进行中':'已结束'}}
                                     </template>
                                 </el-table-column>
+                                <el-table-column label="订单金额" prop="order_price"></el-table-column>
                                 <el-table-column label="民宿名称" prop="bnbname"></el-table-column>
+                                <el-table-column label="操作">
+                                    <template slot-scope="scope">
+                                        <el-button @click="qxdd(scope.row)">取消订单</el-button>
+                                    </template>
+                                </el-table-column>
                             </el-table>
                             <el-pagination
                                 layout="total, sizes, prev, pager, next, jumper"
@@ -383,12 +389,22 @@
             this.jequ=this.userList[0].photo.replace(this.userList[0].photo.substr(4,4),"****");
 
         },methods:{
+            qxdd(row){
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                this.$axios.post("http://localhost:8081/plat/upFmoney?money="+row.order_price).then(res => {
+                    if(res.data>0){
+                        this.$axios.post("http://localhost:8081/plat/addWaterqx?wmoney="+row.order_price+"&uid="+uid+"&wstate=1").then(res => {
+
+                        })
+                    }
+                })
+            },
             fdzx(){
                 this.$router.push({name:"Housing_fdpersonal"})
             },
             queryComments(){
                 var uid=JSON.parse(localStorage.getItem('acc'));
-                this.$axios.post("http://localhost:8081/orders/queryComments?uid="+uid).then(res => {
+                this.$axios.post("http://localhost:8081/order/queryComments?uid="+uid).then(res => {
                     let comment = res.data;
                     this.total = comment.length;
                     this.commentsList = comment
@@ -396,7 +412,7 @@
             },
             queryOrdersjxz(){
                 var uid=JSON.parse(localStorage.getItem('acc'))
-                this.$axios.post("http://localhost:8081/orders/queryOrders?uid="+uid+"&state="+0).then(res => {
+                this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+0).then(res => {
                     let order = res.data;
                     this.total = order.length
                     this.orderjxzList = order
@@ -404,7 +420,7 @@
             },
             queryOrdersjs(){
                 var uid=JSON.parse(localStorage.getItem('acc'))
-                this.$axios.post("http://localhost:8081/orders/queryOrders?uid="+uid+"&state="+1).then(res => {
+                this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+1).then(res => {
                     let order = res.data;
                     this.total = order.length
                     this.orderjsList = order

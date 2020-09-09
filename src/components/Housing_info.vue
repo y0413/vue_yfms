@@ -1,6 +1,6 @@
 <template>
     <div >
-        <div class="top"></div>
+        <!--<div class="top"></div>-->
         <div class="o_mask" id='maskName'  style="display:none;"></div>
         <Header></Header>
         <!--<div class="detail_wrapper">-->

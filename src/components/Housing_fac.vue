@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="top"></div>
+        <!--<div class="top"></div>-->
         <div class="o_mask" id='maskName'  style="display:none;"></div>
         <Header></Header>
         <!--<div class="detail_wrapper">-->
@@ -61,7 +61,7 @@
                     <div id="regSuccInfo">
                     </div>
                 </div>
-            </div><div>        </div>
+            </div><div></div>
 
 
             <div class="h_wrap pb10 mt20" style="margin-top: 100px">

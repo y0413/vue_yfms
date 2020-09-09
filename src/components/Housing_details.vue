@@ -301,7 +301,6 @@
                             <div class="day_l">&#165;<span>{{listinfo.price}}</span><em></em></div>
                             <div class="day_r">每晚</div>
                         </div>
-
                         <!--预定start-->
                         <div id="detailBookArea">
                             <div class="reserve_box">
@@ -684,6 +683,7 @@
                         var marker = new BMap.Marker(point);  // 创建标注
                         map.addOverlay(marker);
                         map.disableDragging();
+
                         this.pic.push(this.listinfo.bedroom);
                         this.pic.push(this.listinfo.room);
                         this.pic.push(this.listinfo.toilet);
