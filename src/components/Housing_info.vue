@@ -149,7 +149,6 @@
                     <li class="clearfix pb15" >
                         <label class="type w_103" style="width: 100px;color:#000;">房屋类型：</label>
                         <!--<div class="h_input_box house_type" id="houseType" style="width: 120px;">-->
-
                         <!--&lt;!&ndash;<div class="s_arrow_top s_arrow_down cursorPointer"></div>&ndash;&gt;-->
                         <!--&lt;!&ndash;<input type="text" class="roomtype tantnum_box cursorPointer" id="houseTypeText" style="width: 106px;" data="" value="" readonly/>&ndash;&gt;-->
                         <!--&lt;!&ndash;<p class="no_select_tip tip_house_type" id="tipHouseType" style="display: none"></p>&ndash;&gt;-->
