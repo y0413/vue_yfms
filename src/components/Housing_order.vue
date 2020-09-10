@@ -1,5 +1,6 @@
 <template xmlns="http://www.w3.org/1999/html">
     <div>
+        {{ord}}
         <el-form style="text-align: left;margin: 0px 20px; "label-width="80px" :model="ord" class="form">
             <div class="border_top_cart">
                 <div class="container">
@@ -121,6 +122,7 @@
                 this.ordetails.order_price = this.ord.order_price;
                 this.ordetails.starttime = this.ord.start;
                 this.ordetails.sendtime = this.ord.end;
+                this.ordetails.bnbid=this.ord.bnbid;
 
                 this.$axios.post("http://localhost:8081/order/addOrder",this.ordetails)
                     .then(res => {

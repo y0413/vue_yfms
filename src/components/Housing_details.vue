@@ -640,6 +640,7 @@
                             this.order[0].order_price = this.tprice;
                             this.order[0].truename=res.data[0].truename;
                             this.order[0].photo=res.data[0].photo;
+                            this.order[0].uid=uid;
                             var list = this.order[0];
                             console.log(list);
                             this.$router.push({name:"Housing_order",params:{list:list}});

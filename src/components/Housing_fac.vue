@@ -358,14 +358,14 @@
         },
         methods: {
             upsub(){
-                this.$axios.post('http://localhost:8081/bnbinfo/ptss',this.checklist)
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                this.$axios.post('http://localhost:8081/bnbinfo/ptss?uid='+uid,this.checklist)
                     .then(res => {
                         this.$refs.upload1.submit();
                         this.$refs.upload2.submit();
                         this.$refs.upload3.submit();
                         this.$refs.upload4.submit();
                         this.$refs.upload5.submit();
-
                         this.$message.success("发布成功");
                         this.$router.push({name:"Housing_main"});
                     });

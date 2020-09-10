@@ -69,6 +69,11 @@
                             <el-table-column label="房源名称" prop="bnbname"></el-table-column>
                             <el-table-column label="房源价格" prop="price"></el-table-column>
                             <el-table-column label="用户昵称" prop="uname"></el-table-column>
+                            <el-table-column label="操作">
+                                <template slot-scope="scope">
+                                    <el-button @click="xjfy(scope.row)">下架房源</el-button>
+                                </template>
+                            </el-table-column>
                         </el-table>
                     </div>
                 </el-tab-pane>
@@ -276,6 +281,22 @@
             this.jequ=this.userList[0].photo.replace(this.userList[0].photo.substr(4,4),"****");
 
         },methods:{
+            //下架房源
+            xjfy(row){
+                this.$axios.post("http://localhost:8081/bnbinfo/queryBnbOrder?bnbid="+row.bnbid).then(res => {
+                    if(res.data!=""){
+                        this.$message.error("该房源还有订单正在进行");
+                    }else{
+                        this.$axios.post("http://localhost:8081/bnbinfo/upBnbshelf?bnbid="+row.bnbid).then(res => {
+                            if(res.data>0){
+                                this.$message.success("下架房源成功");
+                                this.querybnb();
+                            }
+                        })
+                    }
+                })
+            },
+            //入住完成
             rzwc(row){
                 var money=row.order_price-(row.order_price*0.1);
                 var uid=JSON.parse(localStorage.getItem('acc'));
@@ -291,12 +312,15 @@
                     }
                 })
             },
+            //房东中心
             fdzx(){
                 this.$router.push({name:"Housing_fdpersonal"})
             },
+            //房客中心
             fkzx(){
                 this.$router.push({name:"Housing_personal"})
             },
+            //推出
             tc(){
                 localStorage.clear();
                 this.$router.push({name:"Housing_main"})
@@ -360,14 +384,14 @@
                     console.log(this.upzf)
                 })
             },
+            //通过用户查询房源
             querybnb(){
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post("http://localhost:8081/UsersController/queryBnb?uid="+uid).then(res => {
-                    // let b = res.data;
-                    // this.total = bnb.length;
                     this.bnblist = res.data
                 })
             },
+            //查询评论
             queryComments(){
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post("http://localhost:8081/orders/queryComments?uid="+uid).then(res => {
@@ -376,6 +400,7 @@
                     this.commentsList = comment
                 })
             },
+            //进行中订单
             queryOrdersjxz(){
                 var uid=JSON.parse(localStorage.getItem('acc'))
                 this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+0).then(res => {
@@ -385,6 +410,7 @@
                     console.log(this.orderjxzList+"1231231")
                 })
             },
+            //结束订单
             queryOrdersjs(){
                 var uid=JSON.parse(localStorage.getItem('acc'))
                 this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+1).then(res => {
