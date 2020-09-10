@@ -1,56 +1,8 @@
 <template>
     <el-container>
         <el-header>
-            <div class="header height56">
-                <div class="top"></div>
-                <div class="top_wraper">
-                    <div class="top_con">
-                        <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=houseHover,realNamePop,jquery-ui,nyroModal" />
-                        <div class="o_mask" id='maskName'  style="display:none;"></div>
-                        <a class="logo_v2 logo_black" href="https://www.xiaozhu.com">小猪</a>
-                        <span style="color: #fff;font-size: 19px;float: left;margin: 13px 0 0 10px;"> 酒店之外，就住阳房</span>
-                        <input type="hidden" value="tenant" id="userCurrentRole"/>
-                        <input type="hidden" value="144260581897" id="loginUserId"/>
-                        <ul class="nav">
-                            <li class="active">
-                                <a class="icon_zhinan"  href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index" rel="nofollow">用户名</a>
-                                <div class="sel_box sel_fd">
-                                    <p class="p1"><a @click="fdzx()"><strong>房东中心</strong></a></p>
-                                    <!--<div class="twobox clearfix">-->
-                                        <!--<a href="https://www.xiaozhu.com/xz_web2/order/pages/landlord/orderList.html">订单管理</a>-->
-                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_SettlementInfo">结算统计</a>-->
-                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_ShowLetter">聊天记录</a>-->
-                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Comment&filterType=waitComment&fkCmtFilter=all">我的点评</a>-->
-                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_MyRooms">房源信息</a>-->
-                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_MyRentCalendarList">价格房态</a>-->
-                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FD_DiaryList">短租日记</a>-->
-                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_UserInfo">个人资料</a>-->
-                                    <!--</div>-->
-                                    <p class="p1"><a @click="fkzx()"><strong>房客中心</strong></a></p>
-                                    <!--<div class="twobox clearfix">-->
-                                        <!--<a href="https://www.xiaozhu.com/xz_web2/order/pages/lodger/list.html">我的订单</a>-->
-                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_ShowLetter">聊天记录</a>-->
-                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Comment">我的点评</a>-->
-                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo">个人资料</a>-->
-                                    <!--</div>-->
-                                    <p class="exit"><a @click="tc()" id="IM-Logout">退出</a></p>
-                                </div>
-                            </li>
-                            <li><span class="line_index"></span></li>
-                            <li class="active">
-                                <a class="icon_zhinan" href="#ongo">短租指南</a>
-                                <div class="sel_box sel_zhinan">
-                                    <a href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a>
-                                    <a href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a>
-                                </div>
-                            </li>
-                        </ul>
-                        <!---->
-                        <div class="overF_hidden height100">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--头部-->
+            <Header></Header>
         </el-header>
         <el-main>
             <el-tabs :tab-position="tabPosition='left'" style="height: 700px">
@@ -344,6 +296,7 @@
 </template>
 
 <script>
+    import header from "../components/Housing_header.vue"
     export default {
         name: "df",
         inject:['reload'],
@@ -380,6 +333,8 @@
                 orderjsList:[],
                 commentsList:[]
             }
+        },components:{
+            Header:header
         }
        ,created:function(){
             this.queryOrdersjxz();
