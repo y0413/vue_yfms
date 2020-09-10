@@ -634,9 +634,17 @@
                 if (this.com.uid===null){
                     this.$message.error("请先登录账号");
                 } else{
-                    this.order[0].order_price = this.tprice
-                    var list = this.order
-                    this.$router.push({name:"Housing_order",params:{list:list}});
+                    var uid=JSON.parse(localStorage.getItem('acc'));
+                    this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+uid)
+                        .then(res => {
+                            this.order[0].order_price = this.tprice;
+                            this.order[0].truename=res.data[0].truename;
+                            this.order[0].photo=res.data[0].photo;
+                            var list = this.order[0];
+                            console.log(list);
+                            this.$router.push({name:"Housing_order",params:{list:list}});
+                        })
+
                 }
             },
             //查询评论
@@ -650,7 +658,7 @@
             queryorder(){
                 this.$axios.post('http://localhost:8081/order/query')
                     .then(res => {
-                        this.order = res.data
+                        // this.order = res.data
                     });
             },
             inputFocus(){
@@ -710,6 +718,7 @@
                 this.$axios.post("http://localhost:8081/bnbinfo/queryId?bnbid="+bnbid)
                     .then(response=>{
                         this.listinfo=response.data;
+                        this.order[0]=response.data;
                         var map = new BMap.Map('allmap');
                         var point = new BMap.Point(this.listinfo.longitude, this.listinfo.latitude) // 创建点坐标，汉得公司的经纬度坐标
                         map.centerAndZoom(point, 15);

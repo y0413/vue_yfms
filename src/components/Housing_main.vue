@@ -3,7 +3,7 @@
         <div>
             <div class="head_bar" >
                 <div class="head_bar_con">
-                    <a href="https://www.xiaozhu.com" class="logo_index">小猪</a>
+                    <a  class="logo_index">小猪</a>
                     <ul class="nav_R">
                         <li>
                             <div v-if="userList[0]==null">
@@ -168,9 +168,9 @@
             </el-carousel>
 
             <div class="search_index search_index_home">
-                <div class="search_column_l">
+                <div class="search_column_l" style="margin-left: 250px">
                     <span class="icon_place_box" id="suggest_icon"><i class="iconfont search-icon">&#xe7bf;</i></span>
-                    <input class="ipt_search_l r_border" type="text" id="searchcity" name="searchcity" autocomplete="off" value="城市或目的地" />
+                    <input v-model="city" class="ipt_search_l r_border" type="text" id="searchcity" name="searchcity" autocomplete="off" value="城市或目的地" />
                     <div id="suggest" class="ac_results2 " style="display:none;"></div>
                     <div class="sug ">
                         <!-- 地址下拉框 -->
@@ -179,17 +179,17 @@
                     <div class="result_error_tip err_tip_style" style="display: none;" id="tip_searchcity">
                     </div>
                 </div>
-                <div class="search_column_r">
-            <span class="icon_place_box" id="calendar_btn_s">
-                <i class="iconfont search-icon">&#xe748;</i>
-            </span>
-                    <input class="ipt_search_r" type="text" readonly="" id="startenddate" name="startenddate"   value="入住离开日期" />
-                    <input type="hidden" name="startdate" id="startdate" value=""/>
-                    <input type="hidden" name="enddate" id="enddate" value=""/>
-                    <div id="calendar-box" class="calendar-box-index" style="display:none"> </div>
-                </div>
+                <!--<div class="search_column_r">-->
+            <!--<span class="icon_place_box" id="calendar_btn_s">-->
+                <!--<i class="iconfont search-icon">&#xe748;</i>-->
+            <!--</span>-->
+                    <!--<input class="ipt_search_r" type="text" readonly="" id="startenddate" name="startenddate"   value="入住离开日期" />-->
+                    <!--<input type="hidden" name="startdate" id="startdate" value=""/>-->
+                    <!--<input type="hidden" name="enddate" id="enddate" value=""/>-->
+                    <!--<div id="calendar-box" class="calendar-box-index" style="display:none"> </div>-->
+                <!--</div>-->
                 <div class="index-search-box">
-                    <input class="btn_pink_search" type="button" value="搜索小猪" onclick="javascript:searchCity('home');" />
+                    <input class="btn_pink_search" type="button" value="搜索小猪" @click="cityquery(city)" />
                     <span class="icon_place_box"></span>
                 </div>
             </div>
@@ -206,20 +206,20 @@
             </div>
             <div class="content_v2" >
                 <ul class="rooms_show_ul" style="width:1300px">
-                    <li >         <img class="img_room city_big" lazy_src="finish" width="820" height="326" src="https://www.xiaozhu.com/images/index_city/city_hz_big.jpg">
+                    <li >         <img class="img_room city_big"  lazy_src="finish" width="820" height="326" src="https://www.xiaozhu.com/images/index_city/city_hz_big.jpg">
                         <div class="rooms_intro city_big">
                             <span class="room_name">最忆西湖  ·  杭州</span><br>
                             <!--<span class="index_price">10000+<em class="bigFont">套</em></span>-->
                         </div>
-                        <a href="https://hz.xiaozhu.com/" class="room_hover" target="_blank"></a>
+                        <a @click="cityquery('杭州市')" class="room_hover" target="_blank"></a>
                         <input type="text" value="26" class="cityId" style="display: none">
                     </li>
-                    <li >         <img class="img_room" lazy_src="finish" width="400" height="326" src="https://www.xiaozhu.com/images/index_city/city_sh.jpg">
+                    <li >         <img class="img_room"  lazy_src="finish" width="400" height="326" src="https://www.xiaozhu.com/images/index_city/city_sh.jpg">
                         <div class="rooms_intro city_top">
                             <!--<span class="index_price">20000+<em class="bigFont">套</em></span>-->
                             <span class="room_name">东方之珠  ·  上海</span>
                         </div>
-                        <a href="https://sh.xiaozhu.com/" class="room_hover" target="_blank"></a>
+                        <a @click="cityquery('上海市')" class="room_hover" target="_blank"></a>
                         <input type="text" value="13" class="cityId" style="display: none">
                     </li>
                         <span v-for="info in listinfo" >
@@ -235,12 +235,12 @@
                             <a @click="details(info.bnbid)" target="_blank" class="room_hover" ></a>
                         </li>
                         </span>
-                    <li>         <img class="img_room city_big" lazy_src="finish" width="820" height="326" src="../../static/images/city_xa_big.jpg">
+                    <li>         <img class="img_room city_big"  lazy_src="finish" width="820" height="326" src="../../static/images/city_xa_big.jpg">
                         <div class="rooms_intro city_big">
                             <span class="room_name">千年古都  ·  西安</span><br>
                             <!--<span class="index_price">10000+<em class="bigFont">套</em></span>-->
                         </div>
-                        <a href="https://xa.xiaozhu.com/" class="room_hover" target="_blank"></a>
+                        <a @click="cityquery('西安市')" class="room_hover" target="_blank"></a>
                         <input type="text" value="176" class="cityId" style="display: none">
                     </li>
                 </ul>
@@ -367,7 +367,7 @@
                 userList:{},
                 phone:"",
                 yzm1:"",
-
+                city:"",
                 imagesbox:[
                     {id:0,idView:require("../../static/images/timgBBHO7ZJF.jpg")},
                     {id:1,idView:require("../../static/images/timgSWMA57MC.jpg")},
@@ -401,8 +401,17 @@
             this.selectAll();
             // this.reload();
         },methods:{
+            cityquery(city){
+                this.$router.push({name:"Housing_search",params:{city}});
+            },
             fy(){
-                this.$router.push({name:"Housing_info"})
+                var uid=JSON.parse(localStorage.getItem('acc'))
+                if(uid==null){
+                    this.$message.error("请先登录")
+                }else{
+                    this.$router.push({name:"Housing_info"})
+                }
+
             },
             selectAll(){
                 this.$axios.post('http://localhost:8081/bnbinfo/query')
@@ -488,6 +497,9 @@
             },personal:function () {
                 this.$router.push({name: 'Housing_personal'})
             },
+            fdpersonal:function () {
+                this.$router.push({name: 'Housing_fdpersonal'})
+            },
             details(bnbid){
                 this.$router.push({name: 'Housing_details',params: {bnbid}})
             }
@@ -496,25 +508,6 @@
 </script>
 
 <style scoped>
-    /*ul {*/
-        /*display: block;*/
-        /*list-style-type: disc;*/
-        /*margin-block-start: 1em;*/
-        /*margin-block-end: 1em;*/
-        /*margin-inline-start: 0px;*/
-        /*margin-inline-end: 0px;*/
-        /*padding-inline-start: 40px;*/
-    /*}*/
-    /*.rooms_show_ul li {*/
-        /*position: relative;*/
-        /*float: left;*/
-        /*margin: 0 20px 20px 0;*/
-    /*}*/
-    /*li {*/
-        /*display: list-item;*/
-        /*text-align: -webkit-match-parent;*/
-    /*}*/
-
     .el-dialog__body {
         padding: 30px 20px;
         color: #606266;

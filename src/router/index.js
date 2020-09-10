@@ -64,5 +64,12 @@ export default new Router({
           name:'Housing_pay',
           component :()=> import('../components/Housing_pay')
       }
-  ]
+  ],
+    scrollBehavior(to, from,savedPosition) {
+        return {
+            x: 0,
+            y: 0
+        }
+    }
+
 })

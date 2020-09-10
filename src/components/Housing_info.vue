@@ -555,7 +555,10 @@ export default {
           this.$axios.post('http://localhost:8081/bnbinfo/add',this.bnb)
               .then(response => {
                 if(response.data!=""){
+                    this.$message.success("添加成功");
                     this.$router.push({name:"Housing_des"});
+                }else{
+                    this.$message.error("添加失败");
                 }
               }).catch(error => {
 

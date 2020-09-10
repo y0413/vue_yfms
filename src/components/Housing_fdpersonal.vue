@@ -15,25 +15,25 @@
                             <li class="active">
                                 <a class="icon_zhinan"  href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index" rel="nofollow">用户名</a>
                                 <div class="sel_box sel_fd">
-                                    <p class="p1"><a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index"><strong>房东中心</strong></a></p>
-                                    <div class="twobox clearfix">
-                                        <a href="https://www.xiaozhu.com/xz_web2/order/pages/landlord/orderList.html">订单管理</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_SettlementInfo">结算统计</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_ShowLetter">聊天记录</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Comment&filterType=waitComment&fkCmtFilter=all">我的点评</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_MyRooms">房源信息</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_MyRentCalendarList">价格房态</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FD_DiaryList">短租日记</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_UserInfo">个人资料</a>
-                                    </div>
+                                    <p class="p1"><a @click="fdzx()"><strong>房东中心</strong></a></p>
+                                    <!--<div class="twobox clearfix">-->
+                                        <!--<a href="https://www.xiaozhu.com/xz_web2/order/pages/landlord/orderList.html">订单管理</a>-->
+                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_SettlementInfo">结算统计</a>-->
+                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_ShowLetter">聊天记录</a>-->
+                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Comment&filterType=waitComment&fkCmtFilter=all">我的点评</a>-->
+                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_MyRooms">房源信息</a>-->
+                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_MyRentCalendarList">价格房态</a>-->
+                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FD_DiaryList">短租日记</a>-->
+                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_UserInfo">个人资料</a>-->
+                                    <!--</div>-->
                                     <p class="p1"><a @click="fkzx()"><strong>房客中心</strong></a></p>
-                                    <div class="twobox clearfix">
-                                        <a href="https://www.xiaozhu.com/xz_web2/order/pages/lodger/list.html">我的订单</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_ShowLetter">聊天记录</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Comment">我的点评</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo">个人资料</a>
-                                    </div>
-                                    <p class="exit"><a href="https://www.xiaozhu.com/logout" id="IM-Logout">退出</a></p>
+                                    <!--<div class="twobox clearfix">-->
+                                        <!--<a href="https://www.xiaozhu.com/xz_web2/order/pages/lodger/list.html">我的订单</a>-->
+                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_ShowLetter">聊天记录</a>-->
+                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Comment">我的点评</a>-->
+                                        <!--<a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo">个人资料</a>-->
+                                    <!--</div>-->
+                                    <p class="exit"><a @click="tc()" id="IM-Logout">退出</a></p>
                                 </div>
                             </li>
                             <li><span class="line_index"></span></li>
@@ -338,6 +338,13 @@
             },
             fdzx(){
                 this.$router.push({name:"Housing_fdpersonal"})
+            },
+            fkzx(){
+                this.$router.push({name:"Housing_personal"})
+            },
+            tc(){
+                localStorage.clear();
+                this.$router.push({name:"Housing_main"})
             },
             //查看提现记录
             queryTx(){

@@ -15,13 +15,12 @@
 
                                         <dl class="item" style="height: 60px;">
                                             <dt>
-                                                <strong class="itemConsignee">{{this.$route.params.list[0].truename}}</strong>
-                                                {{ord.truename}}
+                                                <strong class="itemConsignee">{{ord.truename}}</strong>
                                                 <span class="itemTag tag">基本信息</span>
                                             </dt>
                                             <dd>
-                                                <p class="tel itemTel">{{this.$route.params.list[0].photo}}</p>
-                                                {{ord.photo}}
+                                                <p class="tel itemTel">{{ord.photo}}</p>
+
                                             </dd>
                                         </dl>
                                     </div>
@@ -64,19 +63,19 @@
                                                 <div class="item-row">
                                                     <div class="col col-1">
                                                         <div class="g-pic">
-                                                            <img :src="'http://localhost:8081/'+ord[0].bedroom"
+                                                            <img :src="'http://localhost:8081/'+ord.bedroom"
                                                                   width="200px" height="200px"/>
                                                         </div>
                                                         <div class="g-info">
                                                             <a href="#">
-                                                                {{this.$route.params.list[0].bnbname}}
+                                                                {{ord.bnbname}}
                                                                 <!--{{ord.bnbname}}-->
                                                             </a>
                                                         </div>
                                                     </div>
 
                                                     <div class="col col-3" style="color: red;">
-                                                        {{ord[0].order_price}}元
+                                                        {{ord.order_price}}元
                                                     </div>
                                                 </div>
                                             </dd>
@@ -111,26 +110,24 @@
             }
         },
         created(){
-            this.ord = this.$route.params.list
+            this.ord = this.$route.params.list;
         },
         methods:{
-
             addOrd(){
                 this.ordetails.order_num = Math.ceil(Math.random()*1000000000);
                 // alert(this.ordetails.order_num)
-                this.ordetails.bnbname =this.ord[0].bnbname;
-                this.ordetails.uid = this.ord[0].uid;
-                this.ordetails.order_price = this.ord[0].order_price;
-                this.ordetails.starttime = this.ord[0].start;
-                this.ordetails.sendtime = this.ord[0].end;
+                this.ordetails.bnbname =this.ord.bnbname;
+                this.ordetails.uid = this.ord.uid;
+                this.ordetails.order_price = this.ord.order_price;
+                this.ordetails.starttime = this.ord.start;
+                this.ordetails.sendtime = this.ord.end;
 
                 this.$axios.post("http://localhost:8081/order/addOrder",this.ordetails)
                     .then(res => {
                         if (res.data === 1) {
                             this.$message.success("订单已提交")
                             var o = this.ordetails
-
-                            this.$router.push({name:"Housing_pay",params:{o:o}})
+                            this.$router.push({name:"Housing_pay",params:{o:o}});
                         } else {
                             this.$message.error("订单提交失败");
                         }

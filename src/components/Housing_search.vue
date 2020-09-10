@@ -265,6 +265,10 @@
                 window.addEventListener('scroll', this.onScroll)
             });
             // this.cs();
+            if(this.$route.params.city!=null){
+                this.map.city=this.$route.params.city;
+            }
+
             this.selectInfo();
             this.getlivable ();
         },
