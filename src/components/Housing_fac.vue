@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="top"></div>
+        <!--<div class="top"></div>-->
         <div class="o_mask" id='maskName'  style="display:none;"></div>
         <Header></Header>
         <!--<div class="detail_wrapper">-->
@@ -61,8 +61,17 @@
                     <div id="regSuccInfo">
                     </div>
                 </div>
-            </div><div>        </div>
+            </div><div></div>
 
+            <div class='h_top_box'>
+                <div class="h_step_box" style="height: auto;background-color: rgba(252,246,255,0);width: 1000px">
+                    <el-steps :active="2" finish-status="success">
+                        <el-step title="已完成"></el-step>
+                        <el-step title="已完成"></el-step>
+                        <el-step title="进行中"></el-step>
+                    </el-steps>
+                </div>
+            </div>
 
             <div class="h_wrap pb10 mt20" style="margin-top: 100px">
                 <h4 class="h_tit">配套设施</h4>
@@ -358,14 +367,14 @@
         },
         methods: {
             upsub(){
-                this.$axios.post('http://localhost:8081/bnbinfo/ptss',this.checklist)
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                this.$axios.post('http://localhost:8081/bnbinfo/ptss?uid='+uid,this.checklist)
                     .then(res => {
                         this.$refs.upload1.submit();
                         this.$refs.upload2.submit();
                         this.$refs.upload3.submit();
                         this.$refs.upload4.submit();
                         this.$refs.upload5.submit();
-
                         this.$message.success("发布成功");
                         this.$router.push({name:"Housing_main"});
                     });

@@ -1,39 +1,34 @@
 <template xmlns="http://www.w3.org/1999/html">
     <div>
-        <!--开始-->
-        <el-form style="text-align: left;margin: 0px 20px; "label-width="80px" :model="xx" class="form">
-            <div class="border_top_cart" style="border: 1px red solid">
+        {{ord}}
+        <el-form style="text-align: left;margin: 0px 20px; "label-width="80px" :model="ord" class="form">
+            <div class="border_top_cart">
                 <div class="container">
                     <div class="checkout-box">
                         <div class="checkout-box-bd">
                             <div class="xm-box">
-                                <!--民宿订单单号-->
-                                <el-input v-model="xx.uid" hidden></el-input>
-                                <!--民宿金额-->
-                                <el-input v-model="xx.order_price" hidden></el-input>
-                                <!--民宿名称-->
-                                <el-input v-model="xx.bnbname" hidden></el-input>
                                 <div class="box-hd ">
                                     <h2 class="title">个人信息</h2>
                                 </div>
 
-                                <div class="box-bd" style="border: 1px blue solid">
+                                <div class="box-bd">
                                     <div class="clearfix xm-address-list" id="checkoutAddrList">
 
                                         <dl class="item" style="height: 60px;">
                                             <dt>
-                                                <strong class="itemConsignee">{{this.$route.params.list.name}}</strong>
+                                                <strong class="itemConsignee">{{ord.truename}}</strong>
                                                 <span class="itemTag tag">基本信息</span>
                                             </dt>
                                             <dd>
-                                                <p class="tel itemTel">{{this.$route.params.list.phone}}</p>
+                                                <p class="tel itemTel">{{ord.photo}}</p>
+
                                             </dd>
                                         </dl>
                                     </div>
                                 </div>
                             </div></div>
                         <!-- 收货地址 END-->
-                        <div id="checkoutPayment" style="border: 1px rosybrown solid">
+                        <div id="checkoutPayment">
                             <!-- 支付方式 -->
                             <div class="xm-box">
                                 <div class="box-hd ">
@@ -51,7 +46,7 @@
                             </div>
                         </div>
 
-                        <div class="checkout-box-ft" style="border: 1px rebeccapurple solid">
+                        <div class="checkout-box-ft">
                             <!-- 商品清单 -->
                             <div id="checkoutGoodsList" class="checkout-goods-box">
                                 <div class="xm-box">
@@ -69,25 +64,25 @@
                                                 <div class="item-row">
                                                     <div class="col col-1">
                                                         <div class="g-pic">
-                                                            <img src="http://i1.mifile.cn/a1/T11lLgB5YT1RXrhCrK!40x40.jpg"
-                                                                 srcset="http://i1.mifile.cn/a1/T11lLgB5YT1RXrhCrK!80x80.jpg 2x" width="200" height="200" />
+                                                            <img :src="'http://localhost:8081/'+ord.bedroom"
+                                                                  width="200px" height="200px"/>
                                                         </div>
                                                         <div class="g-info">
                                                             <a href="#">
-                                                                {{this.$route.params.list.bnbname}}
+                                                                {{ord.bnbname}}
+                                                                <!--{{ord.bnbname}}-->
                                                             </a>
                                                         </div>
                                                     </div>
 
                                                     <div class="col col-3" style="color: red;">
-                                                        {{this.$route.params.list.order_price}}元
+                                                        {{ord.order_price}}元
                                                     </div>
                                                 </div>
                                             </dd>
                                         </dl>
                                     </div>
                                 </div>
-
                                 <!--S 保障计划 产品选择弹框 -->
                             </div>
 
@@ -107,20 +102,34 @@
         name: "Housing_order",
         data() {
             return {
-                xx:{},
+                ord:[],
+                ordetails:{},
+                // o:{}
+                isSign: false,
+                signSrc: '',
+                clientHeight: ''
             }
         },
         created(){
-            this.xx = this.$route.params.list
+            this.ord = this.$route.params.list;
         },
         methods:{
             addOrd(){
-                this.$axios.post("http://localhost:8081/order/addOrder", this.xx)
+                this.ordetails.order_num = Math.ceil(Math.random()*1000000000);
+                // alert(this.ordetails.order_num)
+                this.ordetails.bnbname =this.ord.bnbname;
+                this.ordetails.uid = this.ord.uid;
+                this.ordetails.order_price = this.ord.order_price;
+                this.ordetails.starttime = this.ord.start;
+                this.ordetails.sendtime = this.ord.end;
+                this.ordetails.bnbid=this.ord.bnbid;
+
+                this.$axios.post("http://localhost:8081/order/addOrder",this.ordetails)
                     .then(res => {
                         if (res.data === 1) {
                             this.$message.success("订单已提交")
-                            var x = this.xx
-                            this.$router.push({name:"Housing_pay",params:{x:x}})
+                            var o = this.ordetails
+                            this.$router.push({name:"Housing_pay",params:{o:o}});
                         } else {
                             this.$message.error("订单提交失败");
                         }
@@ -133,3 +142,4 @@
 <style scoped>
 
 </style>
+

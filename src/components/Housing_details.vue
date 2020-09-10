@@ -1,80 +1,22 @@
 <template>
-    <div>
 
+    <div>
         <div class="o_mask" id='maskName'  style="display:none;"></div>
         <Header></Header>
-        <!--<div class="detail_wrapper">-->
-            <!--<div class="detail_head clearfix">-->
-                <!--<a href="https://www.xiaozhu.com" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>-->
-                <!--<ul class="nav_R nav_commen">-->
-                    <!--<li><a rel="nofollow" title="" class="show-register-box" href="https://www.xiaozhu.com/register?next=https%3A%2F%2Fbj.xiaozhu.com%2Ffangzi%2F1209886305.html">注册</a></li>-->
-                    <!--<li>&middot;</li>-->
-                    <!--<li><a rel="nofollow" class="logindialog" href="https://www.xiaozhu.com/login?next=https%3A%2F%2Fbj.xiaozhu.com%2Ffangzi%2F1209886305.html">登录</a></li>-->
-                    <!--<li>&middot;</li>-->
-                    <!--<li class="current">-->
-                        <!--<a href="#ongo" class="openTri_R">短租指南</a>-->
-                        <!--<div class="head_pop width_58 top40">-->
-                            <!--<div class="pop_column">-->
-                                <!--<span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</li>-->
-
-
-                    <!--<li><a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free show-register-box" id = "Pub_Btn">免费发布房源</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
-
-            <!--&lt;!&ndash;/header&ndash;&gt;-->
-
-            <!--&lt;!&ndash;subNav&ndash;&gt;-->
-            <!--<div class="header_bg" style="position:fixed;width:100%;top:0;left:0;z-index:999;display:none;" id="scrollHeader">-->
-                <!--<div class="detail_header clearfix">-->
-                    <!--<div class="nav_l">-->
-                        <!--<a class="xz_logo" href="#">小猪</a>-->
-                        <!--<ul id="scorllFather">-->
-                            <!--<li>-->
-                                <!--<a href="#ongo">实拍照片</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#ongo">详细介绍</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#ongo">位置地图</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#ongo">预订须知</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#ongo">入住点评</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#ongo">房东日记</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                    <!--<div class="nav_r clearfix" id="scrollPrice">-->
-                        <!--<div class="fl">&#165;<span class="detail_avgprice">138</span><em></em></div>-->
-                        <!--<div class="time_r">每晚</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;/subNav&ndash;&gt;-->
-
-
             <!--main -->
-            <div class="wrap clearfix con_bg" style="margin-top: 80px">
-
+            <div class="wrap clearfix con_bg">
                 <!--left content-->
                 <div class="con_l">
+                    <!--{{order[0]}}-->
                     <div class="pho_info">
                         <h4>
                             <em>{{listinfo.bnbname}}</em>
+
                         </h4>
 
                         <p :title="listinfo.city+listinfo.address">
                             <em class="col_pink">
-                                <a href="https://www.xiaozhu.com" >小猪</a>
+                                <a href="#" >小猪</a>
                                 &gt;
                                 <a href="https://bj.xiaozhu.com/">{{listinfo.city}}</a>
                                 &gt;
@@ -83,10 +25,7 @@
                                   </span>
                         </p>
                         <div class="labels">
-
-
-
-                                               <span class="col_slogn" title="设施齐全、服务贴心、体验优质">
+                            <span class="col_slogn" title="设施齐全、服务贴心、体验优质">
                         <i class="new_ico" ></i>优品
                     </span>
 
@@ -100,49 +39,6 @@
                         </el-carousel-item>
                     </el-carousel>
                     <!--轮播图-->
-                    <!--<div class="pho_show clearfix user_unselectable" id="detailImageBox" onselectstart="return false">-->
-                    <!--<div class="pho_show_l">-->
-                    <!--<div class="pho_show_big">-->
-                    <!--<div class="pho_tip_box" id="curImgIntro" style="display:none;">-->
-                    <!--<div>-->
-                    <!--<span></span>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div valign="middle" align="center">-->
-                    <!--<div id="imgMouseCusor" style="background:url('/images/detail/null_bg.png')"></div>-->
-                    <!--<img id="curBigImage" :src="'http://localhost:8081/'+listinfo.bedroom" alt="" />-->
-
-                    <!--&lt;!&ndash;<img id="curBigImage" src="https://image.xiaozhustatic3.com/00,800,533/2,3,0,6,983,1800,1200,0088b195.jpg" alt="" />&ndash;&gt;-->
-
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="pho_show_r">-->
-                    <!--<div class="pho_show_small">-->
-                    <!--<div class="pho_small_prev detail-image-prev"></div>-->
-                    <!--<div class="pho_small_next detail-image-next"></div>-->
-                    <!--<ul class="detail-thumb-nav">-->
-                    <!--<li>-->
-                    <!--<div class="pho_layer"></div>-->
-                    <!--<img :src="'http://localhost:8081/'+listinfo.bedroom"-->
-                    <!--data-intro="" data-imgrate="0.7421875"-->
-                    <!--data-bigimg="https://image.xiaozhustatic3.com/00,396,533/s,1,nubs,950,1280,2,3b15e3c5.jpg" data-width="396"  data-height="533" title="" />-->
-
-                    <!--</li>-->
-                    <!--<li>-->
-                    <!--<img :src="'http://localhost:8081/'+listinfo.bedroom"-->
-                    <!--data-intro="" data-imgrate="0.7421875"-->
-                    <!--data-bigimg="https://image.xiaozhustatic3.com/00,396,533/s,1,nubs,950,1280,2,3b15e3c5.jpg" data-width="396"  data-height="533" title="" />-->
-                    <!--</li>-->
-                    <!--</ul>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--/轮播图-->
-
-                    <!--photo light box-->
-                    <!--/photo light box-->
-
 
                     <div id="introducePart">
                         <ul class="house_info clearfix" id="introduce">
@@ -350,23 +246,20 @@
                                 <div>
                                     <!--发表评论-->
                                     <el-form style="text-align: left;margin: 0px 20px;" label-width="180px" :model="com" class="form">
-                                        <el-input v-model="com.uid"></el-input>
-                                        <el-input v-model="com.bnbid"></el-input>
-                                        <div v-clickoutside="hideReplyBtn" @click="inputFocus" class="my-reply">
+                                        <div v-clickoutside="hideReplyBtn" @click="inputFocus" class="my-reply" v-show="com.uid !== null">
                                             <el-avatar class="header-img" :size="40" :src="myHeader"></el-avatar>
-                                            <div class="reply-info" >
+                                            <div class="reply-info">
                                                 <el-input
                                                     placeholder="输入评论..."
-                                                    class="reply-input"
                                                     @focus="showReplyBtn"
-                                                    @input="onDivInput($event)"
                                                     v-model="com.context"></el-input>
-
                                             </div>
                                             <div class="reply-btn-box" v-show="btnShow">
                                                 <el-button class="reply-btn" size="medium" @click="sendComment" type="primary">发表评论</el-button>
                                             </div>
                                         </div>
+                                        <el-input v-model="com.uid" hidden></el-input>
+                                        <el-input v-model="com.bnbid" hidden></el-input>
                                     </el-form>
 
                                     <!--显示评论-->
@@ -399,42 +292,24 @@
                 </div>
                 <!--/left content-->
 
+                <div class="wrapper">
                 <!--right content-->
-                <div class="con_r">
-                    <div class="top_bar clearfix">
-                        <ul class="collection_ul"  style="display:none;">
-                            <li class="top_bar_w1 col_pink tl_text collection_btn_full">
-                                <a href="#ongo" class="ysc_ico un_collection_btn" id="unCollectionBtn">已收藏</a>
-                            </li>
-                            <li class="top_bar_w3 tl_text collection_btn_short" style="display:none;">
-                                <a class="sc_ico ysc_ico un_collection_btn"></a>
-                            </li>
-                        </ul>
-                        <ul class="collection_ul" >
-                            <li class="top_bar_w1 tl_text collection_btn_full">
-                                <a href="#ongo" class="sc_ico collection_btn" id="collectionBtn">收藏</a>
-                            </li>
-                            <li class="top_bar_w3 tl_text collection_btn_short" style="display:none;">
-                                <a href="#ongo" class="sc_ico collection_btn"></a>
-                            </li>
-                        </ul>
+                <div id="nav_keleyi_com" class="con_r" style="width:auto;background-color: #F8F8F8">
+
+                    <div class="top_bar clearfix" style="background-color: #F8F8F8">
                         <ul>
                             <li class="top_bar_w1 detail-default-share">
                                 <a href="#ongo" class="share_ico">分享</a>
                             </li>
-                            <li class="top_bar_w4 pr detail-icon-share" style="display:none;">
-
-                            </li>
-                            <li class="top_bar_w2 border_right_none">评分：<em class="score-rate">5分</em></li>
+                            <li class="top_bar_w2 border_right_none" style="margin-right: 140px;">评分：<em class="score-rate">4.9分</em></li>
                         </ul>
                     </div>
 
-                    <div class="bg_box" id="floatRightBox">
+                    <div class="bg_box" id="floatRightBox" style="margin-top: 20px; background-color: #F8F8F8">
                         <div class="day_top clearfix" id="pricePart">
                             <div class="day_l">&#165;<span>{{listinfo.price}}</span><em></em></div>
                             <div class="day_r">每晚</div>
                         </div>
-
                         <!--预定start-->
                         <div id="detailBookArea">
                             <div class="reserve_box">
@@ -449,11 +324,12 @@
                                         :clearable="false"
                                         :size="small"
                                         @change="hqjg"
+                                        :picker-options="pickerOptions"
                                         format="yyyy-MM-dd"
                                         value-format="yyyy-MM-dd"
                                         range-separator="至"
-                                        start-placeholder="开始日期"
-                                        end-placeholder="结束日期">
+                                        :start-placeholder="getdate()"
+                                        :end-placeholder="getDay(1)">
                                     </el-date-picker>
                                 </div>
                                 <div class="reserve_space">
@@ -496,64 +372,11 @@
 
                 </div>
                 <!--/right content-->
+                </div>
             </div>
 
             <div class="wrap" id="otherRoomPart"></div>
             <!--/main -->
-            <!--hiden dialog-->
-            <div id="fullCalendarDialog" style="display:none">
-                <div class="colsed"></div>
-                <div class="mask"></div>
-                <div class="calendar_big clearfix">
-                    <div class="calendar_l">
-                        <div class="arrow_l1">
-                        </div>
-                        <div class="arrow_r1"></div>
-                        <div class="calendar_big_tit" id="leftMonth"></div>
-                        <table class="calendar_top" border="0" cellspacing="0" cellpadding="0">
-                            <thead>
-                            <tr><th class="col_pink">日</th>
-                                <th>一</th>
-                                <th>二</th>
-                                <th>三</th>
-                                <th>四</th>
-                                <th>五</th>
-                                <th class="col_pink">六</th>
-                            </tr></thead>
-                        </table>
-                        <table width="100%" border="0" cellspacing="4" cellpadding="0" class="calendar_big_table">
-                            <tbody id="leftTbody">
-                            </tbody>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="calendar_r">
-                        <div class="calendar_btm clearfix">
-                            <div class="calendar_text col_pink yh">
-                            </div>
-                        </div>
-                        <div class="calendar_big_tit" id="rightMonth"></div>
-                        <table class="calendar_top" border="0" cellspacing="0" cellpadding="0">
-                            <thead>
-                            <tr><th class="col_pink">日</th>
-                                <th>一</th>
-                                <th>二</th>
-                                <th>三</th>
-                                <th>四</th>
-                                <th>五</th>
-                                <th class="col_pink">六</th>
-                            </tr></thead>
-                        </table>
-                        <table width="100%" border="0" cellspacing="4" cellpadding="0" class="calendar_big_table">
-                            <tbody id="rightTbody">
-                            </tbody>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> <!--/hiden dialog-->
             <div id="addFavoritePop" style="display:none;"></div>
             <div id="addFavoriteGroupPop" style="display:none;">
 
@@ -668,6 +491,7 @@
 </template>
 
 <script>
+
     const clickoutside = {
         // 初始化指令
         bind(el, binding, vnode) {
@@ -693,28 +517,83 @@
             delete el.vueClickOutside;
         },
     };
+
+    function menuFixed(id){
+        var obj = document.getElementById(id);
+        var _getHeight = obj.offsetTop;
+
+        window.onscroll = function(){
+            changePos(id,_getHeight);
+        }
+    }
+    function changePos(id,height){
+        var obj = document.getElementById(id);
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if(scrollTop < height){
+            obj.style.position = 'relative';
+        }else{
+            obj.style.position = 'fixed';
+        }
+    }
+    window.onload = function(){
+        menuFixed('nav_keleyi_com');
+    }
+
+
     import header from "../components/Housing_header.vue"
-    var userid=JSON.parse(localStorage.getItem('acc'))
+    var uid=JSON.parse(localStorage.getItem('acc'))
 
     export default {
         name: "Housing_details",
         data(){
             return{
+                pickerOptions: {
+                    disabledDate(time) {
+                        return time.getTime() < Date.now() - 8.64e7;   //禁用以前的日期，今天不禁用
+                        // return date.getTime() <= Date.now();    //禁用今天以及以前的日期
+                    }
+                },
+                getdate() {  //获取当前日期
+                    var date = new Date();
+                    var seperator1 = "-";
+                    var year = date.getFullYear();
+                    var month = date.getMonth() + 1;
+                    var strDate = date.getDate();
+
+                    if (month >= 1 && month <= 9) {
+                        month = "0" + month;
+                    }
+                    if (strDate >= 0 && strDate <= 9) {
+                        strDate = "0" + strDate;
+                    }
+                    var currentdate = year + "-" + month + "-" + strDate ;
+                    return currentdate;
+                },
+                getDay(day) { //获取明天日期
+                    var today = new Date();
+                    var targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
+                    today.setTime(targetday_milliseconds); //注意，这行是关键代码
+
+                    var tYear = today.getFullYear();
+                    var tMonth = today.getMonth();
+                    var tDate = today.getDate();
+                    tMonth = this.doHandleMonth(tMonth + 1);
+                    tDate = this.doHandleMonth(tDate);
+                    return tYear + "-" + tMonth + "-" + tDate;
+                },
+                doHandleMonth(month) {
+                    var m = month;
+                    if (month.toString().length == 1) {
+                        m = "0" + month;
+                    }
+                    return m;
+                },
                 bnbid:1,
                 listinfo:[],//房源信息
                 pic:[],//图片
                 tprice:10,//总价格
                 datavalue:"", //日期
-                jasj:{
-                    uid : 2,
-                    name : "张三",
-                    phone : "131235643215",
-                    bnbname:"sss",
-                    bnbid : 10,
-                    order_price : 20,
-                    order_people:1,
-                    order_number:8098080980
-                },
+                order:[],
                 activeName:'xz',
                 btnShow: false,
                 index:'0',
@@ -738,32 +617,51 @@
         },
         directives: {clickoutside},
         created:function(){
+
             this.bnbid = this.$route.params.bnbid
             this.com.bnbid = this.$route.params.bnbid;
             this.com.uid = JSON.parse(localStorage.getItem('acc'));
             // alert(JSON.parse(localStorage.getItem('acc')))
             this.queryBnbid(this.bnbid);
-            this.query();
-            this.reqQuery();
+            //查询评论
+            this.query(this.bnbid);
+            //查询房屋信息
+            this.queryorder();
+
         },
         methods:{
-            addOrder(){
-                var list = this.jasj
-                this.$router.push({name:"Housing_order",params:{list:list}});
+            addOrder(){ //提交订单
+                if (this.com.uid===null){
+                    this.$message.error("请先登录账号");
+                } else{
+                    var uid=JSON.parse(localStorage.getItem('acc'));
+                    this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+uid)
+                        .then(res => {
+                            this.order[0].order_price = this.tprice;
+                            this.order[0].truename=res.data[0].truename;
+                            this.order[0].photo=res.data[0].photo;
+                            this.order[0].uid=uid;
+                            var list = this.order[0];
+                            console.log(list);
+                            this.$router.push({name:"Housing_order",params:{list:list}});
+                        })
+
+                }
             },
             //查询评论
-            query() {
-                this.$axios.post('http://localhost:8081/comment/listAll')
+            query(bnbid) {
+                this.$axios.post('http://localhost:8081/comment/listAll?bnbid='+this.bnbid)
                     .then(res => {
+                        // alert(this.bnbid)
                         this.comments = res.data
                     });
-            },reqQuery(){  //查询回复
-                this.$axios.post('http://localhost:8081/rep/listAll')
+            },
+            queryorder(){
+                this.$axios.post('http://localhost:8081/order/query')
                     .then(res => {
-                        this.reply = res.data
+                        // this.order = res.data
                     });
             },
-
             inputFocus(){
                 var replyInput = document.getElementById('replyInput');
                 replyInput.style.padding= "8px 8px"
@@ -784,6 +682,7 @@
                 this.comments[i].inputShow = true
                 this.to = name
                 this.toId = id
+                
             },
             _inputShow(i){
                 return this.comments[i].inputShow
@@ -794,6 +693,7 @@
                     .then(res => {
                         if (res.data == 1) {
                             this.$message.success("评论成功");
+                            this.com.context="";
                             this.query();
                         } else {
                             this.$message.error("评论失败");
@@ -805,6 +705,8 @@
             },
 
             hqjg(){
+                this.order[0].start=this.datavalue[0]
+                this.order[0].end=this.datavalue[1]
                 let start=(this.datavalue[0]).split('-');
                 start=start[0]+start[1]+start[2]
                 start=parseInt(start);
@@ -818,12 +720,14 @@
                 this.$axios.post("http://localhost:8081/bnbinfo/queryId?bnbid="+bnbid)
                     .then(response=>{
                         this.listinfo=response.data;
+                        this.order[0]=response.data;
                         var map = new BMap.Map('allmap');
                         var point = new BMap.Point(this.listinfo.longitude, this.listinfo.latitude) // 创建点坐标，汉得公司的经纬度坐标
                         map.centerAndZoom(point, 15);
                         var marker = new BMap.Marker(point);  // 创建标注
                         map.addOverlay(marker);
                         map.disableDragging();
+
                         this.pic.push(this.listinfo.bedroom);
                         this.pic.push(this.listinfo.room);
                         this.pic.push(this.listinfo.toilet);
@@ -833,11 +737,25 @@
                     })
             }
         },
-
     }
 </script>
 
 <style lang="stylus" scoped>
+
+    .wrapper{
+        width:auto;
+        margin-left:auto;
+        margin-right:auto;
+        margin-left 1000px
+    }
+    #nav_keleyi_com{
+        position:relative;
+        top:0;
+        background:bottom;
+        width:200px;
+        float: left;
+        margin-left: -60px;
+    }
 
     .my-reply
         padding 10px

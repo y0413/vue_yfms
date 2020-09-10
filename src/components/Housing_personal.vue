@@ -35,11 +35,13 @@
                     </div>
                 </div>
             </div>
+            <!--头部-->
+            <Header></Header>
         </el-header>
-        <el-main >
+        <el-main>
             <el-tabs :tab-position="tabPosition='left'" style="height: 700px">
-                <el-tab-pane style="padding-left:20px;">
-                    <span slot="label"><i class="el-icon-s-order"></i>我的订单</span>
+                <el-tab-pane style="padding-left:20px">
+                    <span slot="label"  style="font:18px large"><i class="el-icon-s-order"></i>我的订单</span>
 
                     <el-tabs v-model="activeName" @tab-click="handleClick"  style="height: 700px;width: 1000px">
                         <el-tab-pane label="进行中" name="first">进行中
@@ -51,7 +53,13 @@
                                         {{scope.row.state==0?'进行中':'已结束'}}
                                     </template>
                                 </el-table-column>
+                                <el-table-column label="订单金额" prop="order_price"></el-table-column>
                                 <el-table-column label="民宿名称" prop="bnbname"></el-table-column>
+                                <el-table-column label="操作">
+                                    <template slot-scope="scope">
+                                        <el-button @click="qxdd(scope.row)">取消订单</el-button>
+                                    </template>
+                                </el-table-column>
                             </el-table>
                             <el-pagination
                                 layout="total, sizes, prev, pager, next, jumper"
@@ -88,7 +96,7 @@
 
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-user"></i>个人资料</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-user"></i>个人资料</span>
                     <div style="width: 980px;border: 0px solid red;overflow: auto">
                         <b style="color: aqua;line-height: 40px;font-size: 20px;padding-left: 20px">基本信息</b>
                         <hr style="color: honeydew"/>
@@ -181,7 +189,7 @@
 
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-edit-outline"></i>我的点评</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-edit-outline"></i>我的点评</span>
                     <el-table :data="commentsList.slice((currentPage-1)*PageSize,currentPage*PageSize)" border style="width: 100%">
                         <el-table-column label="评论编号" prop="cid"></el-table-column>
                         <el-table-column label="评论内容" prop="context"></el-table-column>
@@ -203,7 +211,7 @@
                     <!--我的收藏-->
                 <!--</el-tab-pane>-->
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-lock"></i>密码设置</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-lock"></i>密码设置</span>
                     <span style="font-size: 18px " >密码修改</span>
                     <el-form :model="upwdList" :rules="rules3" ref="upwdList" label-width="80px"  label-position="left">
                           <b style="font-family: 华文宋体;font-size: 24px">手机号:+86 {{this.jequ}}</b>
@@ -221,7 +229,7 @@
                     </el-form>
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;" >
-                    <span slot="label"><i class="el-icon-setting"></i>注销账号</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-setting"></i>注销账号</span>
                     <b style="font-size: 26px">申请注销小猪账号</b>
                     <p style="line-height: 50px;font-size: 16px">在你提交了注销申请之后，系统将进行以下验证，以确保你的账号、财产安全。</p>
                     <hr>
@@ -327,6 +335,7 @@
 </template>
 
 <script>
+    import header from "../components/Housing_header.vue"
     export default {
         name: "df",
         inject:['reload'],
@@ -433,6 +442,8 @@
                 orderjsList:[],
                 commentsList:[]
             }
+        },components:{
+            Header:header
         }
        ,created:function(){
             this.queryOrdersjxz();
@@ -440,6 +451,16 @@
             this.queryComments();
             this.jazai();
         },methods:{
+            qxdd(row){
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                this.$axios.post("http://localhost:8081/plat/upFmoney?money="+row.order_price).then(res => {
+                    if(res.data>0){
+                        this.$axios.post("http://localhost:8081/plat/addWaterqx?wmoney="+row.order_price+"&uid="+uid+"&wstate=1").then(res => {
+
+                        })
+                    }
+                })
+            },
             handleSubmit:function () {
                 if(this.diasabledInput){
                     this.diasabledInput=false;
@@ -450,9 +471,16 @@
             fdzx(){
                 this.$router.push({name:"Housing_fdpersonal"})
             },
+            fkzx(){
+                this.$router.push({name:"Housing_personal"})
+            },
+            tc(){
+                localStorage.clear();
+                this.$router.push({name:"Housing_main"})
+            },
             queryComments(){
                 var uid=JSON.parse(localStorage.getItem('acc'));
-                this.$axios.post("http://localhost:8081/orders/queryComments?uid="+uid).then(res => {
+                this.$axios.post("http://localhost:8081/order/queryComments?uid="+uid).then(res => {
                     let comment = res.data;
                     this.total = comment.length;
                     this.commentsList = comment
@@ -460,7 +488,7 @@
             },
             queryOrdersjxz(){
                 var uid=JSON.parse(localStorage.getItem('acc'))
-                this.$axios.post("http://localhost:8081/orders/queryOrders?uid="+uid+"&state="+0).then(res => {
+                this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+0).then(res => {
                     let order = res.data;
                     this.total = order.length
                     this.orderjxzList = order
@@ -468,7 +496,7 @@
             },
             queryOrdersjs(){
                 var uid=JSON.parse(localStorage.getItem('acc'))
-                this.$axios.post("http://localhost:8081/orders/queryOrders?uid="+uid+"&state="+1).then(res => {
+                this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+1).then(res => {
                     let order = res.data;
                     this.total = order.length
                     this.orderjsList = order
@@ -590,8 +618,6 @@
                         // this.dialogVisible=false;
                         // this.reload();
                     })
-
-
 
                     // this.userList=JSON.parse(localStorage.getItem('acc'));
                     // this.userList1=this.userList[0];

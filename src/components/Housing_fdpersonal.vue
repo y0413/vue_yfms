@@ -1,61 +1,13 @@
 <template>
     <el-container>
         <el-header>
-            <div class="header height56">
-                <div class="top"></div>
-                <div class="top_wraper">
-                    <div class="top_con">
-                        <link rel="stylesheet" type="text/css" href="//jci.xiaozhustatic1.com/e20200803/xzcss?css=houseHover,realNamePop,jquery-ui,nyroModal" />
-                        <div class="o_mask" id='maskName'  style="display:none;"></div>
-                        <a class="logo_v2 logo_black" href="https://www.xiaozhu.com">小猪</a>
-                        <span style="color: #fff;font-size: 19px;float: left;margin: 13px 0 0 10px;"> 酒店之外，就住阳房</span>
-                        <input type="hidden" value="tenant" id="userCurrentRole"/>
-                        <input type="hidden" value="144260581897" id="loginUserId"/>
-                        <ul class="nav">
-                            <li class="active">
-                                <a class="icon_zhinan"  href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index" rel="nofollow">用户名</a>
-                                <div class="sel_box sel_fd">
-                                    <p class="p1"><a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index"><strong>房东中心</strong></a></p>
-                                    <div class="twobox clearfix">
-                                        <a href="https://www.xiaozhu.com/xz_web2/order/pages/landlord/orderList.html">订单管理</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_SettlementInfo">结算统计</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_ShowLetter">聊天记录</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Comment&filterType=waitComment&fkCmtFilter=all">我的点评</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_MyRooms">房源信息</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_MyRentCalendarList">价格房态</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FD_DiaryList">短租日记</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_UserInfo">个人资料</a>
-                                    </div>
-                                    <p class="p1"><a @click="fkzx()"><strong>房客中心</strong></a></p>
-                                    <div class="twobox clearfix">
-                                        <a href="https://www.xiaozhu.com/xz_web2/order/pages/lodger/list.html">我的订单</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_ShowLetter">聊天记录</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Comment">我的点评</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo">个人资料</a>
-                                    </div>
-                                    <p class="exit"><a href="https://www.xiaozhu.com/logout" id="IM-Logout">退出</a></p>
-                                </div>
-                            </li>
-                            <li><span class="line_index"></span></li>
-                            <li class="active">
-                                <a class="icon_zhinan" href="#ongo">短租指南</a>
-                                <div class="sel_box sel_zhinan">
-                                    <a href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a>
-                                    <a href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a>
-                                </div>
-                            </li>
-                        </ul>
-                        <!---->
-                        <div class="overF_hidden height100">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--头部-->
+            <Header></Header>
         </el-header>
         <el-main >
             <el-tabs :tab-position="tabPosition='left'" style="height: 700px">
                 <el-tab-pane style="padding-left:20px;">
-                    <span slot="label"><i class="el-icon-s-order"></i>我的订单</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-s-order"></i>我的订单</span>
 
                     <el-tabs v-model="activeName" @tab-click="handleClick"  style="height: 700px;width: 1000px">
                         <el-tab-pane label="进行中" name="first">进行中
@@ -67,7 +19,13 @@
                                         {{scope.row.state==0?'进行中':'已结束'}}
                                     </template>
                                 </el-table-column>
+                                <el-table-column label="订单金额" prop="order_price"></el-table-column>
                                 <el-table-column label="民宿名称" prop="bnbname"></el-table-column>
+                                <el-table-column label="操作">
+                                    <template slot-scope="scope">
+                                        <el-button @click="rzwc(scope.row)">入住完成</el-button>
+                                    </template>
+                                </el-table-column>
                             </el-table>
                             <el-pagination
                                 layout="total, sizes, prev, pager, next, jumper"
@@ -104,18 +62,23 @@
 
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-user"></i>房源查看</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-user"></i>房源查看</span>
                     <div style="width: 980px;border: 0px solid red;overflow: auto">
                         <el-table :data="bnblist" border style="width: 100%">
                             <el-table-column label="房源编号" prop="bnbid"></el-table-column>
                             <el-table-column label="房源名称" prop="bnbname"></el-table-column>
                             <el-table-column label="房源价格" prop="price"></el-table-column>
                             <el-table-column label="用户昵称" prop="uname"></el-table-column>
+                            <el-table-column label="操作">
+                                <template slot-scope="scope">
+                                    <el-button @click="xjfy(scope.row)">下架房源</el-button>
+                                </template>
+                            </el-table-column>
                         </el-table>
                     </div>
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-edit-outline"></i>支付宝设置</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-edit-outline"></i>支付宝设置</span>
                     <el-form :model="upzf" label-width="80px"  label-position="left">
                         <el-form-item label="支付宝账号" prop="acc">
                             <el-input   v-model="upzf.acc"></el-input>
@@ -133,7 +96,7 @@
                 <!--我的收藏-->
                 <!--</el-tab-pane>-->
                 <el-tab-pane style="padding-left:40px;">
-                    <span slot="label"><i class="el-icon-lock"></i>提现</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-lock"></i>提现</span>
                     余额:{{userList1.money}}
                     <el-button @click="tx()">提现</el-button>
                     <el-dialog width="30%" title="提现" :visible.sync="dialogTx">
@@ -146,7 +109,7 @@
                     </el-dialog>
                 </el-tab-pane>
                 <el-tab-pane style="padding-left:40px;" >
-                    <span slot="label"><i class="el-icon-setting"></i>提现记录</span>
+                    <span slot="label"  style="font:18px large"><i class="el-icon-setting"></i>提现记录</span>
                     <el-table :data="Txjl.slice((currentPage-1)*PageSize,currentPage*PageSize)" border style="width: 100%">
                         <el-table-column label="提现编号" prop="wid"></el-table-column>
                         <el-table-column label="提现用户" prop="uname"></el-table-column>
@@ -257,6 +220,7 @@
 
 <script>
     import moment from 'moment'
+    import header from "../components/Housing_header.vue"
     export default {
         name: "Housing_fdpersonal",
         inject:['reload'],
@@ -297,6 +261,8 @@
                 upmoney:"",//提现金额
                 Txjl:[],
             }
+        },components:{
+             Header:header
         }
         ,created:function(){
 
@@ -315,8 +281,49 @@
             this.jequ=this.userList[0].photo.replace(this.userList[0].photo.substr(4,4),"****");
 
         },methods:{
+            //下架房源
+            xjfy(row){
+                this.$axios.post("http://localhost:8081/bnbinfo/queryBnbOrder?bnbid="+row.bnbid).then(res => {
+                    if(res.data!=""){
+                        this.$message.error("该房源还有订单正在进行");
+                    }else{
+                        this.$axios.post("http://localhost:8081/bnbinfo/upBnbshelf?bnbid="+row.bnbid).then(res => {
+                            if(res.data>0){
+                                this.$message.success("下架房源成功");
+                                this.querybnb();
+                            }
+                        })
+                    }
+                })
+            },
+            //入住完成
+            rzwc(row){
+                var money=row.order_price-(row.order_price*0.1);
+                var uid=JSON.parse(localStorage.getItem('acc'));
+                this.$axios.post("http://localhost:8081/plat/upFmoney?money="+money).then(res => {
+                    if(res.data>0){
+                        this.$axios.post("http://localhost:8081/plat/addWaterqx?wmoney="+money+"&uid="+uid+"&wstate=2").then(res => {
+                            if(res.data>0){
+                                this.$axios.post("http://localhost:8081/plat/upUmoney?money="+money+"&uid="+uid).then(res => {
+                                    this.jazai();
+                                })
+                            }
+                        })
+                    }
+                })
+            },
+            //房东中心
             fdzx(){
                 this.$router.push({name:"Housing_fdpersonal"})
+            },
+            //房客中心
+            fkzx(){
+                this.$router.push({name:"Housing_personal"})
+            },
+            //推出
+            tc(){
+                localStorage.clear();
+                this.$router.push({name:"Housing_main"})
             },
             //查看提现记录
             queryTx(){
@@ -332,11 +339,11 @@
             updatemoney(){
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 if(this.upmoney>this.userList1.money){
-                    alert("余额不足");
+                    this.$message.error("余额不足");
                 }else {
                     this.$axios.post("http://localhost:8081/UsersController/upMoney?upmoney="+this.upmoney+"&uid="+uid).then(res => {
                         if(res.data>0){
-                            alert("提现成功");
+                            this.$message.success("提现成功");
                             this.$axios.post("http://localhost:8081/UsersController/addTx?uid="+uid+"&total_price="+this.upmoney+"&aid="+this.upzf.aid).then(resp => {
                                 this.dialogTx=false;
                                 this.jazai();
@@ -354,7 +361,7 @@
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post("http://localhost:8081/UsersController/queryAcc?uid="+uid).then(res => {
                     if(res.data==0){
-                        alert("请设置支付宝");
+                        this.$message.error("请设置支付宝");
                     }else {
                         this.dialogTx=true;
                     }
@@ -377,14 +384,14 @@
                     console.log(this.upzf)
                 })
             },
+            //通过用户查询房源
             querybnb(){
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post("http://localhost:8081/UsersController/queryBnb?uid="+uid).then(res => {
-                    // let b = res.data;
-                    // this.total = bnb.length;
                     this.bnblist = res.data
                 })
             },
+            //查询评论
             queryComments(){
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post("http://localhost:8081/orders/queryComments?uid="+uid).then(res => {
@@ -393,17 +400,20 @@
                     this.commentsList = comment
                 })
             },
+            //进行中订单
             queryOrdersjxz(){
                 var uid=JSON.parse(localStorage.getItem('acc'))
-                this.$axios.post("http://localhost:8081/orders/queryOrders?uid="+uid+"&state="+0).then(res => {
+                this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+0).then(res => {
                     let order = res.data;
-                    // this.total = order.length
+                    this.total = order.length
                     this.orderjxzList = order
+                    console.log(this.orderjxzList+"1231231")
                 })
             },
+            //结束订单
             queryOrdersjs(){
                 var uid=JSON.parse(localStorage.getItem('acc'))
-                this.$axios.post("http://localhost:8081/orders/queryOrders?uid="+uid+"&state="+1).then(res => {
+                this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+1).then(res => {
                     let order = res.data;
                     // this.total = order.length
                     this.orderjsList = order

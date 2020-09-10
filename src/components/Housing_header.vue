@@ -1,25 +1,25 @@
 <template>
     <div>
-        <div class="head_bar" style="background-color: black">
-            <div class="head_bar_con">
-                <a href="https://www.xiaozhu.com" class="logo_index">小猪</a>
-                <ul class="nav_R">
-                    <li>
-                        <div v-if="userList[0]==null">
-
-                            <a class="show-register-box" @click="zc()">注册</a>
-                        </div>
-                    </li>
-                    <li >
-                        <div v-if="userList[0]==null">
-                            <a class="show-register-box" @click="dl()">登录</a>
-                        </div>
-                        <div v-else>
-                            <a class="show-register-box" @click="dl()">{{userList[0].uname}}</a>
-                            <div class="head_pop width_58"  id="csr" >
-                                <div class="pop_column">
-                                    <div>
-                                        <a class="fl" @click="personal()">房客中心</a>
+        <div class="head_wrapper">
+            <a @click="show()" class="logo_v2">小猪</a><span class="slogan_v2 slogan_black"></span>
+            <!--    <span class="list_city" id="suggest_icon4Search">西安<i id="showCitySuggestion" class="icon_tri_down tri_down_f"></i><i id="closeCitySuggestion" class="icon_tri_down icon_tri_up"></i></span>-->
+            <ul class="nav_R nav_commen" id="u">
+                <li>
+                    <div v-if="userList[0]==null">
+                        <a rel="nofollow" title="" class="show-register-box"  @click="zc()">注册</a>
+                    </div>
+                </li>
+                <li>·</li>
+                <li>
+                    <div v-if="userList[0]==null">
+                        <a rel="nofollow"  class="logindialog" @click="dl()">登录</a>
+                    </div>
+                    <div v-else>
+                        <a class="show-register-box" @click="dl()">{{userList[0].uname}}</a>
+                        <div class="head_pop width_58"  id="csr" >
+                            <div class="pop_column">
+                                <div>
+                                    <a class="fl" @click="personal()">房客中心</a>
 
                                         <a v-show="userList[0].state==0" class="fr" @click="fdpersonal()">房东中心</a>
                                         <a @click="dele()">退出</a>
@@ -45,8 +45,8 @@
                 </ul>
             </div>
         </div>
-        <el-dialog width="50%" title="用户登录" :visible.sync="dialogVisible">
-                    <el-form :model="userSign" status-icon :rules="rules4" ref="userSign" label-width="80px" class="demo-ruleForm">
+        <el-dialog width="50%"  :visible.sync="dialogVisible">
+            <el-form :model="userSign" status-icon :rules="rules2" ref="userSign" label-width="80px" class="demo-ruleForm">
                 <div class="w_698">
                     <div class="clearfix">
                         <div class="r_main_l">
@@ -142,6 +142,7 @@
                         <p class="">已有账号？<a id="loginDialogBtn" class="col_pink logindialog" @click="dl()">登录&gt;&gt;</a></p>
                     </div>
                 </div>
+
             </div>
         </el-dialog>
     </div>
@@ -163,61 +164,15 @@
                 }
             };
             return{
-                rules4: {
-                    uname: [
-                        {required:true,message:'账号不能为空',trigger:'blur'}
-                    ],
-                    upwd: [
-                        {required:true,message:'密码不能为空',trigger:'blur'}
-                    ]
-
-                },
-                rou:{
-                    phone:[
-                        {required:true,message:'手机号不能为空',trigger:'blur'},
-                        {validator: validateregphone, trigger: 'blur'}
-
-                    ],
-                    yzm :[
-                        {required:true,message:'验证码不能为空',trigger:'blur'},
-                        {min:4,max:8,message:'验证码要4-8位',trigger:['change','blur']}
-
-                    ],
-                    uname:[
-                        {required:true,message:'用户名不能为空',trigger:'blur'},
-
-                    ],
-                    upwd:[
-                        {required:true,message:'密码不能为空',trigger:'blur'},
-                        {min:5,max:10,message:'密码5-10位',trigger:['change','blur']}
-
-                    ]
-                },
-                rules2:{
-                    phone:[
-                        {required:true,message:'手机号不能为空',trigger:'blur'},
-                        {validator: validateregphone, trigger: 'blur'}
-
-                    ],
-                    yzm:[
-                        {required:true,message:'验证码不能为空',trigger:'blur'}
-                    ]
-                },
-                che:true,
-                ksdl:{},
                 userSign:{},
-                userSi:{},
                 dialogVisible:false,
                 dialogVisibleta:false,
                 dialogVisibletad:false,
                 dialogVisibletade:false,
                 userList:{},
-                diasabledInput:true,
                 phone:"",
                 yzm1:"",
-                show: true,
-                count: '',
-                timer: null,
+
                 imagesbox:[
                     {id:0,idView:require("../../static/images/timgBBHO7ZJF.jpg")},
                     {id:1,idView:require("../../static/images/timgSWMA57MC.jpg")},
@@ -248,9 +203,21 @@
             // this.reload();
         },methods:{
 
-            fy(){
-                this.$router.push("Housing_info");
+            //跳转首页
+            show(){
+                this.$router.push({name:"Housing_main"})
             },
+            //发布房源
+            fy(){
+                var uid=JSON.parse(localStorage.getItem('acc'))
+                if(uid==null){
+                    this.$message.error("请先登录")
+                }else{
+                    this.$router.push({name:"Housing_info"})
+                }
+
+            },
+            //查询
             selectAll(){
                 this.$axios.post('http://localhost:8081/bnbinfo/query')
                     .then(response => {
@@ -323,9 +290,6 @@
                             this.timer = null;
                             this.diasabledInput=false;
 
-                        }
-                    }, 1000)
-                }
             },
             dele(){
                 localStorage.clear();
@@ -359,7 +323,7 @@
                     if (valid) {
                 this.$axios.post("http://localhost:8081/test/content?mobile="+this.userSi.yzm).then(res=>{
                     if(res.data===1){
-                        this.$axios.post("http://localhost:8081/test/addusers?uname="+this.userSi.uname+"&upwd="+this.userSi.upwd+"&photo="+this.userSi.phone).then(res=>{
+                        this.$axios.post("http://localhost:8081/test/addusers?uname="+this.userSign.uname+"&upwd="+this.userSign.upwd+"&photo="+this.phone).then(res=>{
                             if(res.data>0){
                                 alert("注册成功");
                                 this.dl();
@@ -369,11 +333,6 @@
                         alert("验证码有误");
                     }
                 })
-                    }else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
             },personal:function () {
                 this.$router.push({name: 'Housing_personal'})
             },

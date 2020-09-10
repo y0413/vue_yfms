@@ -18,8 +18,13 @@ export default new Router({
           path: '/Housing_des',
           name: 'Housing_des',
           component: () => import('../components/Housing_des')
-      }
-      ,{
+      },
+      {
+          path: '/T1',
+          name: 'T1',
+          component: () => import('../components/T1')
+      },
+      {
           path: '/Housing_fac',
           name: 'Housing_fac',
           component: () => import('../components/Housing_fac')
@@ -59,5 +64,12 @@ export default new Router({
           name:'Housing_pay',
           component :()=> import('../components/Housing_pay')
       }
-  ]
+  ],
+    scrollBehavior(to, from,savedPosition) {
+        return {
+            x: 0,
+            y: 0
+        }
+    }
+
 })
