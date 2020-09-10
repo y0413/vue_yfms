@@ -535,10 +535,6 @@
             obj.style.position = 'fixed';
         }
     }
-    window.onload = function(){
-        menuFixed('nav_keleyi_com');
-    }
-
 
     import header from "../components/Housing_header.vue"
     var uid=JSON.parse(localStorage.getItem('acc'))
@@ -627,7 +623,7 @@
             this.query(this.bnbid);
             //查询房屋信息
             this.queryorder();
-
+            menuFixed('nav_keleyi_com');
         },
         methods:{
             addOrder(){ //提交订单
