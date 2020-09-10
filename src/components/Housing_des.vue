@@ -50,15 +50,15 @@
                 <!--</ul>-->
             <!--</div>-->
 
-            <div class='h_top_box'>
-                <div style="margin-left: 12%;margin-right: 10%;margin-top: 2%">
-                    <el-steps :active="0" finish-status="success">
-                        <el-step title="房源信息"></el-step>
-                        <el-step title="房源描述"></el-step>
-                        <el-step title="设施照片"></el-step>
-                    </el-steps>
-                </div>
+        <div class='h_top_box'>
+            <div class="h_step_box" style="height: auto;background-color: rgba(252,246,255,0);width: 1000px">
+                <el-steps :active="1" finish-status="success">
+                    <el-step title="已完成"></el-step>
+                    <el-step title="进行中"></el-step>
+                    <el-step title="房源图片"></el-step>
+                </el-steps>
             </div>
+        </div>
 
             <div class="h_wrap pb20 mt20">
                 <el-form style="text-align: left;margin: 0px 20px; "label-width="80px" :model="des">

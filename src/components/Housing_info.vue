@@ -55,46 +55,28 @@
                 <!--</ul>-->
             <!--</div>-->
 
-            <div id="regSuccessDialog" class="reg_success_box login_register_box" style="display:none;">
-                <div class="">
-                    <div class="r_colsed_1" id="closeRegSuccDialogBtn"><span></span></div>
-                    <div id="regSuccInfo">
-                    </div>
-                </div>
-            </div><div>        </div>
+            <!--<div id="regSuccessDialog" class="reg_success_box login_register_box" style="display:none;">-->
+                <!--<div class="">-->
+                    <!--<div class="r_colsed_1" id="closeRegSuccDialogBtn"><span></span></div>-->
+                    <!--<div id="regSuccInfo">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <div class='h_top_box'>
-                <div class="h_step_box">
-                    <ul class="clearfix">
-                    </ul>
-                    <div class="h_step_cur h_pos1">
-                        <span class="h_step1_cur"></span>
-                        <p>房源信息</p>
-                    </div>
-                    <div class="h_step h_pos2">
-                        <span class="h_step2"></span>
-                        <p>房源描述</p>
-                    </div>
-                    <div class="h_step h_pos3">
-                        <span class="h_step3"></span>
-                        <p>配套设施</p>
-                    </div>
-                    <div class="h_step h_pos4">
-                        <span class="h_step4"></span>
-                        <p>真实照片</p>
-                    </div>
-                    <div class="h_step h_pos5">
-                        <span class="h_step5"></span>
-                        <p>价格规则</p>
-                    </div>
+                <div class="h_step_box" style="height: auto;background-color: rgba(252,246,255,0);width: 1000px">
+                    <el-steps :active="0" finish-status="success">
+                        <el-step title="进行中"></el-step>
+                        <el-step title="房源描述"></el-step>
+                        <el-step title="房源图片"></el-step>
+                    </el-steps>
                 </div>
             </div>
             <el-form :model="bnb">
-            <div class="h_wrap mt20">
 
+            <div class="h_wrap mt20">
                 <h4 class="h_tit">房源地址</h4>
                 <div class="address_box" >
-
                     <div class="clearfix">
                         <div class="address_text">房源位于：</div>
                         <div class="address_list">
@@ -167,7 +149,6 @@
                     <li class="clearfix pb15" >
                         <label class="type w_103" style="width: 100px;color:#000;">房屋类型：</label>
                         <!--<div class="h_input_box house_type" id="houseType" style="width: 120px;">-->
-
                         <!--&lt;!&ndash;<div class="s_arrow_top s_arrow_down cursorPointer"></div>&ndash;&gt;-->
                         <!--&lt;!&ndash;<input type="text" class="roomtype tantnum_box cursorPointer" id="houseTypeText" style="width: 106px;" data="" value="" readonly/>&ndash;&gt;-->
                         <!--&lt;!&ndash;<p class="no_select_tip tip_house_type" id="tipHouseType" style="display: none"></p>&ndash;&gt;-->
