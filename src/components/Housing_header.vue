@@ -45,28 +45,23 @@
                 </ul>
             </div>
         </div>
-        <el-dialog width="50%"  :visible.sync="dialogVisible">
-            <el-form :model="userSign" status-icon :rules="rules2" ref="userSign" label-width="80px" class="demo-ruleForm">
+        <el-dialog width="50%" title="用户登录" :visible.sync="dialogVisible">
+                    <el-form :model="userSign" status-icon :rules="rules4" ref="userSign" label-width="80px" class="demo-ruleForm">
                 <div class="w_698">
                     <div class="clearfix">
                         <div class="r_main_l">
-                            <ul class="r_tab clearfix">
-                                <p>用户登录</p>
-                            </ul>
                             <div id="generalLogin">
                                 <ul class="register_list">
                                     <li>
                                         <el-form-item label="账号" prop="uname">
-                                            <input v-model="userSign.uname" class="r_input_1"   placeholder="手机号,邮箱">
+                                            <el-input style="width: 250px" v-model="userSign.uname" placeholder="手机号" auto-complete="off"></el-input>
                                         </el-form-item>
                                         <el-form-item label="密码" prop="upwd">
-                                            <input type="password" class="r_input_1"  v-model="userSign.upwd" auto-complete="off" placeholder="密码">
+                                            <el-input style="width: 250px"  type="password"  v-model="userSign.upwd" auto-complete="off" placeholder="密码"></el-input>
                                         </el-form-item>
                                     </li>
                                 </ul>
-                                <el-button style="width: 350px" type="primary" class="r_input mt_10" id="orgBtn" @click="queryName()">提交</el-button>
-                                <div class="r_login_space clearfix"><span class="fl cur "><input class="ipt-checkbox2" type="checkbox" id="setcookie" checked="checked" />自动登录</span>
-                                    <span class="fr col_gray"><a href="https://www.xiaozhu.com/findpwdbyphone">忘记密码?</a></span></div>
+                                <el-button style="width: 350px" type="primary" class="r_input mt_10" id="orgBtn" @click="queryName('userSign')">提交</el-button>
                             </div>
                         </div>
                         <div class="r_main_r">
@@ -86,24 +81,21 @@
             <div class="w_698">
                 <div class="clearfix">
                     <div class="r_main_l">
-                        <el-form>
+                        <el-form :model="ksdl" status-icon :rules="rules2" ref="ksdl" label-width="80px" class="demo-ruleForm">
                             <el-form-item label="手机号" prop="phone">
-                                <el-input style="width: 250px" v-model="phone" placeholder="手机号" auto-complete="off"></el-input>
+                                <el-input style="width: 250px" v-model="ksdl.phone" placeholder="手机号" auto-complete="off"></el-input>
                             </el-form-item>
                             <el-form-item label="验证码" prop="yzm">
-                                <el-input style="width: 130px" placeholder="验证码" v-model="yzm1" auto-complete="off"></el-input>
-                                <a @click="yzm()"  class="have-nb">重新发送</a>
+                                <el-input  style="width: 130px" placeholder="验证码" v-model="ksdl.yzm">
+                                </el-input>
+                                <a v-show="show" @click="yzm2()"  class="have-nb">发送验证码</a>
+                                <el-button style="width: 120px;height: 40px" v-show="!show"  class="have-nb" :disabled="diasabledInput">发送成功{{count}}s</el-button>
                             </el-form-item>
                             <el-form-item>
-                                <el-button style="width: 250px" type="primary" @click="usersphoto()">登录</el-button>
+                                <el-button style="width: 250px" type="primary" @click="usersphoto('ksdl')">登录</el-button>
                             </el-form-item>
                         </el-form>
-                        <span class="check_css3 agreeResBox">
-                            <input type="checkbox"  class="input_check" id="check4">
-                            <label for="check4"></label>
-                                    我同意  <a href="https://www.xiaozhu.com/help/service" class="r-service-protocol" target="_blank">《服务协议》、</a><a href="https://www.xiaozhu.com/help/privacy" class="r-service-protocol" target="_blank">《隐私保护声明》</a>
-                                 </span>
-                    </div>
+                        <span class="check_css3 agreeResBox"></span></div>
                     <div class="r_main_r">
                         <h5>合作网站账户登录</h5>
                         <ul class="r_wedsitev1">
@@ -120,29 +112,26 @@
             <div class="w_698 login_register_box "  id="registerDialog">
                 <div class="clearfix">
                     <div class="r_main_l">
-                        <el-form :model="userSign" status-icon :rules="rules2" ref="userSign" label-width="80px" class="demo-ruleForm">
+                        <el-form :model="userSi" status-icon :rules="rou" ref="userSi" label-width="80px" class="demo-ruleForm">
                             <el-form-item label="手机号" prop="phone">
-                                <el-input v-model="phone" placeholder="手机号" auto-complete="off"></el-input>
+                                <el-input v-model="userSi.phone" placeholder="手机号" auto-complete="off"></el-input>
                             </el-form-item>
                             <el-form-item label="验证码" prop="yzm">
-                                <el-input style="width: 130px" placeholder="用户名" v-model="yzm1" auto-complete="off"></el-input>
-                                <a @click="yzm()" id="get-code-btn" class="have-nb">重新发送</a>
+                                <el-input style="width: 130px" placeholder="验证码" v-model="userSi.yzm" auto-complete="off"></el-input>
+                                <a @click="yzm()"  v-show="show" id="get-code-btn" class="have-nb">重新发送</a>
+                                <el-button style="width: 120px;height: 40px" v-show="!show"  class="have-nb" :disabled="diasabledInput">发送成功{{count}}s</el-button>
                             </el-form-item>
                             <el-form-item label="用户名" prop="uname">
-                                <el-input  placeholder="用户名" v-model="userSign.uname" auto-complete="off"></el-input>
+                                <el-input  placeholder="用户名" v-model="userSi.uname" auto-complete="off"></el-input>
                             </el-form-item>
                             <el-form-item label="密码" prop="upwd">
-                                <el-input  type="password" placeholder="密码" v-model="userSign.upwd" auto-complete="off"></el-input>
+                                <el-input  type="password" placeholder="密码" v-model="userSi.upwd" auto-complete="off"></el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-button style="width: 250px" type="primary" @click="addusers()">注册</el-button>
+                                <el-button style="width: 250px" type="primary" @click="addusers('userSi')">注册</el-button>
                             </el-form-item>
                         </el-form>
-                        <span class="check_css3 agreeResBox">
-                            <input type="checkbox"  class="input_check" id="check3">
-                            <label for="check3"></label>
-                                    我同意  <a href="https://www.xiaozhu.com/help/service" class="r-service-protocol" target="_blank">《服务协议》、</a><a href="https://www.xiaozhu.com/help/privacy" class="r-service-protocol" target="_blank">《隐私保护声明》</a>
-                                 </span> </div>
+                        <span class="check_css3 agreeResBox"></span></div>
                     <div class="r_main_r">
                         <h5>合作网站账户登录</h5>
                         <ul class="r_wedsitev1">
@@ -153,7 +142,6 @@
                         <p class="">已有账号？<a id="loginDialogBtn" class="col_pink logindialog" @click="dl()">登录&gt;&gt;</a></p>
                     </div>
                 </div>
-
             </div>
         </el-dialog>
     </div>
@@ -164,16 +152,72 @@
         name: "Housing_header",
         inject:['reload'],
         data(){
+            var validateregphone= (rule, value, callback) => {
+                var phone1 =/^[1][3,4,5,7,8][0-9]{9}$/.test(value);
+                if (value === '') {
+                    callback(new Error('请输入手机号'));
+                } else if (phone1) {
+                    callback();
+                } else {
+                    callback(new Error('手机号格式不正确!'));
+                }
+            };
             return{
+                rules4: {
+                    uname: [
+                        {required:true,message:'账号不能为空',trigger:'blur'}
+                    ],
+                    upwd: [
+                        {required:true,message:'密码不能为空',trigger:'blur'}
+                    ]
+
+                },
+                rou:{
+                    phone:[
+                        {required:true,message:'手机号不能为空',trigger:'blur'},
+                        {validator: validateregphone, trigger: 'blur'}
+
+                    ],
+                    yzm :[
+                        {required:true,message:'验证码不能为空',trigger:'blur'},
+                        {min:4,max:8,message:'验证码要4-8位',trigger:['change','blur']}
+
+                    ],
+                    uname:[
+                        {required:true,message:'用户名不能为空',trigger:'blur'},
+
+                    ],
+                    upwd:[
+                        {required:true,message:'密码不能为空',trigger:'blur'},
+                        {min:5,max:10,message:'密码5-10位',trigger:['change','blur']}
+
+                    ]
+                },
+                rules2:{
+                    phone:[
+                        {required:true,message:'手机号不能为空',trigger:'blur'},
+                        {validator: validateregphone, trigger: 'blur'}
+
+                    ],
+                    yzm:[
+                        {required:true,message:'验证码不能为空',trigger:'blur'}
+                    ]
+                },
+                che:true,
+                ksdl:{},
                 userSign:{},
+                userSi:{},
                 dialogVisible:false,
                 dialogVisibleta:false,
                 dialogVisibletad:false,
                 dialogVisibletade:false,
                 userList:{},
+                diasabledInput:true,
                 phone:"",
                 yzm1:"",
-
+                show: true,
+                count: '',
+                timer: null,
                 imagesbox:[
                     {id:0,idView:require("../../static/images/timgBBHO7ZJF.jpg")},
                     {id:1,idView:require("../../static/images/timgSWMA57MC.jpg")},
@@ -203,6 +247,7 @@
             this.selectAll();
             // this.reload();
         },methods:{
+
             fy(){
                 this.$router.push("Housing_info");
             },
@@ -213,8 +258,10 @@
                     }).catch(error => {
 
                 })
-            },
-            queryName:function () {
+            }, queryName(userSign)
+                {
+                    this.$refs[userSign].validate((valid) => {
+                        if (valid) {
                 this.$axios.post("http://localhost:8081/UsersController/queryName?uname="+
                     this.userSign.uname+"&upwd="+this.userSign.upwd).then(res=>{
                     if(res.data!=""){
@@ -231,26 +278,54 @@
                     }else {
                         alert("登录失败");
                     }
-                }).catch(err=>{
-                })
-            },
-            usersphoto:function(){
-                this.$axios.post("http://localhost:8081/test/content?mobile="+this.yzm1).then(res=>{
-                    if(res.data===1){
-                        alert("登录成功");
-                        this.$axios.post("http://localhost:8081/test/usersphoto?photo="+this.phone).then(res=>{
-                            localStorage.setItem('acc',JSON.stringify(res.data));
-                            this.userList=JSON.parse(localStorage.getItem('acc'));
+                })}else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },
+            usersphoto (ksdl)
+            {
+                this.$refs[ksdl].validate((valid) => {
+                    if (valid) {
+                            this.$axios.post("http://localhost:8081/test/content?mobile="+this.ksdl.yzm).then(res=>{
+                                if(res.data===1){
+                                    alert("登录成功");
+                                    this.$axios.post("http://localhost:8081/test/usersphoto?photo="+this.ksdl.phone).then(res=>{
+                                        localStorage.setItem('acc',JSON.stringify(res.data));
+                                        this.userList=JSON.parse(localStorage.getItem('acc'));
 
-                            // this.userList=JSON.parse(localStorage.getItem('acc'));
+                                        // this.userList=JSON.parse(localStorage.getItem('acc'));
 
-                            this.dialogVisibletade=false;
-                        })
-                    }else {
-                        alert("验证码有误");
-                    }
-                });
+                                        this.dialogVisibletade=false;
+                                    })
+                                }else {
+                                    alert("验证码有误");
+                                }
+                            })
+                            }else {
+                                console.log('error submit!!');
+                                return false;
+                            }
+                        });
+            },getCode(){
+                const TIME_COUNT = 20;
+                if (!this.timer) {
+                    this.count = TIME_COUNT;
+                    this.show = false;
+                    this.timer = setInterval(() => {
+                        if (this.count > 0 && this.count <= TIME_COUNT) {
+                            this.count--;
+                            this.diasabledInput=true;
+                        } else {
+                            this.show = true;
+                            clearInterval((this.timer));
+                            this.timer = null;
+                            this.diasabledInput=false;
 
+                        }
+                    }, 1000)
+                }
             },
             dele(){
                 localStorage.clear();
@@ -272,12 +347,19 @@
                 this.dialogVisibletade=false;
                 this.dialogVisible=true;
             },yzm:function () {
-                this.$axios.post("http://localhost:8081/test/show?phone="+this.phone).then(res=>{
+                this.$axios.post("http://localhost:8081/test/show?phone=" + this.userSi.phone).then(res => {
+                    this.getCode();
                 })
-            },addusers:function () {
-                this.$axios.post("http://localhost:8081/test/content?mobile="+this.yzm1).then(res=>{
+        }, yzm2:function () {
+                    this.$axios.post("http://localhost:8081/test/show?phone=" + this.ksdl.phone).then(res => {
+                        this.getCode();
+                    })
+            }, addusers(userSi){
+                this.$refs[userSi].validate((valid) => {
+                    if (valid) {
+                this.$axios.post("http://localhost:8081/test/content?mobile="+this.userSi.yzm).then(res=>{
                     if(res.data===1){
-                        this.$axios.post("http://localhost:8081/test/addusers?uname="+this.userSign.uname+"&upwd="+this.userSign.upwd+"&photo="+this.phone).then(res=>{
+                        this.$axios.post("http://localhost:8081/test/addusers?uname="+this.userSi.uname+"&upwd="+this.userSi.upwd+"&photo="+this.userSi.phone).then(res=>{
                             if(res.data>0){
                                 alert("注册成功");
                                 this.dl();
@@ -287,6 +369,11 @@
                         alert("验证码有误");
                     }
                 })
+                    }else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },personal:function () {
                 this.$router.push({name: 'Housing_personal'})
             },

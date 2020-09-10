@@ -1,8 +1,6 @@
 <template>
     <div>
-
 <Header></Header>
-
         <div class="banner_con" style="height: 720px">
             <el-carousel indicator-position="outside" height="720px">
                 <el-carousel-item v-for="item in imagesbox" :key="item.id">

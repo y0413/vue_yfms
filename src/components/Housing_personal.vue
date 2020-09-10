@@ -1,6 +1,7 @@
 <template>
     <el-container>
         <el-header>
+
             <div class="header height56">
                 <div class="top"></div>
                 <div class="top_wraper">
@@ -13,27 +14,10 @@
                         <input type="hidden" value="144260581897" id="loginUserId"/>
                         <ul class="nav">
                             <li class="active">
-                                <a class="icon_zhinan"  href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index" rel="nofollow">用户名</a>
+                                <a class="icon_zhinan"  href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index" rel="nofollow">{{this.userList[0].uname}}</a>
                                 <div class="sel_box sel_fd">
-                                    <p class="p1"><a @click="fdzx()"><strong>房东中心</strong></a></p>
-                                    <div class="twobox clearfix">
-                                        <a href="https://www.xiaozhu.com/xz_web2/order/pages/landlord/orderList.html">订单管理</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_SettlementInfo">结算统计</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_ShowLetter">聊天记录</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Comment&filterType=waitComment&fkCmtFilter=all">我的点评</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_MyRooms">房源信息</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_MyRentCalendarList">价格房态</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FD_DiaryList">短租日记</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangDong_UserInfo">个人资料</a>
-                                    </div>
-                                    <p class="p1"><a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Index"><strong>房客中心</strong></a></p>
-                                    <div class="twobox clearfix">
-                                        <a href="https://www.xiaozhu.com/xz_web2/order/pages/lodger/list.html">我的订单</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_ShowLetter">聊天记录</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Comment">我的点评</a>
-                                        <a href="https://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo">个人资料</a>
-                                    </div>
-                                    <p class="exit"><a href="https://www.xiaozhu.com/logout" id="IM-Logout">退出</a></p>
+
+                                    <p class="exit"><a @click="delc()">退出</a></p>
                                 </div>
                             </li>
                             <li><span class="line_index"></span></li>
@@ -143,29 +127,36 @@
                             </div>
                     </div>
                     <el-dialog width="20%" title="修改名字" :visible.sync="dialogName">
-                            <span style="color: gray;margin-left: 20px">用户名:
-                        </span><el-input style="width: 160px" placeholder="用户名" v-model="uname" auto-complete="off"></el-input>
-                        <div style="margin-top: 30px;margin-left: 20px">
-                            <el-button style="width: 100px" type="primary" @click="updateName()">保存</el-button>
-                            <el-button style="width: 100px" type="primary" @click="dialoggb()">关闭</el-button>
-                        </div>
+                        <el-form :model="uphoneList" :rules="rules3" ref="uphoneList" label-width="80px"  label-position="left">
+                            <el-form-item label="用户名" prop="aname">
+                                <el-input style="width: 180px" placeholder="用户名" v-model="uphoneList.aname"></el-input>
+                            </el-form-item>
+                            <div style="margin-top: 30px;margin-left: 20px">
+                                <el-button style="width: 100px" type="primary" @click="updatename('uphoneList')">保存</el-button>
+                                <el-button style="width: 100px" type="primary" @click="dialoggb()">关闭</el-button>
+                            </div>
+                        </el-form>
                     </el-dialog>
                     <el-dialog width="30%" title="修改手机号" :visible.sync="dialogUpdate">
-                            <span style="color: gray;margin-left: 20px;line-height: 20px">新的手机号:
-                        </span><el-input style="width: 240px" placeholder="手机号" v-model="photo" auto-complete="off"></el-input>
-                        <br><span style="color: gray;margin-left: 20px;line-height: 20px">验证码:
-                        </span><el-input style="width: 110px;margin-top: 20px;margin-left: 28px" placeholder="验证码" v-model="yzm1" auto-complete="off"></el-input>
-                            <a @click="yzm()" id="get-code-btn1" class="have-nb">重新发送</a>
-                        <div style="margin-top: 30px;margin-left: 20px">
-                            <el-button style="width: 100px;margin-left: 90px" type="primary" @click="updatesphoto()">保存</el-button>
-                            <el-button style="width: 100px" type="primary" @click="dialogUgb()">关闭</el-button>
-                        </div>
+                        <el-form :model="uphoneList" :rules="rules3" ref="uphoneList" label-width="80px"  label-position="left">
+                            <el-form-item label="手机号" prop="phone">
+                                <el-input style="width: 260px" placeholder="手机号" v-model="uphoneList.phone"></el-input>
+                            </el-form-item>
+                            <el-form-item label="验证码" prop="yzm">
+                                <el-input style="width: 130px" placeholder="验证码" v-model="uphoneList.yzm"></el-input>
+                                <a @click="yzm()" id="get-code-bt" class="have-nb">重新发送</a>
+                            </el-form-item>
+                            <div style="margin-top: 30px;margin-left: 20px">
+                                <el-button style="width: 100px;margin-left: 90px" type="primary" @click="updatesphoto('uphoneList')">保存</el-button>
+                                <el-button style="width: 100px" type="primary" @click="dialogUgb()">关闭</el-button>
+                            </div>
+                        </el-form>
                     </el-dialog>
                     <div style="border: 0px solid red;width:980px;">
                         <b style="color: aqua;font-size: 20px;padding-left: 20px">身份信息</b>
                         <b style="color: gray;line-height: 50px;font-size: 18px;padding-left: 20px">仅用于必要的安全环节，其他情况下将为您严格保密</b>
-                        <a style="color: gray;line-height: 50px;font-size: 18px;padding-left: 400px;"  @click="handleSubmit()" v-show="te">编辑</a>
-                        <a style="color: gray;line-height: 50px;font-size: 18px;padding-left: 400px;"  @click="handleSubmit()" v-show="tex">保存</a>
+                        <a style="color: gray;line-height: 50px;font-size: 18px;padding-left: 400px;"   @click="handleSubmit()" v-show="diasabledInput==true">编辑</a>
+                        <a style="color: gray;line-height: 50px;font-size: 18px;padding-left: 400px;"  @click="submitForm('userList1')" v-show="diasabledInput==false">保存</a>
 
                         <hr style="color: white"/>
                         <el-form :model="userList1" status-icon :rules="rules2" ref="userList1" label-width="80px" class="demo-ruleForm">
@@ -214,20 +205,18 @@
                 <el-tab-pane style="padding-left:40px;">
                     <span slot="label"><i class="el-icon-lock"></i>密码设置</span>
                     <span style="font-size: 18px " >密码修改</span>
-                    <el-form :model="upwdList" label-width="80px"  label-position="left">
-                        <el-form-item label="手机号" prop="phone">
-                            <p>+86 {{this.jequ}}</p>
-                        </el-form-item>
-                        <el-form-item label="验证码" prop="yzm">
-                            <el-input style="width: 130px" placeholder="用户名" v-model="yzm1"></el-input>
-                            <a @click="yzm()" id="get-code-btn" class="have-nb">重新发送</a>
+                    <el-form :model="upwdList" :rules="rules3" ref="upwdList" label-width="80px"  label-position="left">
+                          <b style="font-family: 华文宋体;font-size: 24px">手机号:+86 {{this.jequ}}</b>
+                        <el-form-item label="验证码" prop="yzm1">
+                            <el-input style="width: 130px" placeholder="验证码" v-model="upwdList.yzm1"></el-input>
+                            <a @click="yzm1()" id="get-code-btn" class="have-nb">{{btntxt}}</a>
                         </el-form-item>
 
-                        <el-form-item label="密码" prop="1">
-                            <el-input  type="password" v-model="upwd"></el-input>
+                        <el-form-item label="密码" prop="upwd">
+                            <el-input style="width: 240px;" type="password" v-model="upwdList.upwd"></el-input>
                         </el-form-item>
                         <el-form-item>
-                            <el-button style="width: 250px" type="primary" @click="updateupwd()">修改</el-button>
+                            <el-button style="width: 250px" type="primary" @click="updateupwd('upwdList')">修改</el-button>
                         </el-form-item>
                     </el-form>
                 </el-tab-pane>
@@ -342,9 +331,79 @@
         name: "df",
         inject:['reload'],
         data(){
+            var validateidcard = (rule, value, callback) => {
+                let isMobile =  /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(value);
+                if (isMobile) {
+                    callback();
+                } else {
+                    callback(new Error('身份证格式不正确!'));
+                }
+            };
+
+            var validateregEmail= (rule, value, callback) => {
+                var regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+                if (regEmail) {
+                    callback();
+                }else {
+                    callback(new Error('邮箱格式不正确'));
+                }
+            };
+            var validateregtrueName= (rule, value, callback) => {
+               var truename1 =/^[\u2E80-\u9FFF]+$/.test(value);
+                if (truename1) {
+                    callback();
+                }else {
+                    callback(new Error('姓名只能输入中文'));
+                }
+            };
+            var validateregphone= (rule, value, callback) => {
+                var phone1 =/^[1][3,4,5,7,8][0-9]{9}$/.test(value);
+                if (value === '') {
+                    callback(new Error('请输入手机号'));
+                } else if (phone1) {
+                    callback();
+                } else {
+                    callback(new Error('手机号格式不正确!'));
+                }
+            };
             return {
+                rules2: {
+                    truename: [
+                        {validator: validateregtrueName, trigger: 'blur'}
+
+                    ],
+                    idcard: [
+                        {validator: validateidcard, trigger: 'blur'}
+                    ],
+                    email: [
+                        {validator: validateregEmail, trigger: 'blur'}
+                    ]
+                },
+                rules3: {
+                    phone: [
+                        {validator: validateregphone, trigger: 'blur'}
+                    ],
+                    yzm: [
+
+                        {required:true,message:'验证码不能为空',trigger:'blur'}
+                    ],
+                    aname:[
+                        {required:true,message:'用户名不能为空',trigger:'blur'}
+
+                    ],upwd:[
+                        {required:true,message:'密码不能为空',trigger:'blur'},
+                        {min:5,max:10,message:'密码的要5-10位',trigger:['change','blur']}
+
+
+                    ],yzm1:[
+                        {required:true,message:'验证码不能为空',trigger:'blur'}
+
+                    ]
+            },
+                btntxt:"获取验证码",
                 upwdList:{},
                 userList1:{},
+                uphoneList:{},
                 userList:{},
                 jequ:"",
                 jequ1:"",
@@ -380,9 +439,14 @@
             this.queryOrdersjs();
             this.queryComments();
             this.jazai();
-            this.jequ=this.userList[0].photo.replace(this.userList[0].photo.substr(4,4),"****");
-
         },methods:{
+            handleSubmit:function () {
+                if(this.diasabledInput){
+                    this.diasabledInput=false;
+                }else{
+                    this.diasabledInput=true;
+                }
+            },
             fdzx(){
                 this.$router.push({name:"Housing_fdpersonal"})
             },
@@ -409,19 +473,24 @@
                     this.total = order.length
                     this.orderjsList = order
                 })
-            },
-            updateupwd:function () {
-                this.$axios.post("http://localhost:8081/test/content?mobile="+this.yzm1).then(res=>{
+            }, updateupwd(upwdList)
+                {
+                    this.$refs[upwdList].validate((valid) => {
+                        if (valid) {
+                this.$axios.post("http://localhost:8081/test/content?mobile="+this.upwdList.yzm1).then(res=>{
                     if(res.data===1){
-                        this.$axios.post("http://localhost:8081/UsersController/updateUpwd?upwd="+this.upwd+"&photo="+this.userList[0].photo).then(res=>{
+                        this.$axios.post("http://localhost:8081/UsersController/updateUpwd?upwd="+this.upwdList.upwd+"&photo="+this.userList1.photo).then(res=>{
                             if(res.data>0){
                                 this.$message({
                                     showClose: false,
                                     message: '修改成功',
                                     type: 'success'
                                 });
-                                this.yzm1="";
-                                this.upwd="";
+                                this.upwdList.yzm1="";
+                                this.upwdList.upwd="";
+
+                                this.$router.push({name : 'Housing_main'});
+                                    this.delc();
                             }else {
                                 this.$message({
                                     showClose: false,
@@ -438,31 +507,36 @@
                         })
                     }
                 })
-            },yzm:function () {
-                this.$axios.post("http://localhost:8081/test/show?phone="+this.userList[0].photo).then(res => {
+                        }else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },yzm1:function () {
+                this.$axios.post("http://localhost:8081/test/show?phone="+this.userList1.phone).then(res => {
                 })
-            }, handleSubmit:function () {
-                if(this.diasabledInput){
-                    this.diasabledInput=false;
-                    this.te=false;
-                    this.tex=true;
-                }else{
-                    this.diasabledInput=true;
-                    this.te=true;
-                    this.tex=false;
-                    this.updates()
-
-                }
-            },updates:function () {
+            },delc:function(){
+                this.$router.push({name : 'Housing_main'});
+                localStorage.clear();
+                this.reload();
+    },submitForm(userList1)
+            {
+                this.$refs[userList1].validate((valid) => {
+                    if (valid) {
                 this.$axios.post("http://localhost:8081/UsersController/updates?usex="+this.userList1.usex+"&truename="+this.userList1.truename+"&idcard="+this.userList1.idcard+"&email="+this.userList1.email+"&address="+this.userList1.address+"&uid="+this.userList[0].uid)
                     .then(res=>{
                         if(res.data>0){
-                            alert("修改成功");
+                            this.diasabledInput=true;
                             this.userList[0].usex=this.userList1.usex;
                             this.userList[0].truename=this.userList1.truename;
                             this.userList[0].idcard=this.userList1.idcard;
                         }
                     })
+                    }else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
             },dialogdk:function () {
                 this.dialogName=true;
             },dialoggb:function () {
@@ -488,20 +562,30 @@
             //             }
             //         })
             // },
-            updateName:function () {
-                this.$axios.post("http://localhost:8081/UsersController/updateUname?uname="+this.uname+"&uid="+this.userList[0].uid)
+            updatename(uphoneList)
+            {
+                this.$refs[uphoneList].validate((valid) => {
+                    if (valid) {
+                this.$axios.post("http://localhost:8081/UsersController/updateUname?uname="+this.uphoneList.aname+"&uid="+this.userList[0].uid)
                     .then(res=>{
                         if(res.data>0){
                             this.dialogName=false;
-                            this.userList[0].uname=this.uname;
+                            this.userList[0].uname=this.uphoneList.aname;
+                            this.uphoneList.aname='';
                         }
                 })
+            }else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
             },jazai:function () {
                 if (localStorage.getItem("acc") != null ) {
                     var uid=JSON.parse(localStorage.getItem('acc'))
                     this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+uid).then(res=>{
                         this.userList=res.data;
                         this.userList1=this.userList[0];
+                        this.jequ=this.userList1.photo.replace(this.userList1.photo.substr(4,4),"****");
                         // localStorage.setItem('acc',JSON.stringify(this.userList[0].uid));
                         // this.dialogVisible=false;
                         // this.reload();
@@ -515,7 +599,7 @@
                     alert('key 不存在')
                 }
             },yzm:function () {
-                this.$axios.post("http://localhost:8081/test/show?phone=" + this.photo).then(res => {
+                this.$axios.post("http://localhost:8081/test/show?phone=" + this.uphoneList.phone).then(res => {
                 })
             },
             updatePtel(){
@@ -546,24 +630,31 @@
             handleCurrentChange (val) {
                 // 改变默认的页数
                 this.currentPage = val
-            }
-            ,updatesphoto:function(){
-                this.$axios.post("http://localhost:8081/test/content?mobile="+this.yzm1).then(res=>{
-                    if(res.data===1){
-                        alert("登录成功");
-                        this.$axios.post("http://localhost:8081/UsersController/updatephoto?photo="+this.phone+"&uid="+this.userList[0].uid).then(res=>{
-                            if(res.data>0){
-                                this.dialogUpdate=false;
-                                this.userList[0].photo=this.photo;
+            },updatesphoto(uphoneList)
+                {
+                    this.$refs[uphoneList].validate((valid) => {
+                        if (valid) {
+                            this.$axios.post("http://localhost:8081/test/content?mobile=" + this.uphoneList.yzm).then(res => {
+                                if (res.data === 1) {
+                                    this.$axios.post("http://localhost:8081/UsersController/updatephoto?photo=" + this.uphoneList.phone + "&uid=" + this.userList[0].uid).then(res => {
+                                        if (res.data > 0) {
+                                            this.dialogUpdate = false;
+                                            this.userList[0].photo = this.uphoneList.phone;
+                                            this.uphoneList.phone='';
+                                            this.uphoneList.yzm='';
+                                        }
+                                    })
+                                } else {
+                                    alert("验证码有误");
+                                }
+                            });
+
+                        }else {
+                                console.log('error submit!!');
+                                return false;
                             }
-
-                        })
-                    }else {
-                        alert("验证码有误");
-                    }
-                });
-
-            }
+                        });
+                }
         }
     }
 </script>
