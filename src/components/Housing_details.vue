@@ -682,6 +682,7 @@
                 this.comments[i].inputShow = true
                 this.to = name
                 this.toId = id
+                
             },
             _inputShow(i){
                 return this.comments[i].inputShow
