@@ -18,6 +18,8 @@
                                         {{scope.row.state==0?'进行中':'已结束'}}
                                     </template>
                                 </el-table-column>
+                                <el-table-column label="开始日期" prop="starttime"></el-table-column>
+                                <el-table-column label="结束日期" prop="sendtime"></el-table-column>
                                 <el-table-column label="订单金额" prop="order_price"></el-table-column>
                                 <el-table-column label="民宿名称" prop="bnbname"></el-table-column>
                                 <el-table-column label="操作">
@@ -31,7 +33,7 @@
                                 :current-page="currentPage"
                                 :page-sizes="pageSizes"
                                 :page-size="PageSize"
-                                :total="total"
+                                :total="jxztotal"
                                 @size-change="handleSizeChange"
                                 @current-change="handleCurrentChange">
                             </el-pagination>
@@ -52,7 +54,7 @@
                                 :current-page="currentPage"
                                 :page-sizes="pageSizes"
                                 :page-size="PageSize"
-                                :total="total"
+                                :total="jstotal"
                                 @size-change="handleSizeChange"
                                 @current-change="handleCurrentChange">
                             </el-pagination>
@@ -160,13 +162,18 @@
                         <el-table-column label="评论内容" prop="context"></el-table-column>
                         <el-table-column label="评论用户" prop="uname"></el-table-column>
                         <el-table-column label="房源" prop="bnbname"></el-table-column>
+                        <el-table-column label="房源状态" prop="bnbname">
+                            <template slot-scope="scope">
+                                {{scope.row.bnbshelf==0?'营业中':'已下架'}}
+                            </template>
+                        </el-table-column>
                     </el-table>
                     <el-pagination
                         layout="total, sizes, prev, pager, next, jumper"
                         :current-page="currentPage"
                         :page-sizes="pageSizes"
                         :page-size="PageSize"
-                        :total="total"
+                        :total="ctotal"
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange">
                     </el-pagination>
@@ -403,6 +410,9 @@
                 currentPage: 1,
                 // 总条数
                 total: 1,
+                ctotal:1,
+                jxztotal:1,
+                jstotal:1,
                 orderjxzList:[],
                 orderjsList:[],
                 commentsList:[]
@@ -417,14 +427,21 @@
             this.jazai();
         },methods:{
             qxdd(row){
-                var uid=JSON.parse(localStorage.getItem('acc'));
-                this.$axios.post("http://localhost:8081/plat/upFmoney?money="+row.order_price).then(res => {
-                    if(res.data>0){
-                        this.$axios.post("http://localhost:8081/plat/addWaterqx?wmoney="+row.order_price+"&uid="+uid+"&wstate=1").then(res => {
+                var date=new Date();
+                var sdate=new Date(row.starttime);
+                if(date<sdate){
+                    var uid=JSON.parse(localStorage.getItem('acc'));
+                    this.$axios.post("http://localhost:8081/plat/upFmoney?money="+row.order_price+"&oid="+row.oid).then(res => {
+                        if(res.data>0){
+                            this.$axios.post("http://localhost:8081/plat/addWaterqx?wmoney="+row.order_price+"&uid="+uid+"&wstate=1").then(res => {
+                                this.queryOrdersjxz();
+                            })
+                        }
+                    })
+                }else{
+                    this.$message.error("该订单不可取消,以开始")
+                }
 
-                        })
-                    }
-                })
             },
             handleSubmit:function () {
                 if(this.diasabledInput){
@@ -447,7 +464,7 @@
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post("http://localhost:8081/order/queryComments?uid="+uid).then(res => {
                     let comment = res.data;
-                    this.total = comment.length;
+                    this.ctotal = comment.length;
                     this.commentsList = comment
                 })
             },
@@ -455,7 +472,7 @@
                 var uid=JSON.parse(localStorage.getItem('acc'))
                 this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+0).then(res => {
                     let order = res.data;
-                    this.total = order.length
+                    this.jxztotal = order.length
                     this.orderjxzList = order
                 })
             },
@@ -463,7 +480,7 @@
                 var uid=JSON.parse(localStorage.getItem('acc'))
                 this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+1).then(res => {
                     let order = res.data;
-                    this.total = order.length
+                    this.jstotal = order.length
                     this.orderjsList = order
                 })
             }, updateupwd(upwdList)

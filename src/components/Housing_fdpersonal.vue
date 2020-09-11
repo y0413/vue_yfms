@@ -19,8 +19,11 @@
                                         {{scope.row.state==0?'进行中':'已结束'}}
                                     </template>
                                 </el-table-column>
+                                <el-table-column label="开始日期" prop="starttime"></el-table-column>
+                                <el-table-column label="结束日期" prop="sendtime"></el-table-column>
                                 <el-table-column label="订单金额" prop="order_price"></el-table-column>
                                 <el-table-column label="民宿名称" prop="bnbname"></el-table-column>
+                                <el-table-column label="用户名称" prop="uname"></el-table-column>
                                 <el-table-column label="操作">
                                     <template slot-scope="scope">
                                         <el-button @click="rzwc(scope.row)">入住完成</el-button>
@@ -32,7 +35,7 @@
                                 :current-page="currentPage"
                                 :page-sizes="pageSizes"
                                 :page-size="PageSize"
-                                :total="total"
+                                :total="jxztotal"
                                 @size-change="handleSizeChange"
                                 @current-change="handleCurrentChange">
                             </el-pagination>
@@ -53,7 +56,7 @@
                                 :current-page="currentPage"
                                 :page-sizes="pageSizes"
                                 :page-size="PageSize"
-                                :total="total"
+                                :total="jstotal"
                                 @size-change="handleSizeChange"
                                 @current-change="handleCurrentChange">
                             </el-pagination>
@@ -124,7 +127,7 @@
                         :current-page="currentPage"
                         :page-sizes="pageSizes"
                         :page-size="PageSize"
-                        :total="total"
+                        :total="txtotal"
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange">
                     </el-pagination>
@@ -248,13 +251,16 @@
                 file: [],
                 dialogTx:false,
                 // 个数选择器
-                pageSizes: [1, 2, 3, 4],
+                pageSizes: [2, 5, 10],
                 // 每页显示的条数
                 PageSize: 2,
                 // 默认显示第几页
                 currentPage: 1,
                 // 总条数
                 total: 1,
+                txtotal:1,
+                jxztotal:1,
+                jstotal:1,
                 orderjxzList:[],
                 orderjsList:[],
                 commentsList:[],
@@ -276,7 +282,7 @@
             this.queryOrdersjxz();
             //结束订单
             this.queryOrdersjs();
-            this.queryComments();
+            // this.queryComments();
             this.jazai();
             this.jequ=this.userList[0].photo.replace(this.userList[0].photo.substr(4,4),"****");
 
@@ -298,19 +304,26 @@
             },
             //入住完成
             rzwc(row){
-                var money=row.order_price-(row.order_price*0.1);
-                var uid=JSON.parse(localStorage.getItem('acc'));
-                this.$axios.post("http://localhost:8081/plat/upFmoney?money="+money).then(res => {
-                    if(res.data>0){
-                        this.$axios.post("http://localhost:8081/plat/addWaterqx?wmoney="+money+"&uid="+uid+"&wstate=2").then(res => {
-                            if(res.data>0){
-                                this.$axios.post("http://localhost:8081/plat/upUmoney?money="+money+"&uid="+uid).then(res => {
-                                    this.jazai();
-                                })
-                            }
-                        })
-                    }
-                })
+                var date=new Date();
+                var sdate=new Date(row.sendtime);
+                if(date>sdate){
+                    var money=row.order_price-(row.order_price*0.1);
+                    var uid=JSON.parse(localStorage.getItem('acc'));
+                    this.$axios.post("http://localhost:8081/plat/upFmoney?money="+money+"&oid="+row.oid).then(res => {
+                        if(res.data>0){
+                            this.$axios.post("http://localhost:8081/plat/addWaterqx?wmoney="+money+"&uid="+uid+"&wstate=2").then(res => {
+                                if(res.data>0){
+                                    this.$axios.post("http://localhost:8081/plat/upUmoney?money="+money+"&uid="+uid).then(res => {
+                                        this.queryOrdersjxz();
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }else{
+                    this.$message.error("订单日期还未结束")
+                }
+
             },
             //房东中心
             fdzx(){
@@ -330,7 +343,7 @@
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post("http://localhost:8081/UsersController/queryTx?uid="+uid).then(resp => {
                     let jl = resp.data;
-                    this.total = jl.length;
+                    this.txtotal = jl.length;
                     this.Txjl=jl;
                     this.start();
                 });
@@ -391,23 +404,23 @@
                     this.bnblist = res.data
                 })
             },
-            //查询评论
-            queryComments(){
-                var uid=JSON.parse(localStorage.getItem('acc'));
-                this.$axios.post("http://localhost:8081/orders/queryComments?uid="+uid).then(res => {
-                    let comment = res.data;
-                    // this.total = comment.length;
-                    this.commentsList = comment
-                })
-            },
+            // //查询评论
+            // queryComments(){
+            //     var uid=JSON.parse(localStorage.getItem('acc'));
+            //     this.$axios.post("http://localhost:8081/orders/queryComments?uid="+uid).then(res => {
+            //         let comment = res.data;
+            //         // this.total = comment.length;
+            //         this.commentsList = comment
+            //     })
+            // },
             //进行中订单
             queryOrdersjxz(){
                 var uid=JSON.parse(localStorage.getItem('acc'))
-                this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+0).then(res => {
+                this.$axios.post("http://localhost:8081/order/queryOrdersjx?uid="+uid+"&state="+0).then(res => {
                     let order = res.data;
-                    this.total = order.length
+                    this.jxztotal = order.length
                     this.orderjxzList = order
-                    console.log(this.orderjxzList+"1231231")
+                    // console.log(this.orderjxzList+"1231231")
                 })
             },
             //结束订单
@@ -415,7 +428,7 @@
                 var uid=JSON.parse(localStorage.getItem('acc'))
                 this.$axios.post("http://localhost:8081/order/queryOrders?uid="+uid+"&state="+1).then(res => {
                     let order = res.data;
-                    // this.total = order.length
+                    this.jstotal = order.length
                     this.orderjsList = order
                 })
             },
