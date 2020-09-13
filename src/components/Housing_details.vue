@@ -341,7 +341,7 @@
 
                                     </div>
                                     <div class="order_btn_container">
-                                        <a class="order_btn" @click="addOrder" id="day_yuding">立即预订<span class="f14">（总计￥{{tprice}}）</span></a>
+                                        <a class="order_btn" @click="addOrder" v-show="dashow" id="day_yuding">立即预订<span class="f14">（总计￥{{tprice}}）</span></a>
                                     </div>
                                 </div>
 
@@ -551,9 +551,8 @@
         data(){
             return{
                 pickerOptions: {
-                    disabledDate(time) {
-                        return time.getTime() < Date.now() - 8.64e7;   //禁用以前的日期，今天不禁用
-                        // return date.getTime() <= Date.now();    //禁用今天以及以前的日期
+                    disabledDate(time){
+                    return time.getTime() < Date.now();
                     }
                 },
                 rules4:{
@@ -598,6 +597,7 @@
                     }
                     return m;
                 },
+                dashow:true,
                 bnbid:1,
                 listinfo:[],//房源信息
                 pic:[],//图片
@@ -627,8 +627,8 @@
         },
         directives: {clickoutside},
         created:function(){
-
-            this.bnbid = this.$route.params.bnbid
+            // this.pickerFocus();
+            this.bnbid = this.$route.params.bnbid;
             this.com.bnbid = this.$route.params.bnbid;
             this.com.uid = JSON.parse(localStorage.getItem('acc'));
             // alert(JSON.parse(localStorage.getItem('acc')))
@@ -640,10 +640,13 @@
 
         },
         methods:{
-            addOrder(){ //提交订单
+                addOrder(){ //提交订单
                 if (this.com.uid===null){
                     this.$message.error("请先登录账号");
-                } else{
+                }else if(this.com.uid===this.listinfo.uid){
+                    this.$message.error("不可预定自己的房间")
+                }
+                else{
                     var uid=JSON.parse(localStorage.getItem('acc'));
                     this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+uid)
                         .then(res => {
@@ -721,16 +724,30 @@
             },
 
             hqjg(){
-                this.order[0].start=this.datavalue[0]
-                this.order[0].end=this.datavalue[1]
-                let start=(this.datavalue[0]).split('-');
-                start=start[0]+start[1]+start[2]
-                start=parseInt(start);
-                let end=(this.datavalue[1]).split('-');
-                end=end[0]+end[1]+end[2];
-                end=parseInt(end);
-                let num=end-start;
-                this.tprice=num*this.listinfo.price;
+                this.$axios.post('http://localhost:8081/bnbinfo/selectOrYd?sttime='+this.datavalue[0]+"&bnbid="+this.bnbid)
+                    .then(res => {
+                        if(res.data==""){
+                            this.order[0].start=this.datavalue[0]
+                            this.order[0].end=this.datavalue[1]
+                            let start=(this.datavalue[0]).split('-');
+                            start=start[0]+start[1]+start[2]
+                            start=parseInt(start);
+                            let end=(this.datavalue[1]).split('-');
+                            end=end[0]+end[1]+end[2];
+                            end=parseInt(end);
+                            let num=end-start;
+                            this.tprice=num*this.listinfo.price;
+                            this.dashow=true;
+                        }
+                        if(res.data!=" " ){
+                            // this.tprice=this.listinfo.price;
+                            this.$message.error(res.data[0].starttime+"到"+res.data[0].sendtime+"已经被预定");
+                            var a=document.getElementById("day_yuding");
+                            this.dashow=false;
+
+                        }
+                    });
+
             },
             queryBnbid(bnbid){
                 this.$axios.post("http://localhost:8081/bnbinfo/queryId?bnbid="+bnbid)
