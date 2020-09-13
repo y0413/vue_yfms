@@ -40,7 +40,6 @@
                                 </div>
                             </div>
                         </li>
-
                         <li><a rel="nofollow" @click="fy()" class="btn_free show-register-box" id="Pub_Btn">免费发布房间</a></li>
                     </ul>
                 </div>
