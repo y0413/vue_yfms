@@ -4,6 +4,7 @@
             <Header></Header>
         </el-header>
         <el-main>
+            {{this.userList1}}
             <el-tabs :tab-position="tabPosition='left'" style="height: 700px">
                 <el-tab-pane style="padding-left:20px">
                     <span slot="label"  style="font:18px large"><i class="el-icon-s-order"></i>我的订单</span>
@@ -146,9 +147,20 @@
                             <el-form-item label="邮箱:" prop="email">
                                 <el-input v-model="userList1.email" style="width: 290px" v-bind:disabled="diasabledInput"></el-input>
                             </el-form-item>
-                            <el-form-item label="地址:" prop="address">
-                                <el-input v-model="userList1.address" style="width: 290px" v-bind:disabled="diasabledInput"></el-input>
-                            </el-form-item>
+                                <el-form-item label="地址:" prop="address">
+                                    <div v-show="dj">
+                                        <el-cascader
+                                            :options="options"
+                                            v-model="userList1.address"
+                                            @change="handleChange"
+                                            v-bind:disabled="diasabledInput"
+                                            >
+                                        </el-cascader>
+                                    </div>
+                                    <el-input v-model="userList1.address" v-show="db" style="width: 290px" v-bind:disabled="diasabledInput"></el-input>
+
+                                </el-form-item>
+
                         </el-form>
                     </div>
 
@@ -301,6 +313,8 @@
 
 <script>
     import header from "../components/Housing_header.vue"
+
+    import { regionData, CodeToText } from 'element-china-area-data'// 省市级连
     export default {
         name: "df",
         inject:['reload'],
@@ -332,9 +346,7 @@
             };
             var validateregphone= (rule, value, callback) => {
                 var phone1 =/^[1][3,4,5,7,8][0-9]{9}$/.test(value);
-                if (value === '') {
-                    callback(new Error('请输入手机号'));
-                } else if (phone1) {
+                if (phone1) {
                     callback();
                 } else {
                     callback(new Error('手机号格式不正确!'));
@@ -355,6 +367,8 @@
                 },
                 rules3: {
                     phone: [
+                        {required:true,message:'手机号不能为空',trigger:'blur'},
+
                         {validator: validateregphone, trigger: 'blur'}
                     ],
                     yzm: [
@@ -374,6 +388,10 @@
 
                     ]
             },
+                dj:false,
+                db:true,
+                options: regionData,
+                selectedOptions: [], // 省市级连信息
                 btntxt:"获取验证码",
                 upwdList:{},
                 userList1:{},
@@ -394,6 +412,7 @@
                 dialogImageUrl: '',
                 dialogVisible: false,
                 file: [],
+                ssw:"",
 
                 // 个数选择器
                 pageSizes: [1, 2, 3, 4],
@@ -416,7 +435,24 @@
             this.queryComments();
             this.jazai();
         },methods:{
-            qxdd(row){
+            handleChange (value) {
+                // for (var i = 0; i < this.selectedOptions.length; i++) {
+                //     ssq += CodeToText[this.selectedOptions[i]]
+                // }
+                this.bnb.province=CodeToText[this.selectedOptions[0]];
+                this.bnb.city=CodeToText[this.selectedOptions[1]];
+                this.bnb.town=CodeToText[this.selectedOptions[2]];
+                var map = new BMap.Map('allmap')
+                var local = new BMap.LocalSearch(map, {
+                    renderOptions: { map: map }
+                })
+                local.search(CodeToText[this.selectedOptions[2]])
+                map.disableDragging()
+                // local.setMarkersSetCallback(function(pois){
+                //     var p = pois[0].marker.getPosition();
+                //     // alert("marker的位置是" + p.lng + "," + p.lat)
+                // })
+            },qxdd(row){
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post("http://localhost:8081/plat/upFmoney?money="+row.order_price).then(res => {
                     if(res.data>0){
@@ -516,13 +552,16 @@
             {
                 this.$refs[userList1].validate((valid) => {
                     if (valid) {
-                this.$axios.post("http://localhost:8081/UsersController/updates?usex="+this.userList1.usex+"&truename="+this.userList1.truename+"&idcard="+this.userList1.idcard+"&email="+this.userList1.email+"&address="+this.userList1.address+"&uid="+this.userList[0].uid)
+                            this.ssw = CodeToText[this.userList1.address[0]]+"/"+CodeToText[this.userList1.address[1]]+"/"+CodeToText[this.userList1.address[2]]
+                this.$axios.post("http://localhost:8081/UsersController/updates?usex="+this.userList1.usex+"&truename="+this.userList1.truename+"&idcard="+this.userList1.idcard+"&email="+this.userList1.email+"&address="+this.ssw +"&uid="+this.userList[0].uid)
                     .then(res=>{
                         if(res.data>0){
                             this.diasabledInput=true;
                             this.userList[0].usex=this.userList1.usex;
                             this.userList[0].truename=this.userList1.truename;
                             this.userList[0].idcard=this.userList1.idcard;
+                            this.userList[0].address=this.ssw;
+                            this.ssw="";
                         }
                     })
                     }else {

@@ -3,57 +3,6 @@
         <!--<div class="top"></div>-->
         <div class="o_mask" id='maskName'  style="display:none;"></div>
         <Header></Header>
-        <!--<div class="detail_wrapper">-->
-            <!--<div class="detail_head clearfix">-->
-                <!--<a href="https://www.xiaozhu.com" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>-->
-                <!--<ul class="nav_R nav_commen">-->
-                    <!--<input type="hidden" value="landlord" id="userCurrentRole"/>-->
-                    <!--<input type="hidden" value="144260581897" id="loginUserId"/>-->
-                    <!--<li class="current">-->
-                        <!--<a href="" class="openTri_R" rel="nofollow">aaaa</a>-->
-                        <!--<div class="head_pop top40">-->
-                            <!--<div class="pop_column">-->
-                                <!--<a class="pop_T" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index">房东中心</a>-->
-                                <!--<span>-->
-                            <!--<a class="fl" href="https://www.xiaozhu.com/xz_web2/order/pages/landlord/orderList.html">订单管理</a>-->
-                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_SettlementInfo">结算统计</a>-->
-                        <!--</span>-->
-                                <!--<span>-->
-                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Comment&filterType=waitComment&fkCmtFilter=all">我的点评</a>-->
-                        <!--</span>-->
-                                <!--<span>-->
-                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_UserInfo">个人资料</a>-->
-                        <!--</span>-->
-                            <!--</div>-->
-                            <!--<div class="pop_column">-->
-                                <!--<a class="pop_T pop_bor" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Index">房客中心</a>-->
-                                <!--<span>-->
-                            <!--<a class="fl" href="https://www.xiaozhu.com/xz_web2/order/pages/lodger/list.html">我的订单</a>-->
-                        <!--</span>-->
-                                <!--<span>-->
-                            <!--<a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Comment">我的点评</a>-->
-                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo">个人资料</a>-->
-                        <!--</span>-->
-                                <!--<span class="textCt"><a href="https://www.xiaozhu.com/logout" id="IM-Logout">退出</a></span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</li>-->
-
-                    <!--<li class="current">-->
-                        <!--<a href="" class="openTri_R">短租指南</a>-->
-                        <!--<div class="head_pop width_58 top40">-->
-                            <!--<div class="pop_column">-->
-                                <!--<span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</li>-->
-
-                    <!--<li>-->
-                        <!--<a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free" id = "Pub_Btn">免费发布房源-->
-                        <!--</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
 
             <div id="regSuccessDialog" class="reg_success_box login_register_box" style="display:none;">
                 <div class="">
@@ -126,6 +75,7 @@
                 </div>
                 </el-checkbox-group>
                 </el-form>
+
                 <div class="h_wrap">
                     <div style="display: block;" id="pictureTypeModules">
                         <div class="h_pic_list clearfix filesInputNew" id="group_bedroom" type="bedroom">
@@ -143,8 +93,10 @@
                                     :auto-upload="false"
                                     ref="upload1"
                                     :file-list="file"
+                                    :limit="1"
                                     :on-preview="handlePictureCardPreview"
-                                    :on-remove="handleRemove">
+                                    :on-remove="handleRemove"
+                                    :before-upload="beforeAvatarUpload">
 
                                     <i slot="default" class="el-icon-plus"></i>
                                 </el-upload>
@@ -166,6 +118,7 @@
                                     :auto-upload="false"
                                     ref="upload2"
                                     :file-list="file"
+                                    :limit="1"
                                     :on-preview="handlePictureCardPreview"
                                     :on-remove="handleRemove">
                                     <i slot="default" class="el-icon-plus"></i>
@@ -191,6 +144,7 @@
                                     :auto-upload="false"
                                     ref="upload3"
                                     :file-list="file"
+                                    :limit="1"
                                     :on-preview="handlePictureCardPreview"
                                     :on-remove="handleRemove">
                                     <i slot="default" class="el-icon-plus"></i>
@@ -216,6 +170,7 @@
                                     list-type="picture-card"
                                     :auto-upload="false"
                                     :file-list="file"
+                                    :limit="1"
                                     ref="upload4"
                                     :on-preview="handlePictureCardPreview"
                                     :on-remove="handleRemove">
@@ -243,6 +198,7 @@
                                 ref="upload5"
                                 :on-preview="handlePictureCardPreview"
                                 :file-list="file"
+                                :limit="1"
                                 :on-remove="handleRemove">
 
                                 <i slot="default" class="el-icon-plus"></i>
@@ -366,15 +322,17 @@
             Header:header
         },
         methods: {
+
             upsub(){
+
                 var uid=JSON.parse(localStorage.getItem('acc'));
                 this.$axios.post('http://localhost:8081/bnbinfo/ptss?uid='+uid,this.checklist)
                     .then(res => {
-                        this.$refs.upload1.submit();
-                        this.$refs.upload2.submit();
-                        this.$refs.upload3.submit();
-                        this.$refs.upload4.submit();
-                        this.$refs.upload5.submit();
+                        // this.$refs.upload1.submit();
+                        // this.$refs.upload2.submit();
+                        // this.$refs.upload3.submit();
+                        // this.$refs.upload4.submit();
+                        // this.$refs.upload5.submit();
                         this.$message.success("发布成功");
                         this.$router.push({name:"Housing_main"});
                     });

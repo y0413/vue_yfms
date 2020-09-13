@@ -61,17 +61,10 @@
                                             </el-form-item>
                                         </li>
                                     </ul>
+                                    <p>还没有注册？<a  class="col_pink show-register-box" @click="zc()">注册账号&gt;&gt;</a></p>
+                                    <p style="width: 400px">短信快捷登录？<a  class="col_pink show-register-box" @click="dx()">短信快捷登录&gt;&gt;</a></p>
                                     <el-button style="width: 350px" type="primary" class="r_input mt_10" id="orgBtn" @click="queryName('userSign')">提交</el-button>
                                 </div>
-                            </div>
-                            <div class="r_main_r">
-                                <h5>合作网站账户登录</h5>
-                                <ul class="r_wedsitev1">
-                                    <li>
-                                        <a class="hz_qqv1" href="https://www.xiaozhu.com/xzweb.php?op=GetOpenSnsAuthUrl&snsType=qqzone&state=login&next=https%3A%2F%2Fwww.xiaozhu.com%2F"><i></i>QQ登录</a>
-                                    </li>
-                                </ul><p>还没有注册？<a  class="col_pink show-register-box" @click="zc()">注册账号&gt;&gt;</a></p>
-                                <p style="width: 400px">短信快捷登录？<a  class="col_pink show-register-box" @click="dx()">短信快捷登录&gt;&gt;</a></p>
                             </div>
                         </div>
                     </div>
@@ -95,22 +88,13 @@
                                     <el-button style="width: 250px" type="primary" @click="usersphoto('ksdl')">登录</el-button>
                                 </el-form-item>
                             </el-form>
-                            <span class="check_css3 agreeResBox"></span></div>
-                        <div class="r_main_r">
-                            <h5>合作网站账户登录</h5>
-                            <ul class="r_wedsitev1">
-                                <li>
-                                    <a class="hz_qqv1" href="https://www.xiaozhu.com/xzweb.php?op=GetOpenSnsAuthUrl&snsType=qqzone&state=login&next=https%3A%2F%2Fwww.xiaozhu.com%2F"><i></i>QQ登录</a>
-                                </li>
-                            </ul>
-                            <p class="">已有账号？<a  class="col_pink logindialog" @click="dl()">登录&gt;&gt;</a></p>
                         </div>
                     </div>
                 </div>
             </el-dialog>
-            <el-dialog width="50%" title="注册小猪账号" :visible.sync="dialogVisibleta">
+            <el-dialog width="50%" title="注册阳房账号" :visible.sync="dialogVisibleta">
                 <div class="w_698 login_register_box "  id="registerDialog">
-                    <div class="clearfix">
+                    <div class="clearfix" >
                         <div class="r_main_l">
                             <el-form :model="userSi" status-icon :rules="rou" ref="userSi" label-width="80px" class="demo-ruleForm">
                                 <el-form-item label="手机号" prop="phone">
@@ -131,16 +115,8 @@
                                     <el-button style="width: 250px" type="primary" @click="addusers('userSi')">注册</el-button>
                                 </el-form-item>
                             </el-form>
-                            <span class="check_css3 agreeResBox"></span></div>
-                        <div class="r_main_r">
-                            <h5>合作网站账户登录</h5>
-                            <ul class="r_wedsitev1">
-                                <li>
-                                    <a class="hz_qqv1" href="https://www.xiaozhu.com/xzweb.php?op=GetOpenSnsAuthUrl&snsType=qqzone&state=login&next=https%3A%2F%2Fwww.xiaozhu.com%2F"><i></i>QQ登录</a>
-                                </li>
-                            </ul>
-                            <p class="">已有账号？<a id="loginDialogBtn" class="col_pink logindialog" @click="dl()">登录&gt;&gt;</a></p>
                         </div>
+
                     </div>
                 </div>
             </el-dialog>
@@ -155,10 +131,10 @@
                 </el-carousel-item>
             </el-carousel>
 
-            <div class="search_index search_index_home">
+            <div class="search_index search_index_home" style="margin-left: -250px">
                 <div class="search_column_l">
                     <span class="icon_place_box" id="suggest_icon"><i class="iconfont search-icon">&#xe7bf;</i></span>
-                    <input class="ipt_search_l r_border" type="text" id="searchcity" name="searchcity" autocomplete="off" value="城市或目的地" />
+                    <input class="ipt_search_l r_border" type="text" id="searchcity" name="searchcity" autocomplete="off" placeholder="城市或目的地" />
                     <div id="suggest" class="ac_results2 " style="display:none;"></div>
                     <div class="sug ">
                         <!-- 地址下拉框 -->
@@ -167,16 +143,8 @@
                     <div class="result_error_tip err_tip_style" style="display: none;" id="tip_searchcity">
                     </div>
                 </div>
-                <!--<div class="search_column_r">-->
-            <!--<span class="icon_place_box" id="calendar_btn_s">-->
-                <!--<i class="iconfont search-icon">&#xe748;</i>-->
-            <!--</span>-->
-                    <!--<input class="ipt_search_r" type="text" readonly="" id="startenddate" name="startenddate"   value="入住离开日期" />-->
-                    <!--<input type="hidden" name="startdate" id="startdate" value=""/>-->
-                    <!--<input type="hidden" name="enddate" id="enddate" value=""/>-->
-                    <!--<div id="calendar-box" class="calendar-box-index" style="display:none"> </div>-->
-                <!--</div>-->
-                <div class="index-search-box">
+
+                <div class="index-search-box" >
                     <input class="btn_pink_search" type="button" value="搜索小猪" @click="cityquery(city)" />
                     <span class="icon_place_box"></span>
                 </div>
@@ -427,24 +395,18 @@
         },
         created:function (){
             if(localStorage.getItem('acc')!=null){
-                // alert(1)
-                // this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+1).then(res=>{
-                //     this.userList=res.data;
-                //
-                //     // this.dialogVisibletade=false;
-                // })
+
                 var uid=JSON.parse(localStorage.getItem('acc'))
                 this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+uid).then(res=>{
                     this.userList=res.data;
                     localStorage.setItem('acc',JSON.stringify(this.userList[0].uid));
                     this.dialogVisible=false;
-                    // this.reload();
+
                 })
-                // this.userList.uname="nh";
-                // this.userList=JSON.parse(localStorage.getItem('acc'));
+
             }
             this.selectAll();
-            // this.reload();
+
         },methods:{
             cityquery(city){
                 this.$router.push({name:"Housing_search",params:{city}});
@@ -474,17 +436,19 @@
                             if(res.data!=""){
                                 var uid=res.data[0].uid;
                                 this.$axios.post("http://localhost:8081/UsersController/queryUid?uid="+uid).then(res=>{
+                                    this.$message({
+                                        message: '登录成功',
+                                        type: 'success'
+                                    });
                                     this.userList=res.data;
                                     localStorage.setItem('acc',JSON.stringify(this.userList[0].uid));
                                     this.dialogVisible=false;
                                     this.reload();
                                 })
-                                // this.dialogVisible=false;
-                                // localStorage.setItem('acc',JSON.stringify(res.data));
-                                // this.reload();
+
                             }else {
-                                alert("登录失败");
-                            }
+                                this.$message.error("登录失败")
+                        }
                         })}else {
                         console.log('error submit!!');
                         return false;
@@ -497,17 +461,18 @@
                     if (valid) {
                         this.$axios.post("http://localhost:8081/test/content?mobile="+this.ksdl.yzm).then(res=>{
                             if(res.data===1){
-                                alert("登录成功");
+                                this.$message({
+                                    message: '登录成功',
+                                    type: 'success'
+                                });
                                 this.$axios.post("http://localhost:8081/test/usersphoto?photo="+this.ksdl.phone).then(res=>{
                                     localStorage.setItem('acc',JSON.stringify(res.data));
                                     this.userList=JSON.parse(localStorage.getItem('acc'));
 
-                                    // this.userList=JSON.parse(localStorage.getItem('acc'));
-
                                     this.dialogVisibletade=false;
                                 })
-                            }else {
-                                alert("验证码有误");
+                            }else   {
+                                this.$message.error("验证码有误")
                             }
                         })
                     }else {
@@ -568,12 +533,15 @@
                             if(res.data===1){
                                 this.$axios.post("http://localhost:8081/test/addusers?uname="+this.userSi.uname+"&upwd="+this.userSi.upwd+"&photo="+this.userSi.phone).then(res=>{
                                     if(res.data>0){
-                                        alert("注册成功");
+                                        this.$message({
+                                            message: '注册成功',
+                                            type: 'success'
+                                        });
                                         this.dl();
                                     }
                                 })
                             }else {
-                                alert("验证码有误");
+                                this.$message.error("验证码有误")
                             }
                         })
                     }else {

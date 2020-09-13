@@ -61,47 +61,50 @@
         </div>
 
             <div class="h_wrap pb20 mt20">
-                <el-form style="text-align: left;margin: 0px 20px; "label-width="80px" :model="des">
+                <el-form style="text-align: left;margin: 0px 20px; "label-width="80px" :model="des" ref="des" :rules="roules2">
                          <!--class="form" :rules="rules" ref="fm">-->
                 <h4 class="h_tit">房源描述</h4>
                 <div class="h_room_box">
                     <div class="h_room_ms clearfix" style="position: relative;">
-                        <label style="width: 100%;">房源标题：<span style="margin-left: 15px;">
+                        <label style="width: 100%;padding-top: 20px">房源标题：<span style="margin-left: 15px;">
                             精炼的介绍特点和优势，让房客在第一时间对你的房源感兴趣</span></label>
-                        <div class="h_room_msg1 " style="margin-left:90px;">
+                        <div class="h_room_msg1 " style="margin-left:90px; height: 112.5px">
                             <el-tooltip class="item" effect="dark" placement="right-start">
                                 <div slot="content">
                                     建议格式：地标＋出租类型＋房源形容词<br>
                                     例如：国贸双井10号线地铁阳光充沛的大床房整租<br>
                                     请不要使用旅馆、旅店、招待所、浴池、计时休息、英租、法租、租界等词汇<br>
                                 </div>
-
-                                <input type="text" placeholder="请填写" class="room_input input_detail" id="roomtitle"
-                                        name="roomtitle" value="" onkeyup='changeFlag = true;' v-model="des.title"/>
+                                <el-form-item prop="title">
+                                <el-input  type="textarea" :rows="6" style="width: 480px;margin-left:-80px"
+                                           placeholder="请输入内容" v-model="des.title"></el-input>
+                                </el-form-item>
                             </el-tooltip>
                         </div>
                     </div>
 
                     <div class="h_room_ms clearfix" style="position: relative;">
-                        <label style="width: 100%;">个性描述：<span style="margin-left: 15px;">
+                        <label style="width: 100%;padding-top: 20px">个性描述：<span style="margin-left: 15px;">
                             向房客介绍一下自己的兴趣爱好，告诉房客能体验到的不一样的特色或服务有哪些</span><br />（选填）</label>
-                        <div class="h_room_msg1 h_room_msg12" style="margin-left:90px;">
+                        <div class="h_room_msg1 " style="margin-left:90px; height: 112.5px">
                             <el-tooltip class="item" effect="dark" placement="right-start">
                                 <div slot="content">
                                     例如：你将结识一个热情、爱分享、喜欢音乐的IT男生<br/>
                                     希望与你一同感受胡同里的悠闲与自在。<br/>
                                     请不要使用旅馆、旅店、招待所、浴池、计时休息、英租、法租、租界等词汇<br/>
                                 </div>
-                                <textarea rows="6" autoHeight="true" placeholder="请填写" class="room_msg textarea_detail"
-                                          id = "roomServiceIntro" name="roomServiceIntro" v-model="des.desbes"></textarea>
+                                <el-form-item prop="desbes">
+                                    <el-input  type="textarea" :rows="6" style="width: 480px;margin-left:-80px"
+                                               placeholder="请输入内容" v-model="des.desbes"></el-input>
+                                </el-form-item>
                             </el-tooltip>
                         </div>
                     </div>
 
                     <div class="h_room_ms clearfix" style="position: relative;">
-                        <label style="width: 100%;">内部情况：<span style="margin-left: 15px;">
+                        <label style="width: 100%;padding-top: 20px">内部情况：<span style="margin-left: 15px;">
                             房屋内装修和装饰的风格，以及主要配套设施的介绍</span></label>
-                        <div class="h_room_msg1 " style="margin-left:90px;">
+                        <div class="h_room_msg1 " style="margin-left:90px;height: 112.5px">
                             <div class="msg_tip" style='display:none'>
                                 <div class="msg_tip_arrow"></div>
                                 例如：欧式田园小清新风格的装修，配备舒适的大床和床垫，相信您一定会舒舒服服的睡个好觉！
@@ -116,32 +119,36 @@
                                     （24小时热水是妥妥的）！<br/>
                                     请不要使用旅馆、旅店、招待所、浴池、计时休息、英租、法租、租界等词汇<br/>
                                 </div>
-                                <textarea rows="6" autoHeight="true" placeholder="请填写" class="room_msg textarea_detail"
-                                          id= "roomRoominnerIntro"  name="roomRoominnerIntro" v-model="des.internal"></textarea>
+                                <el-form-item prop="internal">
+                                    <el-input  type="textarea" :rows="6" style="width: 480px;margin-left:-80px"
+                                               placeholder="请输入内容" v-model="des.internal"></el-input>
+                                </el-form-item>
                             </el-tooltip>
                         </div>
                     </div>
 
                     <div class="h_room_ms clearfix" style="position: relative;">
-                        <label style="width: 100%;">交通情况：<span style="margin-left: 15px;">
+                        <label style="width: 100%;padding-top: 20px">交通情况：<span style="margin-left: 15px;">
                             房源所处位置，以及周边交通情况的描述</span><br />（选填）</label>
-                        <div class="h_room_msg1 h_room_msg12" style="margin-left:90px;">
+                        <div class="h_room_msg1 " style="margin-left:90px;height: 112.5px">
                             <el-tooltip class="item" effect="dark" placement="right-start">
                                 <div slot="content">
                                     例如：位于安定门外大街，从安定门地铁站A口5分钟即到<br/>
                                     楼下还有27路、119路等多条公交线路，十分方便。<br/>
                                     请不要使用旅馆、旅店、招待所、浴池、计时休息、英租、法租、租界等词汇<br/>
                                 </div>
-                                <textarea rows="6" autoHeight="true" placeholder="请填写" class="room_msg textarea_detail"
-                                          id= "roomLocationIntro" name="roomLocationIntro" v-model="des.traffic"></textarea>
+                                <el-form-item prop="traffic">
+                                    <el-input  type="textarea" :rows="6" style="width: 480px;margin-left:-80px"
+                                               placeholder="请输入内容" v-model="des.traffic"></el-input>
+                                </el-form-item>
                             </el-tooltip>
                         </div>
                     </div>
 
                     <div class="h_room_ms clearfix" style="position: relative;">
-                        <label style="width: 100%;">周边情况：<span style="margin-left: 15px;">
+                        <label style="width: 100%;padding-top: 20px">周边情况：<span style="margin-left: 15px;">
                             房源所在楼宇和小区的基本情况，以及周边商超、景点、银行、医院等配套设施等情况</span><br />（选填）</label>
-                        <div class="h_room_msg1 h_room_msg12" style="margin-left:90px;">
+                        <div class="h_room_msg1 " style="margin-left:90px;height: 112.5px">
                             <el-tooltip class="item" effect="dark" placement="right-start">
                                 <div slot="content">
                                     例如：楼宇内安装有进口大品牌电梯，楼道干净整洁。<br/>
@@ -151,21 +158,25 @@
                                     金融机构有建设银行、中国银行等，医疗服务有解放军总医院。<br/>
                                     请不要使用旅馆、旅店、招待所、浴池、计时休息、英租、法租、租界等词汇<br/>
                                 </div>
-                                <textarea rows="6" autoHeight="true" placeholder="请填写" class="room_msg textarea_detail"
-                                          id= "roomAroundIntro" name="roomAroundIntro" v-model="des.spots"></textarea>
+                                <el-form-item prop="spots">
+                                    <el-input  type="textarea" :rows="6" style="width: 480px;margin-left:-80px"
+                                               placeholder="请输入内容" v-model="des.spots"></el-input>
+                                </el-form-item>
                             </el-tooltip>
                         </div>
                     </div>
                     <div class="h_room_ms clearfix" style="position: relative;">
-                        <label style="width: 100%;">房客要求：<span style="margin-left: 15px;">
+                        <label style="width: 100%;padding-top: 20px">房客要求：<span style="margin-left: 15px;">
                             对房客的一些要求</span><br />（选填）</label>
-                        <div class="h_room_msg1 h_room_msg12" style="margin-left:90px;">
+                        <div class="h_room_msg1 " style="margin-left:90px;height: 112.5px">
                             <el-tooltip class="item" effect="dark" placement="right-start">
                                 <div slot="content">
                                     例如：请房客不要在室内抽烟<br/>
                                 </div>
-                                <textarea rows="6" autoHeight="true" placeholder="请填写" class="room_msg textarea_detail"
-                                          id= "roomLocationIntro" name="roomLocationIntro" v-model="des.requirement"></textarea>
+                                <el-form-item prop="requirement">
+                                    <el-input  type="textarea" :rows="6" style="width: 480px;margin-left:-80px"
+                                               placeholder="请输入内容" v-model="des.requirement"></el-input>
+                                </el-form-item>
                             </el-tooltip>
                         </div>
                     </div>
@@ -175,7 +186,7 @@
 
             <div class="w_960 pb20 clearfix">
                 <!--<a class="keep_btn" href="javascript:;" id="roomDetailSave">保存并继续</a>-->
-                <el-button round @click="addDes(),next()">保存并继续</el-button>
+                <el-button round @click="addDes('des'),next()">保存并继续</el-button>
             </div>
 
             <div class='h_body'>
@@ -273,22 +284,51 @@
             return {
                 //添加描述集合
                 des:{},
-                rules:{
+                roules2:{
                     title:[
                         { required: true, message: '请输入房源标题', trigger: 'blur' },
-                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                        {min:5,message:'最低五个字',trigger:['change','blur']}
+
                     ],
                     internal:[
                         { required: true, message: '请输入内部情况', trigger: 'blur' },
-                        { min: 10, max: 50, message: '长度在 10 到 50 个字符', trigger: 'blur' }
+                        {min:5,message:'最低五个字',trigger:['change','blur']}
+
+                    ],
+                    requirement:[
+                        { required: true, message: '请输入房客要求', trigger: 'blur' },
+                        {min:5,message:'最低五个字',trigger:['change','blur']}
+
+
+                    ],
+                    spots:[
+                        { required: true, message: '请输入周边情况', trigger: 'blur' },
+                        {min:5,message:'最低五个字',trigger:['change','blur']}
+
+
+                    ],
+                    traffic:[
+                        { required: true, message: '请输入交通情况', trigger: 'blur' },
+                        {min:5,message:'最低五个字',trigger:['change','blur']}
+
+
+                    ],
+                    desbes:[
+                        { required: true, message: '请输入个性描述', trigger: 'blur' },
+                        {min:5,message:'最低五个字',trigger:['change','blur']}
+
+
                     ]
-                 }
+                }
             }
         },
         components:{
             Header:header
         },methods:{
-            addDes(){  //添加房源描述
+                addDes(des)
+                {
+                    this.$refs[des].validate((valid) => {
+                        if (valid) {
                 this.$axios.post('http://localhost:8081/bnbinfo/addDes',this.des)
                     .then(res => {
                         if (res.data === 1){
@@ -298,7 +338,12 @@
                             this.$message.error('添加失败');
                         }
                     });
-            }, next() {  //步骤条
+                        }else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                }, next() {  //步骤条
                 if (this.active++ > 2) this.active = 0;
             }
         }

@@ -3,65 +3,6 @@
         <!--<div class="top"></div>-->
         <div class="o_mask" id='maskName'  style="display:none;"></div>
         <Header></Header>
-        <!--<div class="detail_wrapper">-->
-            <!--<div class="detail_head clearfix">-->
-                <!--<a href="https://www.xiaozhu.com" class="xz_logo_detail">小猪</a><span class="slogan_v2 slogan_black"></span>-->
-                <!--<ul class="nav_R nav_commen">-->
-                    <!--<input type="hidden" value="landlord" id="userCurrentRole"/>-->
-                    <!--<input type="hidden" value="144260581897" id="loginUserId"/>-->
-                    <!--<li class="current">-->
-                        <!--<a href="" class="openTri_R" rel="nofollow">aaaa</a>-->
-                        <!--<div class="head_pop top40">-->
-                            <!--<div class="pop_column">-->
-                                <!--<a class="pop_T" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Index">房东中心</a>-->
-                                <!--<span>-->
-                            <!--<a class="fl" href="https://www.xiaozhu.com/xz_web2/order/pages/landlord/orderList.html">订单管理</a>-->
-                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_SettlementInfo">结算统计</a>-->
-                        <!--</span>-->
-                                <!--<span>-->
-                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_Comment&filterType=waitComment&fkCmtFilter=all">我的点评</a>-->
-                        <!--</span>-->
-                                <!--<span>-->
-                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangDong_UserInfo">个人资料</a>-->
-                        <!--</span>-->
-                            <!--</div>-->
-                            <!--<div class="pop_column">-->
-                                <!--<a class="pop_T pop_bor" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Index">房客中心</a>-->
-                                <!--<span>-->
-                            <!--<a class="fl" href="https://www.xiaozhu.com/xz_web2/order/pages/lodger/list.html">我的订单</a>-->
-                        <!--</span>-->
-                                <!--<span>-->
-                            <!--<a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_Comment">我的点评</a>-->
-                            <!--<a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=FangKe_UserInfo">个人资料</a>-->
-                        <!--</span>-->
-                                <!--<span class="textCt"><a href="https://www.xiaozhu.com/logout" id="IM-Logout">退出</a></span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</li>-->
-
-                    <!--<li class="current">-->
-                        <!--<a href="" class="openTri_R">短租指南</a>-->
-                        <!--<div class="head_pop width_58 top40">-->
-                            <!--<div class="pop_column">-->
-                                <!--<span><a class="fl" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=tenant">房客指南</a><a class="fr" href="https://www.xiaozhu.com/xzweb.php?op=Help_UserGuide&type=landlord">房东指南</a></span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</li>-->
-
-                    <!--<li>-->
-                        <!--<a rel="nofollow" data-href="https://www.xiaozhu.com/publish" class="btn_free" id = "Pub_Btn">免费发布房源-->
-                        <!--</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
-
-            <!--<div id="regSuccessDialog" class="reg_success_box login_register_box" style="display:none;">-->
-                <!--<div class="">-->
-                    <!--<div class="r_colsed_1" id="closeRegSuccDialogBtn"><span></span></div>-->
-                    <!--<div id="regSuccInfo">-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
 
             <div class='h_top_box'>
                 <div class="h_step_box" style="height: auto;background-color: rgba(252,246,255,0);width: 1000px">
@@ -72,7 +13,7 @@
                     </el-steps>
                 </div>
             </div>
-            <el-form :model="bnb">
+            <el-form :model="bnb" ref="bnb" :rules="rules3">
 
             <div class="h_wrap mt20">
                 <h4 class="h_tit">房源地址</h4>
@@ -80,23 +21,9 @@
                     <div class="clearfix">
                         <div class="address_text">房源位于：</div>
                         <div class="address_list">
-                            <!--<ul id="address_ul">-->
-                                <!--<li class="clearfix "   data-lock="0" data-nationid="0">-->
-                                    <!--<span class=" "></span>-->
-                                    <!--<div class="select_text" title="">-->
-                                        <!--<div>-->
-                                            <!--<i></i>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</li>-->
-                            <!--</ul>-->
+
                             <p class="open_all"  style="display:none">显示全部地址<span></span></p>
-                            <!--<div class="address_btm clearfix">-->
-                                <!--&lt;!&ndash;<a href="" class="add_btn fl" id="add_site"><span></span>位于新地址</a>&ndash;&gt;-->
-                                <!--<button class="add_btn fl" id="add_site" @click="showDialog()"><span></span>位于新地址</button>-->
-                                <!--<input type="hidden"  id="address"  value="0"></input>-->
-                                <!--<p class="h_check_tip simsun mt2" id="tip_address" style="display:none">请您填写房源地址</p>-->
-                            <!--</div>-->
+
                             <div>
                             <el-cascader
                                 size="large"
@@ -105,16 +32,13 @@
                                 @change="handleChange">
                             </el-cascader>
                             </div>
-                            <div><el-input style="width: 200px" placeholder="详细地址" v-model="bnb.address" @blur="cx()"></el-input>
+                            <div>
+                                <el-form-item prop="address">
+                                <el-input style="width: 200px" placeholder="详细地址" v-model="bnb.address" @blur="cx()"></el-input>
+                                </el-form-item>
                             </div>
                             <div id="allmap"></div>
-                            <!--<el-dialog width="40%" title="房源添加" :visible.sync="dialogVisible">-->
-                                <!--<div id="l-map">-->
-                                <!--</div>-->
-                                <!--<div slot="footer" class="dialog-footer">-->
-                                    <!--<el-button type="success" @click="dialogVisible = false">取 消</el-button>-->
-                                <!--</div>-->
-                            <!--</el-dialog>-->
+
                         </div>
                     </div>
                 </div>
@@ -144,17 +68,14 @@
                 <ul>
                     <li class="clearfix pb15" >
                         <label class="type w_103" style="width: 100px;color:#000;">房屋名称：</label>
-                        <el-input style="width: 200px" placeholder="民宿名称" v-model="bnb.bnbname" ></el-input>
+                        <el-form-item prop="bnbname">
+                            <el-input style="width: 200px" placeholder="民宿名称" v-model="bnb.bnbname" ></el-input>
+                        </el-form-item>
                     </li>
                     <li class="clearfix pb15" >
                         <label class="type w_103" style="width: 100px;color:#000;">房屋类型：</label>
-                        <!--<div class="h_input_box house_type" id="houseType" style="width: 120px;">-->
-                        <!--&lt;!&ndash;<div class="s_arrow_top s_arrow_down cursorPointer"></div>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="text" class="roomtype tantnum_box cursorPointer" id="houseTypeText" style="width: 106px;" data="" value="" readonly/>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<p class="no_select_tip tip_house_type" id="tipHouseType" style="display: none"></p>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<ul class="select_list_box"  style="z-index: 99;">&ndash;&gt;-->
-                        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-                    <!--</div>-->
+
+                        <el-form-item prop="rid">
                         <el-select v-model="bnb.rid" placeholder="请选择">
                             <el-option
                                 v-for="item in rommtype"
@@ -163,6 +84,7 @@
                                 :value="item.rid">
                             </el-option>
                         </el-select>
+                        </el-form-item>
                     </li>
                     <li class="clearfix pb15" >
                         <label class="type w_103" style="width: 100px;color:#000;">出租类型：</label>
@@ -220,72 +142,7 @@
                             <p class="no_select_tip simsun" id="tip_leasetype" style="display:none">请选择出租类型</p>
                         </div>
                     </li>
-                    <!--<li class="clearfix pb15">-->
-                        <!--<label class="type1 w_103" style="color:#000;">房屋户型：</label>-->
-                        <!--<span id="roomTypeDesc" style="line-height: 40px;font-size:12px;color:#757575">-->
-	                                        <!--</span>-->
-                        <!--<div class="h_house_r clearfix" style="margin-left: 103px;">-->
-                            <!--<div class="h_input_box " id="room_shi_err" style="width: 120px;">-->
-                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
-                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name ="roomtype_shi" id="roomtype_shi" value="请选择" readonly/>-->
-                                <!--<ul class="select_list_box tantnum_box" id="roomtype_shi_num" style="display: none;z-index: 99;">-->
-                                    <!--<li key ="1" class="tantnum_box">1</li>-->
 
-                                <!--</ul>-->
-                            <!--</div>-->
-                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">室</span>-->
-
-                            <!--<div class="h_input_box  " id="room_ting_err" style="width: 120px;">-->
-                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
-                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_ting" id="roomtype_ting" value="请选择" readonly/>-->
-                                <!--<ul class="select_list_box tantnum_box" id="roomtype_ting_num" style="display: none;">-->
-                                    <!--<li key ="0" class="tantnum_box">0</li>-->
-                                    <!--<li key ="1" class="tantnum_box">1</li>-->
-
-                                <!--</ul>-->
-                            <!--</div>-->
-
-                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">厅</span>-->
-                            <!--<div class="h_input_box  " id="room_wei_err" style="width: 120px;">-->
-                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
-                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_wei" id="roomtype_wei" value="请选择" readonly/>-->
-                                <!--<ul class="select_list_box tantnum_box" id="roomtype_wei_num" style="display: none;">-->
-                                    <!--<li key ="0" class="tantnum_box">0</li>-->
-                                    <!--<li key ="1" class="tantnum_box">1</li>-->
-
-                                <!--</ul>-->
-                            <!--</div>-->
-
-                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">卫</span>-->
-                            <!--<div class="h_input_box  " id="room_chu_err" style="width: 120px;">-->
-                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
-                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_chu" id="roomtype_chu" value="请选择" readonly/>-->
-                                <!--<ul class="select_list_box tantnum_box" id="roomtype_chu_num" style="display: none;">-->
-                                    <!--<li key ="0" class="tantnum_box">0</li>-->
-                                    <!--<li key ="1" class="tantnum_box">1</li>-->
-                                <!--</ul>-->
-                            <!--</div>-->
-
-                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">厨</span>-->
-                            <!--<div class="h_input_box  " id="room_yt_err" style="width: 120px;">-->
-                                <!--<div class="s_arrow_top s_arrow_down cursorPointer"></div>-->
-                                <!--<input type="text" class="roomtype tantnum_box cursorPointer"   style="color: #c2cacd;" name="roomtype_yt" id="roomtype_yt" value="请选择" readonly/>-->
-                                <!--<ul class="select_list_box tantnum_box" id="roomtype_yt_num" style="display: none;">-->
-                                    <!--<li key ="0" class="tantnum_box">0</li>-->
-                                    <!--<li key ="1" class="tantnum_box">1</li>-->
-                                <!--</ul>-->
-                            <!--</div>-->
-
-                            <!--<span class="" style="position: relative;float: left;display: block;height: 38px;line-height: 38px;margin-right: 5px;">阳台</span>-->
-                            <!--<p class="h_check_tip ml10 simsun" id="tip_roomtype" style="display:none">请完善房屋户型</p>-->
-                            <!--<p class="h_check_tip ml10 simsun" id="tip_roomtype_zero" style="display:none"></p>-->
-                        <!--</div>-->
-                    <!--</li>-->
-                    <!--
-                    <li class="pb15" style="display:none" id="pleaseNum">
-                        <p class="h_num_tip">请填写整套房屋的户型（如果没有请填写0）</p>
-                    </li>
-                    -->
 
                     <li class="clearfix pb15" id="luToilet" >
                         <label class="type1 w_103" style="color:#000;">卫生间类型：</label>
@@ -324,19 +181,17 @@
                 </span>
                         <div class="h_house_r" style="margin-left: 103px;margin-top: 10px;">
                             <div style="width: 100px" class=" select_box fl mr10 tantnum_box" id="select_red_err">
-                                <!--<div class="s_arrow_top s_arrow_down tantnum_box"></div>-->
-                                <!--<input type="text" class="tantnum_box h_col_gray" id="tantnum" name="tantnum" key='' value="请选择" readonly/>-->
-                                <!--<ul class="select_list_box tantnum_box" id="tantnum_select" style="display:none">-->
-                                    <!--<li value="1" class="tantnum_box">1</li>-->
-                                <!--</ul>-->
-                                <el-select style="width: 200px;" v-model="bnb.liva_id" placeholder="请选择">
-                                    <el-option
-                                        v-for="item in livable"
-                                        :key="item.liva_num"
-                                        :label="item.liva_num"
-                                        :value="item.liva_id">
-                                    </el-option>
-                                </el-select>
+                                <el-form-item prop="liva_id">
+                                    <el-select style="width: 200px;" v-model="bnb.liva_id">
+                                        <el-option
+                                            v-for="item in livable"
+                                            :key="item.liva_num"
+                                            :label="item.liva_num"
+                                            :value="item.liva_id">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+
                             </div>
 
                             <span class="bedDetailInfo">人</span>
@@ -346,7 +201,10 @@
                     <br/>
                     <li class="clearfix pb15" >
                         <label class="type w_103" style="width: 100px;color:#000;">房屋价格：</label>
-                        <el-input style="width: 200px" placeholder="民宿价格" v-model="bnb.price" ></el-input>
+                        <el-form-item prop="price">
+                            <el-input  style="width: 200px" placeholder="民宿价格" v-model="bnb.price" ></el-input>
+                        </el-form-item>
+
                     </li>
                     <!--<li class="clearfix pb15" id="luRoomNum" >-->
                 </ul>
@@ -357,50 +215,9 @@
             </el-form>
             <div class="w_960 pb15 clearfix">
                 <!--<a class="keep_btn" href="#ongo" id="saveSub">保存并继续</a>-->
-                <el-button @click="addbnb()">保存并继续</el-button>
+                <el-button @click="addbnb('bnb')">保存并继续</el-button>
             </div>
 
-            <!-- <div id="requestDeleteReasonsDiv" class="requestDeleteReasons" style="display: none;" lodgeunitOnline="">
-                <div class="requestDeleteReasonsTitle">删除房源</div>
-                    <div class="ReasonsListTitle">请选择想要删除房源的原因：</div>
-                <ul class="optionSelected">
-                    <li id="lodgeunitInputerror">
-                        <span class="select_leasetype"></span>
-                        <span>房源信息填写有误</span>
-                    </li>
-                    <li id="lodgeunitwait">
-                        <span class="select_leasetype "></span>
-                        <span>接下来一段时间没有办法接待</span>
-                    </li>
-                    <li id="lodgeunitWorkMuch">
-                        <span class="select_leasetype "></span>
-                        <span>做房东工作量太大</span>
-                    </li>
-                    <li id="lodgeunitGetless">
-                        <span class="select_leasetype "></span>
-                        <span>做房东赚得不够多</span>
-                    </li>
-                    <li id="lodgeunitNoHappy">
-                        <span class="select_leasetype "></span>
-                        <span>不愉快的接待经历</span>
-                    </li>
-                    <li id="lodgeunitLost">
-                        <span class="select_leasetype "></span>
-                        <span>没有了房屋的所有权</span>
-                    </li>
-                    <li id="lodgeunitOthers">
-                        <span class="select_leasetype "></span>
-                        <span>其他原因</span>
-                    </li>
-                </ul>
-                <div class="lodgeunitCl"> </div>
-                <div id="lodgeunitReasonDesc" class="lodgeunitReasonDescChange"></div>
-                <div class="confirmDeleteLodgeunit cursorPointer" id="deleteLodgeunit" lodgeunitId="" route="" style="display: none"><a href="javascript:void(0)">确认永久删除，不再恢复</a></div>
-                <div class="btnLine">
-                    <div id="operateBtnText" route="" style="display: none;cursor: pointer;"></div>
-                    <div id="cancleDeleteLodgunit" style="margin-left: 230px;cursor: pointer;">取消</div>
-                </div>
-            </div>                        -->
             <div class="o_mask" id='mask'  style="display:none;"></div>
             <div class="o_warp" id="dialog"  style="display:none;border:none;"></div>
             <input type="hidden" value="0" id="houseId"/>
@@ -506,7 +323,39 @@ var w = ''// 维度
 export default {
   name: 'Housing_info',
   data () {
+      var validateidcard = (rule, value, callback) => {
+          let isMobile =  /^[0-9]+$/.test(value);
+          if (isMobile) {
+              callback();
+          } else {
+              callback(new Error('只能输入数字'));
+          }
+      };
     return {
+          rules3:{
+              bnbname:[
+                  {required:true,message:'房源名称不能为空',trigger:'blur'},
+
+
+              ],
+              price:[
+                  {required:true,message:'价格不能为空',trigger:'blur'},
+                  {validator: validateidcard, trigger: 'blur'},
+                  {min:2,max:4,message:'价格要2-4位',trigger:['change','blur']}
+              ],
+              liva_id:[
+                {required:true,message:'请选择宜居人数',trigger:'blur'},
+
+            ],
+              address:[
+                  {required:true,message:'详细地址不能为空',trigger:'blur'},
+
+              ],
+              rid:[
+                  {required:true,message:'请选择房屋类型',trigger:'blur'},
+
+              ]
+          },
       options: regionData,
       selectedOptions: [], // 省市级连信息
         bnb:{"guard":0,"hid":1},
@@ -530,21 +379,34 @@ export default {
   },
   methods: {
       //添加房源信息
-      addbnb(){
+          addbnb(bnb)
+          {
+              this.$refs[bnb].validate((valid) => {
+                      if (valid) {
           this.bnb.longitude=j;
           this.bnb.latitude=w;0
-          this.$axios.post('http://localhost:8081/bnbinfo/add',this.bnb)
-              .then(response => {
-                if(response.data!=""){
-                    this.$message.success("添加成功");
-                    this.$router.push({name:"Housing_des"});
-                }else{
-                    this.$message.error("添加失败");
-                }
-              }).catch(error => {
+                          if(this.selectedOptions[0]===undefined){
+                              this.$message.error("请选择省市区");
+                          }else{
+                              this.$axios.post('http://localhost:8081/bnbinfo/add',this.bnb)
+                                  .then(response => {
+                                      if(response.data!=""){
+                                          this.$message.success("添加成功");
+                                          this.$router.push({name:"Housing_des"});
+                                      }else{
+                                          this.$message.error("添加失败");
+                                      }
+                                  }).catch(error => {
 
-          })
-      },
+                              })
+
+  }
+                      }else {
+                          console.log('error submit!!');
+                          return false;
+                      }
+              })
+          } ,
       //获取房屋类型
     getrommtype () {
       this.$axios.post('http://localhost:8081/rommtype/queryAll')
@@ -677,5 +539,9 @@ export default {
     }
     #xxdz{
         width: 100px;
+    }
+    .el-form-item__error{
+        border: 1px solid  red;
+        text-align: center;
     }
 </style>

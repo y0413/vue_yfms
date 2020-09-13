@@ -245,17 +245,20 @@
                           </span>
                                 <div>
                                     <!--发表评论-->
-                                    <el-form style="text-align: left;margin: 0px 20px;" label-width="180px" :model="com" class="form">
+                                    <el-form style="text-align: left;margin: 0px 20px;" label-width="180px" :model="com" class="form" :rules="rules4" ref="com">
                                         <div v-clickoutside="hideReplyBtn" @click="inputFocus" class="my-reply" v-show="com.uid !== null">
                                             <el-avatar class="header-img" :size="40" :src="myHeader"></el-avatar>
                                             <div class="reply-info">
-                                                <el-input
-                                                    placeholder="输入评论..."
-                                                    @focus="showReplyBtn"
-                                                    v-model="com.context"></el-input>
+                                                <el-form-item prop="context">
+                                                    <el-input
+                                                        placeholder="输入评论..."
+                                                        @focus="showReplyBtn"
+                                                        v-model="com.context"></el-input>
+                                                </el-form-item>
+
                                             </div>
                                             <div class="reply-btn-box" v-show="btnShow">
-                                                <el-button class="reply-btn" size="medium" @click="sendComment" type="primary">发表评论</el-button>
+                                                <el-button class="reply-btn" size="medium" @click="sendComment('com')" type="primary">发表评论</el-button>
                                             </div>
                                         </div>
                                         <el-input v-model="com.uid" hidden></el-input>
@@ -553,6 +556,13 @@
                         // return date.getTime() <= Date.now();    //禁用今天以及以前的日期
                     }
                 },
+                rules4:{
+                    context: [
+
+                        {required:true,message:'评论不能为空',trigger:'blur'}
+
+                    ]
+                },
                 getdate() {  //获取当前日期
                     var date = new Date();
                     var seperator1 = "-";
@@ -682,13 +692,14 @@
                 this.comments[i].inputShow = true
                 this.to = name
                 this.toId = id
-                
+
             },
             _inputShow(i){
                 return this.comments[i].inputShow
-            },
-            sendComment(){
-                //添加评论
+            }, sendComment(com)
+            {
+                this.$refs[com].validate((valid) => {
+                    if (valid) {//添加评论
                 this.$axios.post("http://localhost:8081/comment/addCom", this.com)
                     .then(res => {
                         if (res.data == 1) {
@@ -699,6 +710,11 @@
                             this.$message.error("评论失败");
                         }
                     })
+                    }else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
             },
             onDivInput: function(e) {
                 this.replyComment = e.target.innerHTML;
